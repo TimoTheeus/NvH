@@ -1,0 +1,43 @@
+#This is a comment, any row starting with # does not get read by the FileLoader.
+#Don't leave empty lines (as they might not get read by the loader), use a # in front of an empty line instead.
+#
+#
+#
+#
+#
+#This file is made to translate asset names to paths to the actual files
+#Use this format: assetName-path
+#The lines get split at the '-'
+#It starts looking in the Content folder, so no need to add Content/
+#Example: tree-objects/tree
+#
+#Tilesets:
+hexagonTile-Tilesets/HexagonTile
+selectedTile-Tilesets/SelectedTile
+#
+#GUI:
+button-GUI/Button
+scroll-GUI/Scroll
+sliderBack-GUI/sliderBack
+sliderFront-GUI/sliderFront
+checkBox-GUI/CheckBox@2
+dropMenu-GUI/DropMenu@2
+mediumButton-GUI/MediumButton
+smallButton-GUI/SmallButton
+menuBackground-GUI/MenuBackground
+disabledButton-GUI/disabledButton
+#
+#Font:
+buttonFont-Fonts/ButtonFont
+font-Fonts/font
+smallFont-Fonts/smallFont
+title-Fonts/AchievementTitle
+description-Fonts/AchievementDescription
+#
+#Sounds:
+#
+#Music:
+#
+#RandomStuff:
+cursorDot-CursorDot
+
