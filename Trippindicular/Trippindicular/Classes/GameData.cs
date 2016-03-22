@@ -43,13 +43,20 @@ static class GameData
                 GameData.LevelGrid.Add(new Tile(), i, j);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
+        GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X - (int)(0.5*GameWorld.Screen.X), -(int)tile.Sprite.Center.Y - 
+            (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
+        GameWorld.Camera.Pos= new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+
         selectedTile = new SpriteGameObject("selectedTile", 0, "selectedTile", 1);
         selectedTile.Origin = selectedTile.Sprite.Center;
-        GameData.LevelObjects.Add(selectedTile);
         selectedTile.Position = new Vector2(-3000, -3000);
+        GameData.LevelObjects.Add(selectedTile);
 
         Cursor = new Cursor();
         GameData.LevelObjects.Add(Cursor);
+
+        Player player = new Player(Player.Faction.nature);
+        GameData.LevelObjects.Add(player);
     }
     static public void AfterInitialize()
     {

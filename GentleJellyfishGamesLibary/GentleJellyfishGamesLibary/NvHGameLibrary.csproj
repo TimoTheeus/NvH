@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Base\Camera.cs" />
     <Compile Include="Classes\Base\DrawTesting.cs" />
     <Compile Include="Classes\Base\Log.cs" />
     <Compile Include="Classes\Base\Testing.cs" />

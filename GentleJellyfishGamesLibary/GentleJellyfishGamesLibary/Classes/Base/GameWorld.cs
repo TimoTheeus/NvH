@@ -21,6 +21,7 @@ public class GameWorld : Game
     protected static GameStateManager gameStateManager;
     protected static R random;
     protected static Point screen;
+    protected static Camera cam;
     protected static bool exited;
 
     //Readonly properties ({ get { return means get {return ...}(C# 6.0))
@@ -30,6 +31,8 @@ public class GameWorld : Game
         { return resolution; }
     }
     public static AssetLoader AssetLoader { get { return assetLoader; } }
+    public static Camera Camera { get { return cam; } }
+    
     public static GameStateManager GameStateManager
     {
         get
@@ -47,14 +50,14 @@ public class GameWorld : Game
     {
         get { return screen; }
     }
-    
 
     //Initialize the gameworld (also initializes settings).
     public GameWorld()
     {
         graphics = new GraphicsDeviceManager(this);
         GameSettings.Initialize();
-
+        cam = new Camera();
+        cam.ScaleMatrix = ScaleMatrix;
         gameStateManager = new GameStateManager();
         inputHelper = new InputHelper();
         random = new R();
@@ -72,9 +75,6 @@ public class GameWorld : Game
     protected override void Update(GameTime gameTime)
     {
         gameStateManager.Update(gameTime);
-
-        
-
         HandleInput();
     }
     //Handle input from the gamestatemanager
@@ -94,7 +94,7 @@ public class GameWorld : Game
     {
         GraphicsDevice.Clear(Color.Green);
 
-        spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, ScaleMatrix);
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.get_transformation(GraphicsDevice));
         gameStateManager.Draw(gameTime, spriteBatch);
         spriteBatch.End();
     }
