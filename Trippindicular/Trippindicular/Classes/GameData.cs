@@ -37,14 +37,14 @@ static class GameData
     {
         LevelObjects = new GameObjectList();
         Tile tile = new Tile();
-        tile.Scale = 1f;
-        GameData.LevelGrid = new HexaGrid(10, 40, tile.Width, tile.Height, true, "levelGrid");
+        GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
                 GameData.LevelGrid.Add(new Tile(), i, j);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
         selectedTile = new SpriteGameObject("selectedTile", 0, "selectedTile", 1);
+        selectedTile.Origin = selectedTile.Sprite.Center;
         GameData.LevelObjects.Add(selectedTile);
         selectedTile.Position = new Vector2(-3000, -3000);
 

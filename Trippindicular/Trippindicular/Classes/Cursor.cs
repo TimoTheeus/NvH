@@ -9,6 +9,7 @@ class Cursor : SpriteGameObject
 {
     protected bool hasClickedTile;
     protected Tile currentTile;
+    protected Tile tileForOrigin;
 
     public bool HasClickedTile
     {
@@ -20,16 +21,17 @@ class Cursor : SpriteGameObject
         get { return currentTile; }
         set { currentTile = value; }
     }
-    public Cursor() : base("cursorDot", 0, "cursor", 5)
+    public Cursor() : base("cursorDot", 0, "cursor", 10)
     {
         hasClickedTile = false;
+        tileForOrigin = new Tile();
     }
     public override void HandleInput(InputHelper inputHelper)
     {
         base.HandleInput(inputHelper);
         this.Position = inputHelper.MousePosition;
 
-        Point position = new Point((int)(inputHelper.MousePosition.X), (int)(inputHelper.MousePosition.Y));
+        Point position = new Point((int)(inputHelper.MousePosition.X + tileForOrigin.Sprite.Center.X), (int)(inputHelper.MousePosition.Y + tileForOrigin.Sprite.Center.Y));
 
         if (!hasClickedTile)
         {

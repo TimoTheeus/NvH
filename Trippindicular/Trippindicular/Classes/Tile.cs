@@ -8,11 +8,11 @@ class Tile : SpriteGameObject
 {
     public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 5)
     {
-         //this.Origin = this.sprite.Center;
+        this.Origin = this.sprite.Center;
     }
 
-   
-   public void SetMenu(TileMenu menu)
+
+    public void SetMenu(TileMenu menu)
     {
         menu.Add(new TileMenuItem());
         menu.Add(new TileMenuItem());
