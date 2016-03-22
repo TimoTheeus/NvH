@@ -33,7 +33,7 @@ public class Button : GUIGameObject
         set { selected = value; selectedSet = true; }
     }
 
-    public bool Pressed => pressed;
+    public bool Pressed { get { return pressed; } }
 
     public Button(string assetName, string font, string smallFont, int sheetIndex = 0, string id = "", int layer = 0) : base(assetName, sheetIndex, id, layer)
     {

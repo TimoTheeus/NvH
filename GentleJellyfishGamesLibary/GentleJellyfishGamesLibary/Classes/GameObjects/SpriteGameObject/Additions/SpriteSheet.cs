@@ -14,10 +14,10 @@ public class SpriteSheet
     protected Color color;
 
     //Readonly properties.
-    public int Width => sprite.Width / sheetColumns;
-    public int Height => sprite.Height / sheetRows;
-    public int NumberSprites => sheetColumns * sheetRows;
-    public Vector2 Center => new Vector2(Width, Height) / 2;
+    public int Width { get { return sprite.Width / sheetColumns; } }
+    public int Height { get { return sprite.Height / sheetRows; } }
+    public int NumberSprites { get { return sheetColumns * sheetRows; } }
+    public Vector2 Center { get { return new Vector2(Width, Height) / 2; } }
 
     //Other properties.
     public float Scale

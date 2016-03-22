@@ -20,7 +20,7 @@ public class TextGameObject : GameObject
         set { text = value; }
     }
 
-    public Vector2 Size => spriteFont.MeasureString(text);
+    public Vector2 Size { get { return spriteFont.MeasureString(text); } }
 
     public TextGameObject(string assetname, int layer = 0, string id = "")
         : base(id, layer)

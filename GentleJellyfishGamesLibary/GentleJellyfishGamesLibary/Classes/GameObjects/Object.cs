@@ -13,8 +13,8 @@ public abstract class Object : IGameLoopObject
     protected Vector2 position;
 
     //Readonly properties.
-    public virtual Rectangle BoundingBox => new Rectangle((int)GlobalPosition.X, (int)GlobalPosition.Y, 0, 0);
-    public string ID => id;
+    public virtual Rectangle BoundingBox { get { return new Rectangle((int)GlobalPosition.X, (int)GlobalPosition.Y, 0, 0); } }
+    public string ID { get { return id; } }
     public virtual Vector2 GlobalPosition
     {
         get

@@ -7,7 +7,7 @@ public abstract class GameObject: Object
     protected Vector2 velocity;
     protected bool solid;
 
-    public virtual Vector2 CenterPos => new Vector2();
+    public virtual Vector2 CenterPos { get { return new Vector2(); } }
 
     public bool Solid
     {

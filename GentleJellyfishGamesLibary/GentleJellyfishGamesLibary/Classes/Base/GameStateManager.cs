@@ -9,7 +9,7 @@ public class GameStateManager
     Dictionary<string, IGameLoopObject> gameStates;
     IGameLoopObject currentGameState;
 
-    public IGameLoopObject CurrentGameState => currentGameState;
+    public IGameLoopObject CurrentGameState { get { return currentGameState; } }
 
     public GameStateManager()
     {

@@ -9,7 +9,7 @@ static public class Testing
     public static int curFPSCount;
     public static int FPSCount;
     public static float timePast;
-    public static string FPSCounter => FPSCount.ToString();
+    public static string FPSCounter { get { return FPSCount.ToString(); } }
 
     //Property to get the Directory the build is in.
     public static string AssemblyDirectory

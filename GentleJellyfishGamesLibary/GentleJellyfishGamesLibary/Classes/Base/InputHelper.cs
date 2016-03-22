@@ -21,7 +21,7 @@ public class InputHelper
     }
 
     //Get the position of the mouse on the screen (corrected to the scale of the screen).
-    public Vector2 MousePosition => new Vector2(currMState.X, currMState.Y) / GameSettings.Scale;
+    public Vector2 MousePosition { get { return new Vector2(currMState.X, currMState.Y) / GameSettings.Scale; } }
 
     public InputHelper()
     {

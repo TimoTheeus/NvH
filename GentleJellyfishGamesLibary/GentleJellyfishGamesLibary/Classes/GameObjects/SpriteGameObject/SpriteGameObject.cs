@@ -9,10 +9,10 @@ public class SpriteGameObject : GameObject
     protected const int tileWidth = GameSettings.TileWidth;
     protected const int tileHeight = GameSettings.TileHeight;
     //Readonly properties.
-    public int Height => sprite.Height;
-    public int Width => sprite.Width;
-    public SpriteSheet Sprite => sprite;
-    public override Vector2 CenterPos => GlobalPosition + sprite.Center;
+    public int Height { get { return sprite.Height; } }
+    public int Width { get { return sprite.Width; } }
+    public SpriteSheet Sprite { get { return sprite; } }
+    public override Vector2 CenterPos { get { return GlobalPosition + sprite.Center; } }
 
     public Vector2 Origin
     {

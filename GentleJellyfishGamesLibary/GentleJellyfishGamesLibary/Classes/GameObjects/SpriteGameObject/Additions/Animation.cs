@@ -9,10 +9,10 @@ public class Animation : SpriteSheet
     protected float time;
 
     //Readonly properties.
-    public float FrameTime => frameTime;
-    public bool IsLooping => isLooping;
-    public int CountFrames => NumberSprites;
-    public bool AnimationEnded => !isLooping && sheetIndex >= NumberSprites - 1;
+    public float FrameTime { get { return frameTime; } }
+    public bool IsLooping { get { return isLooping; } }
+    public int CountFrames { get { return NumberSprites; } }
+    public bool AnimationEnded { get { return !isLooping && sheetIndex >= NumberSprites - 1; } }
 
     public Animation(string assetName, bool isLooping, float frameTime = 0.1f) : base(assetName)
     {

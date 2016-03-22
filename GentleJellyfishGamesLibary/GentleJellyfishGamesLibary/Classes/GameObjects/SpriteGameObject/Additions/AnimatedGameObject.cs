@@ -9,9 +9,9 @@ public class AnimatedGameObject : SpriteGameObject
     protected SpriteSheet hitboxSprite;
 
     //Readonly properties.
-    public Animation Current => sprite as Animation;
-    public SpriteSheet HitboxSprite => hitboxSprite;
-    public Vector2 OldPosition => oldPosition;
+    public Animation Current { get { return sprite as Animation; } }
+    public SpriteSheet HitboxSprite { get { return hitboxSprite; } }
+    public Vector2 OldPosition { get { return oldPosition; } }
 
     public AnimatedGameObject(string id = "", int layer = 0) : base("", 1, id, layer)
     {

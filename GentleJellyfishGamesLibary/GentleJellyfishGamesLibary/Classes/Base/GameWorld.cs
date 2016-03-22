@@ -23,10 +23,20 @@ public class GameWorld : Game
     protected static Point screen;
     protected static bool exited;
 
-    //Readonly properties (=> means get {return ...}(C# 6.0))
-    public static Point Resolution => resolution;
-    public static AssetLoader AssetLoader => assetLoader;
-    public static GameStateManager GameStateManager => gameStateManager;
+    //Readonly properties ({ get { return means get {return ...}(C# 6.0))
+    public static Point Resolution
+    {
+        get
+        { return resolution; }
+    }
+    public static AssetLoader AssetLoader { get { return assetLoader; } }
+    public static GameStateManager GameStateManager
+    {
+        get
+        {
+            return gameStateManager;
+        }
+    }
 
     //Property used to exit the game from anywhere
     public static bool Exited

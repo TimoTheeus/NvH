@@ -21,7 +21,7 @@ static public class GameSettings
     public const int TileWidth = 64;
     public const int TileHeight = 64;
     public const int GameFieldOffset = 32;
-    static public Point DefaultResolution => new Point(1280, 720);
+    static public Point DefaultResolution { get { return new Point(1280, 720); } }
 
     //A few private vars.
     const string path = "Content/Settings/settings.txt";
