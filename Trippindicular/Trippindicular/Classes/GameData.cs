@@ -37,6 +37,8 @@ static class GameData
     static public void Initialize()
     {
         LevelObjects = new GameObjectList();
+        Cursor = new Cursor();
+        GameData.LevelObjects.Add(Cursor);
         Tile tile = new Tile();
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
@@ -60,8 +62,7 @@ static class GameData
         selectedTile.Position = new Vector2(-3000, -3000);
         GameData.LevelObjects.Add(selectedTile);
 
-        Cursor = new Cursor();
-        GameData.LevelObjects.Add(Cursor);
+        
 
         Player player = new Player(Player.Faction.nature);
         GameData.LevelObjects.Add(player);

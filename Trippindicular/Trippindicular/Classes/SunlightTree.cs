@@ -10,12 +10,20 @@ class SunlightTree:Building
     public SunlightTree() : base("sunlightTree","selectedTile")
     {
         resController = new ResourceController(1, 50, 0);
-        GameData.LevelObjects.Add(resController);   
+        GameData.LevelObjects.Add(resController);
     }
+
 
     public override void LeftButtonAction()
     {
+        if (GameData.Cursor.HasClickedTile) { 
         GameData.LevelObjects.Add(new Menu(this));
+        }
+    }
+
+    public override void Destroy()
+    {
+        GameData.LevelObjects.Remove(resController);
     }
 
 }

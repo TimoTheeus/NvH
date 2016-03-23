@@ -73,11 +73,12 @@ public class Button : GUIGameObject
 
         if (selected)
         {
-            if ((ih.LeftButtonPressed() && ih.MouseInBox(BoundingBox)) || ih.KeyPressed(Keys.Enter))
+            if ((ih.LeftButtonReleased() && ih.MouseInBox(BoundingBox)) || ih.KeyPressed(Keys.Enter))
             {
                 pressed = true;
                 textColor = Color.Purple;
             }
+
             if ((ih.IsLeftMouseButtonDown() && ih.MouseInBox(BoundingBox)) || ih.IsKeyDown(Keys.Enter))
                 sprite.SheetIndex = 1;
             else

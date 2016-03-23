@@ -44,8 +44,6 @@ class Cursor : SpriteGameObject
         if (inputHelper.LeftButtonPressed() && currentTile != null && !hasClickedTile)
         {
             hasClickedTile = true;
-            Menu b = new Menu(CurrentTile,"menu");
-            GameData.LevelObjects.Add(b);
         }
         
         if (inputHelper.IsKeyDown(Keys.Right)||this.Position.X>GameWorld.Screen.X-borderWidth + GameWorld.Camera.Pos.X)

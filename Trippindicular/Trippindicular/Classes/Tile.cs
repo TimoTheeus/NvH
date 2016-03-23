@@ -11,14 +11,23 @@ class Tile : SpriteGameObject
         this.Origin = this.sprite.Center;
     }
 
-
-    public void SetMenu(TileMenu menu)
+    public override void HandleInput(InputHelper ih)
     {
-        menu.Add(new TileMenuItem());
-        menu.Add(new TileMenuItem());
-        menu.Add(new TileMenuItem());
-        menu.Add(new TileMenuItem());
-        menu.Add(new TileMenuItem());
-    } 
+        if (GameData.Cursor.CurrentTile == this && ih.LeftButtonPressed() && GameData.Cursor.HasClickedTile)
+        {
+            LeftButtonAction();
+        }
+    }
+
+    public virtual void LeftButtonAction()
+    {
+        GameData.LevelObjects.Add(new Menu(this));
+    }
+
+    public virtual void Destroy()
+    {
+
+    }
+
 }
 

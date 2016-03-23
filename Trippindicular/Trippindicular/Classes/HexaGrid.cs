@@ -183,6 +183,21 @@ class HexaGrid : GameObjectGrid
 
     }
 
+    public void replaceTile(Tile search, Tile replace)
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < grid.GetLength(1); j++)
+            {
+                if (grid[i, j].Equals(search))
+                {
+                    this.Add(replace, i, j);
+                    return;
+                }
+            }
+        }
+    }
+
     public Tile BRNeighbourTile(Point tilePosition)
     {
         if ((startLeft && tilePosition.Y % 2 == 0) || (!startLeft && tilePosition.Y % 2 == 1))

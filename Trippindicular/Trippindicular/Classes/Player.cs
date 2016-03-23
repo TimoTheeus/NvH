@@ -65,9 +65,9 @@ class Player : GameObject
     }
     public override void Update(GameTime gameTime)
     {
-        mainResource.Position = new Vector2(1500 + GameWorld.Camera.Pos.X, 0 + GameWorld.Camera.Pos.Y);
+        mainResource.Position = new Vector2(1500 + GameWorld.Camera.Pos.X, GameWorld.Camera.Pos.Y);
         mainResource.Text = this.MainResource.ToString();
-        secondaryResource.Position = new Vector2(1200 + GameWorld.Camera.Pos.X, 0 + GameWorld.Camera.Pos.Y);
+        secondaryResource.Position = new Vector2(1200 + GameWorld.Camera.Pos.X, GameWorld.Camera.Pos.Y);
         secondaryResource.Text = this.SecondaryResource.ToString();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
