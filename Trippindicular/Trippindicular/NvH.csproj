@@ -73,6 +73,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Building.cs" />
     <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\DropDown.cs" />
     <Compile Include="Classes\GameData.cs" />
@@ -83,7 +84,9 @@
     <Compile Include="Classes\GameStates\Menus\SettingsMenuOverlay.cs" />
     <Compile Include="Classes\GameStates\Menus\TitleMenuState.cs" />
     <Compile Include="Classes\HexaGrid.cs" />
+    <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\SunlightTree.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\TileMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

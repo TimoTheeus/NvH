@@ -56,7 +56,7 @@ public class Button : GUIGameObject
             this.spriteFont = GameWorld.AssetLoader.GetFont(font);
 
         textColor = Color.Black;
-
+        if(text!=""&&font!="")
         textPosition = new Vector2(-(spriteFont.MeasureString(text).X / 2), -(spriteFont.MeasureString(text).Y / 2));
     }
 
@@ -85,6 +85,7 @@ public class Button : GUIGameObject
                 sprite.SheetIndex = 2;
                 textColor = Color.White;
                 spriteFont = smallFont;
+                if(text!="")
                 textPosition = new Vector2(-(smallFont.MeasureString(text).X / 2), -(smallFont.MeasureString(text).Y / 2));
                 sprite.Scale = 0.95f;
             }
@@ -95,7 +96,8 @@ public class Button : GUIGameObject
             textColor = Color.Black;
             sprite.Scale = 1.0f;
             spriteFont = bigFont;
-            textPosition = new Vector2(-(bigFont.MeasureString(text).X / 2), -(bigFont.MeasureString(text).Y / 2));
+            if (text != "")
+                textPosition = new Vector2(-(bigFont.MeasureString(text).X / 2), -(bigFont.MeasureString(text).Y / 2));
             pressed = false;
         }
     }
@@ -108,6 +110,7 @@ public class Button : GUIGameObject
         base.Draw(gameTime, spriteBatch);
 
         //Button Text
+        if(text!="")
         spriteBatch.DrawString(spriteFont, text, this.GlobalPosition + textPosition, textColor);
     }
 

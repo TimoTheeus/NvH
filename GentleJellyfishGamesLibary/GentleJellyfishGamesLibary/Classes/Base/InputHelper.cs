@@ -74,7 +74,7 @@ public class InputHelper
     //Check if the mouse is inside a given Rectangle.
     public bool MouseInBox(Rectangle box)
     {
-        return box.Contains(new Point((int)MousePosition.X, (int)MousePosition.Y));
+        return box.Contains(new Point((int)(MousePosition.X+GameWorld.Camera.Pos.X), (int)(MousePosition.Y + GameWorld.Camera.Pos.Y)));
     }
     //Return a list of keys that have been pressed.
     public List<Keys> GetPressedKeys()

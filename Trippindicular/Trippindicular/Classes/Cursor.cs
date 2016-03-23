@@ -44,13 +44,10 @@ class Cursor : SpriteGameObject
         if (inputHelper.LeftButtonPressed() && currentTile != null && !hasClickedTile)
         {
             hasClickedTile = true;
+            Menu b = new Menu(CurrentTile,"menu");
+            GameData.LevelObjects.Add(b);
         }
-        //If player clicks again while there is a menu popup and the mouse is not in the boundingbox of the menu, hasClickedTile = false and the menu should
-        //disappear.   DOESNT WORK YET, GOTTA HAVE MENU FIRST TO TEST BETTER.
-        else if (inputHelper.LeftButtonPressed() && hasClickedTile)
-        {
-            hasClickedTile = false;
-        }
+        
         if (inputHelper.IsKeyDown(Keys.Right)||this.Position.X>GameWorld.Screen.X-borderWidth + GameWorld.Camera.Pos.X)
         {
             GameWorld.Camera.Move(new Vector2(10, 0));

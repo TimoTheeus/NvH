@@ -8,10 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 class ResourceController : GameObject
 {
     Timer passiveResourceTimer;
-    protected const int passiveResourceAmount = 1;
-    public ResourceController() : base("resourceController")
+    protected int primaryResourceAmount;
+    protected int secondaryResourceAmount;
+    public ResourceController(int timer,int primaryResourceAmount, int secondaryResourceAmount) : base("resourceController")
     {
-        passiveResourceTimer = new Timer(1);
+        passiveResourceTimer = new Timer(timer);
+        this.primaryResourceAmount = primaryResourceAmount;
+        this.secondaryResourceAmount = secondaryResourceAmount;
     }
     public override void Update(GameTime gameTime)
     {
@@ -20,7 +23,6 @@ class ResourceController : GameObject
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-
     }
 
     protected void checkPassiveTimer()
@@ -32,7 +34,8 @@ class ResourceController : GameObject
                 if (GameData.LevelObjects.Objects[i] is Player)
                 {
                     Player player = GameData.LevelObjects.Objects[i] as Player;
-                    player.MainResource += passiveResourceAmount;
+                    player.MainResource += primaryResourceAmount;
+                    player.SecondaryResource += secondaryResourceAmount;
                 }
             }
             passiveResourceTimer.Reset();
