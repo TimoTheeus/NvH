@@ -15,5 +15,10 @@ class Building:Tile
     {
         base.LeftButtonAction();
     }
-
+    protected void RemoveMenu()
+    {
+        Menu menu = GameData.LevelObjects.Find("menu") as Menu;
+        if (menu != null)
+            GameData.LevelObjects.Remove(menu);
+    }
 }

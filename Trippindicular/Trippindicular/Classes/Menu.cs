@@ -11,7 +11,7 @@ class Menu : GameObjectList
     protected SpriteGameObject background;
     protected Tile tile;
 
-    public Menu(Tile tile,string id = ""):base(4,id)
+    public Menu(Tile tile,string id = "menu"):base(4,id)
     {
         this.tile = tile;
         background = new SpriteGameObject("button", 0, "background", 4);

@@ -43,14 +43,7 @@ static class GameData
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
-                if (i == 0 && j == 0)
-                {
-                    GameData.LevelGrid.Add(new SunlightTree(), i, j);
-                }
-                else
-                {
                     GameData.LevelGrid.Add(new Tile(), i, j);
-                }
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
         GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X - (int)(0.5*GameWorld.Screen.X), -(int)tile.Sprite.Center.Y - 

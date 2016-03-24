@@ -11,6 +11,7 @@ class SunlightTree:Building
     {
         resController = new ResourceController(1, 50, 0);
         GameData.LevelObjects.Add(resController);
+        RemoveMenu();
     }
 
 
