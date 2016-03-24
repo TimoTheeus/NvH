@@ -28,7 +28,7 @@ public class FinishState : GameObjectList
             for (int i = 0; i < GameData.LevelObjects.Objects.Count; i++)
             {
                 GameData.LevelObjects.Objects[i] = null;
-                GameData.LevelObjects.Objects[i]?.Reset();
+                GameData.LevelObjects.Objects[i].Reset();
             }
             GameWorld.GameStateManager.GetGameState("titleMenu").Reset();
             GameWorld.GameStateManager.SwitchTo("titleMenu");

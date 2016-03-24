@@ -47,7 +47,7 @@ public class UserInput : TextGameObject
     {
         Locked = false;
         text = "";
-        ihTemp?.ResetInput();
+        ihTemp.ResetInput();
     }
 }
 

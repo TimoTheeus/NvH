@@ -61,6 +61,13 @@ static class GameData
         GameData.LevelObjects.Add(player);
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
+
+        Unit unit = new Unit("hexagonTile", 0);
+        unit.Position = new Vector2(800, 2000);
+        unit.targetUnit = new Unit("hexagonTile");
+        unit.targetUnit.Position = new Vector2(1600, 1600);
+        GameData.LevelObjects.Add(unit.targetUnit);
+        GameData.LevelObjects.Add(unit);
     }
     static public void AfterInitialize()
     {
