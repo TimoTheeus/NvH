@@ -2,28 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 
-class SunlightTree:Building
+class Mine : Building
 {
     ResourceController resController;
-    public SunlightTree() : base("sunlightTree","selectedTile")
+    public Mine() : base("mine","selectedTile")
     {
         resController = new ResourceController(1, 50, 0);
         GameData.LevelObjects.Add(resController);
-        RemoveMenu();
     }
-
-
-    public override void LeftButtonAction()
-    {
-        GameData.LevelObjects.Add(new Menu(this));
-    }
-
     public override void Destroy()
     {
+        base.Destroy();
         GameData.LevelObjects.Remove(resController);
     }
-
 }
 

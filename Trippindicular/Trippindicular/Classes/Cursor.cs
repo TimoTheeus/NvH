@@ -49,21 +49,21 @@ class Cursor : SpriteGameObject
         
         if (inputHelper.IsKeyDown(Keys.Right)||inputHelper.MousePosition.X>GameSettings.GameWidth-borderWidth)
         {
-            GameWorld.Camera.Move(new Vector2(10, 0));
+            GameWorld.Camera.Move(new Vector2(15, 0));
 
         }
         if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.MousePosition.X < borderWidth)
         {
-            GameWorld.Camera.Move(new Vector2(-10, 0));
+            GameWorld.Camera.Move(new Vector2(-15, 0));
 
         }
         if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.MousePosition.Y < borderWidth)
         {
-            GameWorld.Camera.Move(new Vector2(0, -10));
+            GameWorld.Camera.Move(new Vector2(0, -15));
         }
         if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.MousePosition.Y > GameSettings.GameHeight - borderWidth)
         {
-            GameWorld.Camera.Move(new Vector2(0, 10));
+            GameWorld.Camera.Move(new Vector2(0, 15));
         }
 
     }

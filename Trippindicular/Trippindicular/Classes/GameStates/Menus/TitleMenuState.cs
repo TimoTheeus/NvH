@@ -25,12 +25,12 @@ class TitleMenuState : GameObjectList
 
                 //Options
                 options = new Button("button", "buttonFont", "font", 0, "Options", 0);
-                options.Position = new Vector2(300, 410);
+                options.Position = new Vector2(300, 280);
                 this.Add(options);
 
                 //Exit Game
                 exitGame = new Button("button", "buttonFont", "font", 0, "Exit Game", 0);
-                exitGame.Position = new Vector2(300, 930);
+                exitGame.Position = new Vector2(300, 410);
                 this.Add(exitGame);
     }
 

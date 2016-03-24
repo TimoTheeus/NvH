@@ -10,6 +10,7 @@ class Building:Tile
 
     public Building(string id = "", string assetName=""):base(assetName,id)
     {
+        RemoveMenu();
     }
     public override void LeftButtonAction()
     {

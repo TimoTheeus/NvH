@@ -191,6 +191,7 @@ class HexaGrid : GameObjectGrid
             {
                 if (grid[i, j].Equals(search))
                 {
+                    search.Destroy();
                     this.Add(replace, i, j);
                     return;
                 }
