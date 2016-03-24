@@ -11,5 +11,9 @@ class Building:Tile
     public Building(string id = "", string assetName=""):base(assetName,id)
     {
     }
+    public override void LeftButtonAction()
+    {
+        base.LeftButtonAction();
+    }
 
 }

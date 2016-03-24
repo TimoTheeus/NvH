@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 class Cursor : SpriteGameObject
 {
@@ -40,28 +41,27 @@ class Cursor : SpriteGameObject
             if (currentTile != null)
                 GameData.selectedTile.Position = currentTile.Position;
         }
-        //Create popup and stop hovering tiles 
+        //stop hovering tiles 
         if (inputHelper.LeftButtonPressed() && currentTile != null && !hasClickedTile)
         {
             hasClickedTile = true;
         }
         
-        if (inputHelper.IsKeyDown(Keys.Right)||this.Position.X>GameWorld.Screen.X-borderWidth + GameWorld.Camera.Pos.X)
+        if (inputHelper.IsKeyDown(Keys.Right)||inputHelper.MousePosition.X>GameSettings.GameWidth-borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(10, 0));
 
         }
-        if (inputHelper.IsKeyDown(Keys.Left) || this.Position.X < borderWidth + GameWorld.Camera.Pos.X)
+        if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.MousePosition.X < borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(-10, 0));
 
         }
-        if (inputHelper.IsKeyDown(Keys.Up) || this.Position.Y < borderWidth + GameWorld.Camera.Pos.Y)
+        if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.MousePosition.Y < borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(0, -10));
-
         }
-        if (inputHelper.IsKeyDown(Keys.Down) || this.Position.Y > GameWorld.Screen.Y - borderWidth+GameWorld.Camera.Pos.Y)
+        if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.MousePosition.Y > GameSettings.GameHeight - borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(0, 10));
         }

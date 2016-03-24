@@ -61,18 +61,19 @@ class Player : GameObject
         MainResource = 0;
         SecondaryResource = 0;
         mainResource = new TextGameObject("smallFont", 4, "mainResourceText");
+        mainResource.Position = new Vector2(1500, 0);
         secondaryResource = new TextGameObject("smallFont", 4, "secondaryResourceText");
+        secondaryResource.Position = new Vector2(1200, 0);
+        HUD hud = GameWorld.GameStateManager.GetGameState("hud") as HUD;
+        hud.hud.Add(mainResource);
+        hud.hud.Add(secondaryResource);
     }
     public override void Update(GameTime gameTime)
     {
-        mainResource.Position = new Vector2(1500 + GameWorld.Camera.Pos.X, GameWorld.Camera.Pos.Y);
         mainResource.Text = this.MainResource.ToString();
-        secondaryResource.Position = new Vector2(1200 + GameWorld.Camera.Pos.X, GameWorld.Camera.Pos.Y);
         secondaryResource.Text = this.SecondaryResource.ToString();
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        mainResource.Draw(gameTime, spriteBatch);
-        secondaryResource.Draw(gameTime, spriteBatch);
     }
 }

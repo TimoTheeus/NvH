@@ -33,7 +33,8 @@ static public class GameSettings
         get
         {
             float screenScale = (float)GameWorld.graphics.GraphicsDevice.Viewport.Width / GameWidth;
-            return Matrix.CreateScale(screenScale, screenScale, 1);
+            float screenScaleY= (float)GameWorld.graphics.GraphicsDevice.Viewport.Height / GameHeight;
+            return Matrix.CreateScale(screenScale, screenScaleY, 1);
         }
     }
 

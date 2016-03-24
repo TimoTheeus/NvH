@@ -37,6 +37,8 @@ public class HUD : IGameLoopObject
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         playingState.Draw(gameTime, spriteBatch);
+        spriteBatch.End();
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, GameWorld.ScaleMatrix);
         hud.Draw(gameTime, spriteBatch);
     }
 

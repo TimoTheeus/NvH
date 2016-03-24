@@ -10,7 +10,6 @@ class Menu : GameObjectList
     protected Button button1, button2, button3, button4;
     protected SpriteGameObject background;
     protected Tile tile;
-    public enum MenuType { empty, sunlightTree };
 
     public Menu(Tile tile,string id = ""):base(4,id)
     {

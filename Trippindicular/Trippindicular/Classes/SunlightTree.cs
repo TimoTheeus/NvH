@@ -16,9 +16,7 @@ class SunlightTree:Building
 
     public override void LeftButtonAction()
     {
-        if (GameData.Cursor.HasClickedTile) { 
         GameData.LevelObjects.Add(new Menu(this));
-        }
     }
 
     public override void Destroy()
