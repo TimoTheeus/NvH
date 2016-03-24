@@ -7,10 +7,17 @@ using Microsoft.Xna.Framework.Input;
 
 class Building:Tile
 {
+    protected float health;
 
+    public float Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
     public Building(string id = "", string assetName=""):base(assetName,id)
     {
         RemoveMenu();
+        health = 1;
     }
     public override void LeftButtonAction()
     {
@@ -22,4 +29,13 @@ class Building:Tile
         if (menu != null)
             GameData.LevelObjects.Remove(menu);
     }
+    protected void DealDamage(float amount)
+    {
+        this.Health -= amount;
+        if (this.Health <= 0)
+        {
+            Destroy();
+        }
+    }
+
 }

@@ -36,12 +36,9 @@ class MainGame : GameWorld
         gameStateManager.AddGameState("playing", new PlayingState());
         gameStateManager.AddGameState("hud", new HUD());
         gameStateManager.AddGameState("titleMenu", new TitleMenuState());
-
-
         gameStateManager.AddGameState("settingsMenuTitle", new SettingsMenuOverlay(gameStateManager.GetGameState("titleMenu")));
         gameStateManager.AddGameState("settingsMenuPause", new SettingsMenuOverlay(gameStateManager.GetGameState("pauseMenu")));
         gameStateManager.AddGameState("finish", new FinishState());
-
         gameStateManager.SwitchTo("titleMenu");
     }
 }

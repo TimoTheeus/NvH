@@ -15,7 +15,7 @@ public class FinishState : GameObjectList
     public FinishState()
     {
         hud = GameWorld.GameStateManager.GetGameState("hud");
-        exitMenu = new Button("button", "buttonFont", "font", 0, "Exit to menu");
+        exitMenu = new Button("button", "buttonFont", "font", 0, "Return to menu");
         exitMenu.Position = new Vector2((GameSettings.GameWidth / 2), GameSettings.GameHeight - (exitMenu.Height * 3.0f));
         this.Add(exitMenu);
     }
@@ -25,8 +25,14 @@ public class FinishState : GameObjectList
         base.HandleInput(inputHelper);
         if (exitMenu.Pressed)
         {
+            for (int i = 0; i < GameData.LevelObjects.Objects.Count; i++)
+            {
+                GameData.LevelObjects.Objects[i] = null;
+                GameData.LevelObjects.Objects[i]?.Reset();
+            }
             GameWorld.GameStateManager.GetGameState("titleMenu").Reset();
             GameWorld.GameStateManager.SwitchTo("titleMenu");
+
         }
     }
 

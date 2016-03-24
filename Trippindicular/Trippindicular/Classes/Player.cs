@@ -76,4 +76,11 @@ class Player : GameObject
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
     }
+    public override void Reset()
+    {
+        base.Reset();
+        HUD hud = GameWorld.GameStateManager.GetGameState("hud") as HUD;
+        hud.hud.Remove(mainResource);
+        hud.hud.Remove(secondaryResource);
+    }
 }

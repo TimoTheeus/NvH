@@ -90,7 +90,7 @@ class Menu : GameObjectList
             button3.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            GameData.LevelGrid.replaceTile(this.tile, new NatureBarracks());
+            GameData.LevelGrid.replaceTile(this.tile, new NatureBase());
         }
        else if (button4 != null && button4.Pressed)
         {
