@@ -7,6 +7,8 @@ class Unit : SpriteGameObject
     int damage, maxHealth, health, speed, range;
     Vector2 targetPosition;
     public Unit targetUnit;
+    bool targeting;
+    Player.Faction faction;
 
     public Unit(string id = "", int layer = 0) : base(id, layer)
     {
@@ -31,10 +33,15 @@ class Unit : SpriteGameObject
 
     public override void HandleInput(InputHelper ih)
     {
-        if (ih.LeftButtonPressed() && BoundingBox.Contains((new Point((int)GameData.Cursor.Position.X, (int)GameData.Cursor.Position.Y))))
+        if (faction == GameData.player.GetFaction && ih.LeftButtonPressed() && BoundingBox.Contains((new Point((int)GameData.Cursor.Position.X, (int)GameData.Cursor.Position.Y))))
         {
-            SetTargetPosition(new Vector2(1300, 1300));
+            targeting = true;
         }
+
+        if(targeting && ih.LeftButtonPressed())
+        {
+
+        } 
     }
 
     public override void Update(GameTime gameTime)
