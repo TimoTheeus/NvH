@@ -4,72 +4,223 @@ using System;
 
 class Unit : SpriteGameObject
 {
-    int damage, maxHealth, health, speed, range;
+    float damage, maxHealth, health, speed, range,attackSpeed;
     Vector2 targetPosition;
     public Unit targetUnit;
-    bool targeting;
+    bool selected;
+    Timer attackTimer;
     Player.Faction faction;
 
-    public Unit(string id = "", int layer = 0) : base(id, layer)
+    public float AttackSpeed
     {
+        get { return attackSpeed; }
+        set { attackSpeed = value; }
+    }
+    public float Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+    public float Speed
+    {
+        get { return speed;  }
+        set { speed = value; }
+    }
+    public float Range
+    {
+
+        get { return range; }
+        set { range = value; }
+    }
+    public float Health
+    {
+
+        get { return health; }
+        set { health = value; }
+    }
+    public Unit(string assetName="",string id = "", int layer = 0) : base(assetName,0, id,layer)
+    {
+        this.Origin = this.sprite.Center;
         speed = 200;
         range = 50;
-
-    }
-
-    public void SetTargetUnit(Unit targetUnit)
-    {
-        this.targetPosition = targetUnit.Position;
-        this.targetUnit = targetUnit;
-    }
-
-    public void SetTargetPosition(Vector2 targetPosition)
-    {
-        this.targetUnit = null;
-        this.targetPosition = targetPosition;
-        velocity = new Vector2(-(Position.X - targetPosition.X) / (float)Math.Sqrt(Math.Pow(Position.X - targetPosition.X, 2) + Math.Pow(Position.Y - targetPosition.Y, 2)) * speed,
-                               -(Position.Y - targetPosition.Y) / (float)Math.Sqrt(Math.Pow(Position.X - targetPosition.X, 2) + Math.Pow(Position.Y - targetPosition.Y, 2)) * speed);
+        maxHealth = 100;
+        damage = 20;
+        this.health = maxHealth;
+        selected = false;
+        attackSpeed = 1;
+        attackTimer = new Timer(this.AttackSpeed);
     }
 
     public override void HandleInput(InputHelper ih)
     {
-        if (faction == GameData.player.GetFaction && ih.LeftButtonPressed() && BoundingBox.Contains((new Point((int)GameData.Cursor.Position.X, (int)GameData.Cursor.Position.Y))))
+        Point mousePoint = new Point((int)(ih.MousePosition.X + GameWorld.Camera.Pos.X), (int)(ih.MousePosition.Y + GameWorld.Camera.Pos.Y));
+
+        if (selected)
         {
-            targeting = true;
+            GameData.Cursor.HasClickedTile = false;
         }
-
-        if(targeting && ih.LeftButtonPressed())
+        if (BoundingBox.Contains(mousePoint))
         {
-
-        } 
+            if (ih.LeftButtonPressed())
+            {
+                selected = true;
+            }
+        }
+        else if (!this.BoundingBox.Contains(mousePoint))
+        {
+            if (ih.LeftButtonPressed())
+            {
+                selected = false;
+            }
+        }
+        if (selected)
+        {
+            if (ih.RightButtonPressed())
+            {
+                for(int i = 0; i < GameData.Units.Objects?.Count; i++)
+                {
+                    if(GameData.Units.Objects[i] is Unit)
+                    {
+                        Unit unit = GameData.Units.Objects[i] as Unit;
+                        if (unit.BoundingBox.Contains(mousePoint))
+                        {
+                            targetUnit = unit;
+                            continue;
+                        }
+                        else targetUnit = null;
+                    }
+                }
+                if(targetUnit== null)
+                {
+                    targetPosition = GameData.Cursor.CurrentTile.Position;
+                }
+            }
+        }
     }
 
     public override void Update(GameTime gameTime)
     {
-        if(targetUnit != null)
+        attackTimer.Update(gameTime);
+        if (targetUnit != null)
         {
-            if ((int)Math.Sqrt(Math.Pow(Position.X - targetUnit.Position.X, 2) + Math.Pow(Position.Y - targetUnit.Position.Y, 2)) > range)
-            {
-                velocity = new Vector2(-(Position.X - targetUnit.Position.X) / (float)Math.Sqrt(Math.Pow(Position.X - targetUnit.Position.X, 2) + Math.Pow(Position.Y - targetUnit.Position.Y, 2)) * speed,
-                                       -(Position.Y - targetUnit.Position.Y) / (float)Math.Sqrt(Math.Pow(Position.X - targetUnit.Position.X, 2) + Math.Pow(Position.Y - targetUnit.Position.Y, 2)) * speed);
-            }
-            
-            else
-            {
-                velocity = new Vector2(0, 0);
-            }
+            MoveToUnit();
         }
 
-        else if(targetPosition != null)
+        else if (targetPosition != Vector2.Zero)
         {
-            if((int)Math.Sqrt(Math.Pow(Position.X - targetPosition.X, 2) + Math.Pow(Position.Y - targetPosition.Y, 2)) < 5)
-            {
-                targetPosition = Position;
-                velocity = Vector2.Zero;
-            }
+            MoveToTile();
         }
         base.Update(gameTime);
     }
 
-    
+    protected void MoveToTile()
+    {
+        float differenceXPos = Math.Abs(targetPosition.X - this.GlobalPosition.X);
+        float differenceYPos = Math.Abs(targetPosition.Y - this.GlobalPosition.Y);
+        float xvelocity = 0;
+        float yvelocity = 0;
+        double angle = 0;
+        float marginForError = 2;
+        angle = Math.Atan((differenceXPos / differenceYPos));
+        xvelocity = (float)(Math.Sin(angle) * this.Speed);
+        yvelocity = (float)(Math.Cos(angle) * this.Speed);
+        if (targetPosition.X >= this.GlobalPosition.X)
+        {
+            if (targetPosition.Y < this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(xvelocity, -yvelocity);
+            }
+            else if (targetPosition.Y > this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(xvelocity, yvelocity);
+            }
+        }
+        else if (targetPosition.X <= this.GlobalPosition.X)
+        {
+            if (targetPosition.Y < this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(-xvelocity, -yvelocity);
+            }
+            else if (targetPosition.Y > this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(-xvelocity, yvelocity);
+            }
+        }
+        if ((differenceXPos < marginForError && differenceXPos > -marginForError) &&(differenceYPos< marginForError && differenceYPos>-marginForError))
+        {
+            targetPosition = Vector2.Zero;
+            this.Velocity = Vector2.Zero;
+        }
+       
+    }
+    protected void MoveToUnit()
+    {
+        float differenceXPos = Math.Abs(targetUnit.Position.X - this.GlobalPosition.X);
+        float differenceYPos = Math.Abs(targetUnit.Position.Y - this.GlobalPosition.Y);
+        float xvelocity = 0;
+        float yvelocity = 0;
+        double angle = 0;
+        angle = Math.Atan((differenceXPos / differenceYPos));
+        xvelocity = (float)(Math.Sin(angle) * this.Speed);
+        yvelocity = (float)(Math.Cos(angle) * this.Speed);
+        if (targetUnit.Position.X >= this.GlobalPosition.X)
+        {
+            if (targetUnit.Position.Y < this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(xvelocity, -yvelocity);
+            }
+            else if (targetUnit.Position.Y > this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(xvelocity, yvelocity);
+            }
+        }
+        else if (targetUnit.Position.X <= this.GlobalPosition.X)
+        {
+            if (targetUnit.Position.Y < this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(-xvelocity, -yvelocity);
+            }
+            else if (targetUnit.Position.Y > this.GlobalPosition.Y)
+            {
+                this.Velocity = new Vector2(-xvelocity, yvelocity);
+            }
+        }
+        if ((differenceXPos < Range && differenceXPos > -Range) && (differenceYPos < Range && differenceYPos > -Range))
+        {
+            this.Velocity = Vector2.Zero;
+            if (attackTimer.Ended)
+            {
+                Attack();
+            }
+        }
+
+    }
+    protected void Attack()
+    {
+        targetUnit.DealDamage(this.Damage,this);
+        if (targetUnit.Health <= 0)
+            targetUnit = null;
+        attackTimer.Reset();
+    }
+    public void DealDamage(float amount,GameObject attacker)
+    {
+        this.Health -= amount;
+        if (Health <= 0)
+        {
+            Die();
+        }
+        if(targetUnit== null)
+        {
+            if(attacker is Unit)
+            {
+                Unit target = attacker as Unit;
+                targetUnit = target;
+            }
+        }
+    }
+    protected virtual void Die()
+    {
+        GameData.Units.Remove(this);
+    }
 }
+

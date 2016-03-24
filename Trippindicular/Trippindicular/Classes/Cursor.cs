@@ -31,8 +31,8 @@ class Cursor : SpriteGameObject
     public override void HandleInput(InputHelper inputHelper)
     {
         base.HandleInput(inputHelper);
-        this.Position = inputHelper.MousePosition+GameWorld.Camera.Pos;
-        Point position = new Point((int)(inputHelper.MousePosition.X + tileForOrigin.Sprite.Center.X+GameWorld.Camera.Pos.X), 
+        this.Position = inputHelper.MousePosition + GameWorld.Camera.Pos;
+        Point position = new Point((int)(inputHelper.MousePosition.X + tileForOrigin.Sprite.Center.X + GameWorld.Camera.Pos.X),
             (int)(inputHelper.MousePosition.Y + tileForOrigin.Sprite.Center.Y + GameWorld.Camera.Pos.Y));
 
         if (!hasClickedTile)
@@ -41,31 +41,50 @@ class Cursor : SpriteGameObject
             if (currentTile != null)
                 GameData.selectedTile.Position = currentTile.Position;
         }
+        for (int i = 0; i < GameData.Units.Objects.Count; i++)
+        {
+            // make return property that returns the right value instead 
+        }
         //stop hovering tiles 
-        if (inputHelper.LeftButtonPressed() && currentTile != null && !hasClickedTile)
+        if (inputHelper.LeftButtonPressed() && currentTile != null && !hasClickedTile && !HoveringOverUnit(inputHelper))
         {
             hasClickedTile = true;
         }
-        
-        if (inputHelper.IsKeyDown(Keys.Right)||inputHelper.MousePosition.X>GameSettings.GameWidth-borderWidth)
+
+        if (inputHelper.IsKeyDown(Keys.Right) || inputHelper.MousePosition.X > GameSettings.GameWidth - borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(15, 0));
 
         }
-        if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.MousePosition.X < borderWidth)
+        else if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.MousePosition.X < borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(-15, 0));
 
         }
-        if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.MousePosition.Y < borderWidth)
+        else if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.MousePosition.Y < borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(0, -15));
         }
-        if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.MousePosition.Y > GameSettings.GameHeight - borderWidth)
+        else if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.MousePosition.Y > GameSettings.GameHeight - borderWidth)
         {
             GameWorld.Camera.Move(new Vector2(0, 15));
         }
 
     }
+    public bool HoveringOverUnit(InputHelper ih)
+    {
+        Point mousePoint = new Point((int)(ih.MousePosition.X + GameWorld.Camera.Pos.X), (int)(ih.MousePosition.Y + GameWorld.Camera.Pos.Y));
+        {
+            for (int i = 0; i < GameData.Units.Objects.Count; i++)
+            {
+                if (GameData.Units.Objects[i].BoundingBox.Contains(mousePoint))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
+
 

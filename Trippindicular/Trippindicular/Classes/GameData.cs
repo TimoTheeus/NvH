@@ -11,6 +11,7 @@ static class GameData
     static Point resolution;
     //This is the list with all the objects of the current level in it.
     static public GameObjectList LevelObjects;
+    static public GameObjectList Units;
     static public HexaGrid LevelGrid;
     static public SpriteGameObject selectedTile;
     static public Cursor Cursor;
@@ -38,6 +39,8 @@ static class GameData
     static public void Initialize()
     {
         LevelObjects = new GameObjectList();
+        Units = new GameObjectList(4);
+        LevelObjects.Add(Units);
         Cursor = new Cursor();
         GameData.LevelObjects.Add(Cursor);
         Tile tile = new Tile();
@@ -63,12 +66,13 @@ static class GameData
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
 
-        Unit unit = new Unit("hexagonTile", 0);
-        unit.Position = new Vector2(800, 2000);
-        unit.targetUnit = new Unit("hexagonTile");
-        unit.targetUnit.Position = new Vector2(1600, 1600);
-        GameData.LevelObjects.Add(unit.targetUnit);
-        GameData.LevelObjects.Add(unit);
+        Unit unit = new Unit("selectedTile","testUnit", 4);
+        unit.Position = new Vector2(500, 500);
+        Unit unit2 = new Unit("selectedTile", "testUnit2", 4);
+        unit2.Position = new Vector2(700, 500);
+        GameData.Units.Add(unit2);
+        GameData.Units.Add(unit);
+
     }
     static public void AfterInitialize()
     {

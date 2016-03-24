@@ -47,6 +47,11 @@ public class InputHelper
         return currMState.LeftButton == ButtonState.Pressed && prevMState.LeftButton == ButtonState.Released;
     }
     //Bool to check if the left mouse button is pressed.
+    public bool RightButtonPressed()
+    {
+        return currMState.RightButton == ButtonState.Pressed && prevMState.RightButton == ButtonState.Released;
+    }
+    //Bool to check if the left mouse button is pressed.
     public bool LeftButtonReleased()
     {
         return prevMState.LeftButton == ButtonState.Pressed && currMState.LeftButton == ButtonState.Released;
