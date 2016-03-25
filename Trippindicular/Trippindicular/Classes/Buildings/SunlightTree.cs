@@ -14,9 +14,6 @@ class SunlightTree:Building
         GameData.LevelObjects.Add(resController);
     }
 
-    public override void HandleInput(InputHelper ih)
-    {
-    }
 
     public override void Destroy()
     {

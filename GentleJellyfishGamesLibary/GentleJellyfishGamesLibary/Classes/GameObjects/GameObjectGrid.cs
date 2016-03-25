@@ -58,7 +58,12 @@ public class GameObjectGrid : GameObject
         get { return cellHeight; }
         set { cellHeight = value; }
     }
-
+    public override void Update(GameTime gameTime)
+    {
+        foreach (GameObject obj in grid)
+            if (obj != null)
+                obj.Update(gameTime);
+    }
     public override void HandleInput(InputHelper inputHelper)
     {
         foreach (GameObject obj in grid)

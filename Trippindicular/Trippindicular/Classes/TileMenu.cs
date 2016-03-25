@@ -9,6 +9,7 @@ class TileMenu : Menu
 {
     protected Button button1, button2, button3, button4;
     protected Tile tile;
+    protected float sunlightTreeCooldown;
 
     public TileMenu(Tile tile,string id = "menu"):base(4,id)
     {
@@ -25,6 +26,7 @@ class TileMenu : Menu
         {
             background.Sprite.Color = Color.Green;
         }
+        sunlightTreeCooldown = 5f;
     }
 
     protected void AddButtons()
@@ -63,7 +65,8 @@ class TileMenu : Menu
             }
             else
             {
-                GameData.LevelGrid.replaceTile(this.tile, new SunlightTree());
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
+               // GameData.LevelGrid.replaceTile(this.tile, new SunlightTree());
             }
         }
         else if (button2 != null && button2.Pressed)
