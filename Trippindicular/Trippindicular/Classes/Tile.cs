@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 class Tile : SpriteGameObject
 {
-    public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 5)
+    public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 1)
     {
         this.Origin = this.sprite.Center;
     }

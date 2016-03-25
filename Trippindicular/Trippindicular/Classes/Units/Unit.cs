@@ -87,7 +87,7 @@ class Unit : SpriteGameObject
                         if (unit.BoundingBox.Contains(mousePoint))
                         {
                             targetUnit = unit;
-                            continue;
+                            break;
                         }
                         else targetUnit = null;
                     }
@@ -114,7 +114,7 @@ class Unit : SpriteGameObject
         }
         base.Update(gameTime);
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
-        healthBar.ChangeHealth((health / maxHealth) * 2);
+        healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

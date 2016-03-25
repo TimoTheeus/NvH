@@ -9,7 +9,7 @@ class NatureBase : Building
 {
     public NatureBase() : base("natureBase", "selectedTile")
     {
-        this.health = 100;
+        this.health = 1;
     }
     public override void HandleInput(InputHelper ih)
     {
