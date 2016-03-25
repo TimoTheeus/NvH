@@ -21,7 +21,7 @@ class HumanityBarrack : Building
         }
     }
 
-    public virtual void LeftButtonAction()
+    public override void LeftButtonAction()
     {
         GameData.LevelObjects.Add(new BarracksMenu(this));
     }

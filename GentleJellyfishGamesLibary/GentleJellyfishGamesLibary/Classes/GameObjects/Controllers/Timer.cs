@@ -8,6 +8,10 @@ public class Timer : Controller
     protected bool paused;
     protected bool ended;
 
+    public double TimeLeft
+    {
+        get { return timeLeft; }
+    }
     public bool Ended { get { return ended; } }
 
     public Timer(float timeInSeconds)

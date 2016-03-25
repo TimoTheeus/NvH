@@ -65,7 +65,8 @@ class TileMenu : Menu
             }
             else
             {
-                GameData.LevelGrid.replaceTile(this.tile, new SunlightTree());
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
+               // GameData.LevelGrid.replaceTile(this.tile, new SunlightTree());
             }
         }
         else if (button2 != null && button2.Pressed)

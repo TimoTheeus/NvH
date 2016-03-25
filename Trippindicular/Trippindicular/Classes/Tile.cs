@@ -4,18 +4,23 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 class Tile : SpriteGameObject
 {
     public Point gridPosition;
     protected List<Timer> buildTimers;
     protected List<SpriteGameObject> objectsToBuild;
+    protected List<TextGameObject> text;
+    TextGameObject descriptive;
 
     public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 1)
     {
         this.Origin = this.sprite.Center;
         buildTimers = new List<Timer>();
         objectsToBuild = new List<SpriteGameObject>();
+        text = new List<TextGameObject>();
+        descriptive = new TextGameObject("smallFont", 4, "descriptive");
     }
 
     public override void HandleInput(InputHelper ih)
@@ -30,17 +35,34 @@ class Tile : SpriteGameObject
         base.Update(gameTime);
         for(int i = 0; i < buildTimers.Count; i++)
         {
-            buildTimers[i].Update(gameTime);
-            if (buildTimers[i].Ended)
+            if (buildTimers[i] != null)
             {
-                if (objectsToBuild[i] is Unit)
+                buildTimers[i].Update(gameTime);
+                if (buildTimers[i].Ended)
                 {
-                    objectsToBuild[i].Position= new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
-                    GameData.LevelObjects.Add(objectsToBuild[i]);
+                    if (objectsToBuild[i] is Unit)
+                    {
+                        objectsToBuild[i].Position = new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
+                        GameData.LevelObjects.Add(objectsToBuild[i]);
+                    }
+                    else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Tile); }
+                    buildTimers.Remove(buildTimers[i]);
+                    objectsToBuild.Remove(objectsToBuild[i]);
+                    if (text[i] != null)
+                        text.Remove(text[i]);
+                    GameData.LevelObjects.Remove(descriptive);
                 }
-                else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Tile); }
-                buildTimers.Remove(buildTimers[i]);
-                objectsToBuild.Remove(objectsToBuild[i]);
+            }
+        }
+    }
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        base.Draw(gameTime, spriteBatch);
+        for (int i = 0; i < text.Count; i++)
+        {
+            if (text[i] != null)
+            {
+                descriptive.Text = "constructing.." + (int)buildTimers[i].TimeLeft;
             }
         }
     }
@@ -57,6 +79,13 @@ class Tile : SpriteGameObject
     {
         buildTimers.Add(timer);
         objectsToBuild.Add(objectToBuild);
+        if(objectToBuild is Building)
+        {
+            TextGameObject buildingText = new TextGameObject("smallFont", 4, "buildingText");
+            text.Add(buildingText);
+            descriptive.Position = Position + new Vector2(-50, -50);
+            GameData.LevelObjects.Add(descriptive);
+        }
     }
 
 }

@@ -54,7 +54,7 @@ public class GameWorld : Game
     //Initialize the gameworld (also initializes settings).
     public GameWorld()
     {
-        this.Components.Add(new GamerServicesComponent(this));
+       // this.Components.Add(new GamerServicesComponent(this));
         
         graphics = new GraphicsDeviceManager(this);
         GameSettings.Initialize();
