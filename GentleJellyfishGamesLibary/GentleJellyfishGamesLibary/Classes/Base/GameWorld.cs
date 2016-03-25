@@ -54,7 +54,7 @@ public class GameWorld : Game
     //Initialize the gameworld (also initializes settings).
     public GameWorld()
     {
-        this.Components.Add(new GamerServicesComponent(this));
+        //this.Components.Add(new GamerServicesComponent(this));
         
         graphics = new GraphicsDeviceManager(this);
         GameSettings.Initialize();
@@ -64,7 +64,7 @@ public class GameWorld : Game
         inputHelper = new InputHelper();
         random = new R();
         screen = new Point(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-        Guide.ShowSignIn(2, true);
+
 
     }
     //Method to load needed items
@@ -73,7 +73,7 @@ public class GameWorld : Game
         spriteBatch = new SpriteBatch(GraphicsDevice);
         assetLoader = new AssetLoader(Content);
         DrawTesting.Initialize(this.GraphicsDevice);
-       
+        Guide.ShowSignIn(2, true);
     }
     //Update the gamestatemanager and the testing class
     protected override void Update(GameTime gameTime)
