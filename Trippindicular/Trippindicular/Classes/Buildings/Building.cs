@@ -4,20 +4,30 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
-class Building:Tile
+class Building : Tile
 {
-    protected float health;
+    protected float health, maxHealth;
+    protected HealthBar healthBar;
 
     public float Health
     {
         get { return health; }
         set { health = value; }
     }
+
+    public float MaxHealth
+    {
+        get { return maxHealth; }
+        set { maxHealth = value; }
+    }
     public Building(string id = "", string assetName=""):base(assetName,id)
     {
         RemoveMenu();
         health = 1;
+        maxHealth = 1;
+        healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
     }
     public override void LeftButtonAction()
     {
@@ -29,13 +39,21 @@ class Building:Tile
         if (menu != null)
             GameData.LevelObjects.Remove(menu);
     }
-    protected void DealDamage(float amount)
+    public void DealDamage(float amount)
     {
         this.Health -= amount;
         if (this.Health <= 0)
         {
-            Destroy();
+            GameData.LevelGrid.replaceTile(this, new Tile());
         }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
+        healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
+        healthBar.Draw(gameTime, spriteBatch);
+        base.Draw(gameTime, spriteBatch);
     }
 
 }

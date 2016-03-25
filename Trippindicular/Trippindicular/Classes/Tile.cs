@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 class Tile : SpriteGameObject
 {
-    public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 5)
+    public Point gridPosition;
+
+    public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 1)
     {
         this.Origin = this.sprite.Center;
     }
@@ -26,7 +29,6 @@ class Tile : SpriteGameObject
 
     public virtual void Destroy()
     {
-
     }
 
 }

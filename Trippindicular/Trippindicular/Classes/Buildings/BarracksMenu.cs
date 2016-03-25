@@ -46,7 +46,7 @@ class BarracksMenu : Menu
                 unit = new Unit("selectedTile", "unit", 2);
             }
             unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
-            GameData.LevelObjects.Add(unit);
+            GameData.Units.Add(unit);
             
         }
         else if (button2 != null && button2.Pressed)
@@ -64,7 +64,7 @@ class BarracksMenu : Menu
                 unit = new Unit("selectedTile", "unit", 2);
             }
             unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
-            GameData.LevelObjects.Add(unit);
+            GameData.Units.Add(unit);
         }
         else if (button3 != null && button3.Pressed)
         {
@@ -81,7 +81,7 @@ class BarracksMenu : Menu
                 unit = new Unit("selectedTile", "unit", 2);
             }
             unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
-            GameData.LevelObjects.Add(unit);
+            GameData.Units.Add(unit);
         }
     }
 }

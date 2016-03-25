@@ -9,6 +9,8 @@ class HumanityBarrack : Building
 {
     public HumanityBarrack() : base("humanityBarrack","selectedTile")
     {
+        this.maxHealth = 100;
+        this.health = 100;
     }
 
     public override void HandleInput(InputHelper ih)

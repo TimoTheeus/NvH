@@ -7,6 +7,7 @@ class Unit : SpriteGameObject
     float damage, maxHealth, health, speed, range,attackSpeed;
     Vector2 targetPosition;
     public Unit targetUnit;
+    public Building targetBuilding;
     bool selected;
     Timer attackTimer;
     Player.Faction faction;
@@ -87,14 +88,24 @@ class Unit : SpriteGameObject
                         if (unit.BoundingBox.Contains(mousePoint))
                         {
                             targetUnit = unit;
-                            continue;
+                            break;
                         }
                         else targetUnit = null;
                     }
                 }
+
                 if(targetUnit== null)
                 {
-                    targetPosition = GameData.Cursor.CurrentTile.Position;
+                    if (GameData.Cursor.CurrentTile is Building)
+                    {
+                        targetUnit = null;
+                        targetBuilding = (Building)GameData.Cursor.CurrentTile;
+                        targetPosition = GameData.Cursor.CurrentTile.Position; 
+                    }
+                    else
+                    {
+                        targetPosition = GameData.Cursor.CurrentTile.Position;
+                    }
                 }
             }
         }
@@ -108,13 +119,14 @@ class Unit : SpriteGameObject
             MoveToUnit();
         }
 
+
         else if (targetPosition != Vector2.Zero)
         {
             MoveToTile();
         }
         base.Update(gameTime);
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
-        healthBar.ChangeHealth((health / maxHealth) * 2);
+        healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -156,10 +168,23 @@ class Unit : SpriteGameObject
                 this.Velocity = new Vector2(-xvelocity, yvelocity);
             }
         }
-        if ((differenceXPos < marginForError && differenceXPos > -marginForError) &&(differenceYPos< marginForError && differenceYPos>-marginForError))
+        if ((targetBuilding != null && (Math.Sqrt(Math.Pow(differenceXPos, 2) + Math.Pow(differenceYPos, 2)) <= range) || (differenceXPos < marginForError && differenceXPos > -marginForError) &&(differenceYPos< marginForError && differenceYPos>-marginForError)))
         {
-            targetPosition = Vector2.Zero;
-            this.Velocity = Vector2.Zero;
+            if(targetBuilding != null)
+            {
+                if (attackTimer.Ended)
+                {
+                    Attack();
+                }
+                this.Velocity = Vector2.Zero;
+            }
+
+            else
+            {
+                targetPosition = Vector2.Zero;
+                this.Velocity = Vector2.Zero;
+            }
+            
         }
        
     }
@@ -207,9 +232,20 @@ class Unit : SpriteGameObject
     }
     protected void Attack()
     {
-        targetUnit.DealDamage(this.Damage,this);
-        if (targetUnit.Health <= 0)
-            targetUnit = null;
+        if(targetUnit != null)
+        {
+            targetUnit.DealDamage(this.Damage, this);
+            if (targetUnit.Health <= 0)
+                targetUnit = null;
+        }
+
+        else
+        {
+            targetBuilding.DealDamage(this.Damage);
+            if (targetBuilding.Health <= 0)
+                targetBuilding = null;
+        }
+        
         attackTimer.Reset();
     }
 
