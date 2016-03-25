@@ -43,12 +43,14 @@ public class GameStateManager
     {
         if (currentGameState != null)
             currentGameState.HandleInput(inputHelper);
+
     }
     //Update the current gamestate.
     public void Update(GameTime gameTime)
     {
         if (currentGameState != null)
             currentGameState.Update(gameTime);
+
     }
     //Draw the current gamestate.
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

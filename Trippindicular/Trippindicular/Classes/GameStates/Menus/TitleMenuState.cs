@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.GamerServices;
 
 //Main menu, access to all sub-menus
 class TitleMenuState : GameObjectList
@@ -13,6 +15,7 @@ class TitleMenuState : GameObjectList
     int selectedSessionIndex;
     PacketReader packetReader = new PacketReader();
     PacketWriter packetWriter = new PacketWriter();
+    protected Button createGame;
 
     public TitleMenuState()
     {
@@ -29,6 +32,8 @@ class TitleMenuState : GameObjectList
                 newGame.Position = new Vector2(300, 150);
                 this.Add(newGame);
 
+
+
                 //Options
                 options = new Button("button", "buttonFont", "font", 0, "Options", 0);
                 options.Position = new Vector2(300, 280);
@@ -43,6 +48,10 @@ class TitleMenuState : GameObjectList
                 exitGame = new Button("button", "buttonFont", "font", 0, "Exit Game", 0);
                 exitGame.Position = new Vector2(300, 540);
                 this.Add(exitGame);
+
+                createGame = new Button("button", "buttonFont", "font", 0, "Create Game", 0);
+                createGame.Position = new Vector2(300, 670);
+                this.Add(createGame);
     }
 
     public override void Reset()
@@ -55,6 +64,10 @@ class TitleMenuState : GameObjectList
         //base
         base.HandleInput(inputHelper);
 
+        if (inputHelper.KeyPressed(Keys.Home))
+        {
+           
+        }
         //Buttons
         if (newGame.Pressed)
         {
@@ -73,6 +86,9 @@ class TitleMenuState : GameObjectList
         else if (sessions.Pressed)
         {
             GameWorld.GameStateManager.SwitchTo("sessionsMenu");
+        }
+        else if (createGame.Pressed) {
+            GameWorld.GameStateManager.SwitchTo("hostLobby");
         }
     }
 }

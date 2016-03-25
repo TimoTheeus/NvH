@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using Lidgren.Network;
+
 
 //Class with all basic loops and variables needed for any game.
 public class GameWorld : Game
@@ -54,7 +56,7 @@ public class GameWorld : Game
     //Initialize the gameworld (also initializes settings).
     public GameWorld()
     {
-        this.Components.Add(new GamerServicesComponent(this));
+        //this.Components.Add(new GamerServicesComponent(this));
         
         graphics = new GraphicsDeviceManager(this);
         GameSettings.Initialize();
@@ -92,9 +94,12 @@ public class GameWorld : Game
 
         if (inputHelper.KeyPressed(Keys.F8))
             GameSettings.ApplySettings();
-        if (inputHelper.KeyPressed(Keys.Home)) {
-            Guide.ShowSignIn(2, true);
+        if (inputHelper.KeyPressed(Keys.Delete))
+        {
+
+
         }
+        
     }
     //Clear the screen, then draw the gamestatemanager with the right scale
     protected override void Draw(GameTime gameTime)
