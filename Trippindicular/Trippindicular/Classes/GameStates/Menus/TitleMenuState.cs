@@ -1,12 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Net;
 
 //Main menu, access to all sub-menus
 class TitleMenuState : GameObjectList
 {
-    protected Button newGame, options, exitGame;
+    protected Button newGame, options, exitGame, sessions;
     protected SpriteGameObject background;
     protected PlayingState playingState;
+    NetworkSession networkSession;
+    AvailableNetworkSessionCollection availableSessions;
+    int selectedSessionIndex;
+    PacketReader packetReader = new PacketReader();
+    PacketWriter packetWriter = new PacketWriter();
 
     public TitleMenuState()
     {
@@ -28,9 +34,14 @@ class TitleMenuState : GameObjectList
                 options.Position = new Vector2(300, 280);
                 this.Add(options);
 
+                //Options
+                sessions = new Button("button", "buttonFont", "font", 0, "Sessions", 0);
+                sessions.Position = new Vector2(300, 410);
+                this.Add(sessions);
+
                 //Exit Game
                 exitGame = new Button("button", "buttonFont", "font", 0, "Exit Game", 0);
-                exitGame.Position = new Vector2(300, 410);
+                exitGame.Position = new Vector2(300, 540);
                 this.Add(exitGame);
     }
 
@@ -56,6 +67,12 @@ class TitleMenuState : GameObjectList
             GameWorld.GameStateManager.SwitchTo("settingsMenuTitle");
         }
         else if (exitGame.Pressed)
+        {
             GameWorld.Exited = true;
+        }
+        else if (sessions.Pressed)
+        {
+            GameWorld.GameStateManager.SwitchTo("sessionsMenu");
+        }
     }
 }

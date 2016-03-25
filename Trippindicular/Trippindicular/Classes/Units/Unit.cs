@@ -212,6 +212,7 @@ class Unit : SpriteGameObject
             targetUnit = null;
         attackTimer.Reset();
     }
+
     public void DealDamage(float amount,GameObject attacker)
     {
         this.Health -= amount;

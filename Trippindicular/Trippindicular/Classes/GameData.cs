@@ -16,8 +16,8 @@ static class GameData
     static public SpriteGameObject selectedTile;
     static public Cursor Cursor;
     static public ResourceController ResourceController;
-    static public Player player;
-
+    static public Player naturePlayer;
+    static public Player humanityPlayer;
     static public Point Resolution
     {
         get { return resolution; }
@@ -61,8 +61,10 @@ static class GameData
 
         
 
-        player = new Player(Player.Faction.nature);
-        GameData.LevelObjects.Add(player);
+        naturePlayer = new Player(Player.Faction.nature);
+        GameData.LevelObjects.Add(naturePlayer);
+        humanityPlayer = new Player(Player.Faction.humanity);
+        GameData.LevelObjects.Add(humanityPlayer);
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
 

@@ -64,6 +64,7 @@
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework.Storage, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -90,6 +91,7 @@
     <Compile Include="Classes\GameStates\Menus\SettingsMenuOverlay.cs" />
     <Compile Include="Classes\GameStates\Menus\TitleMenuState.cs" />
     <Compile Include="Classes\HexaGrid.cs" />
+    <Compile Include="Classes\GameStates\Menus\SessionsMenuState.cs" />
     <Compile Include="Classes\TileMenu.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Buildings\SunlightTree.cs" />

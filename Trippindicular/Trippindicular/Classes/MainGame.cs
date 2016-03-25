@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Trippindicular.Classes;
 
 //This is the main class, the game gets started from here.
 class MainGame : GameWorld
@@ -36,6 +37,7 @@ class MainGame : GameWorld
         gameStateManager.AddGameState("playing", new PlayingState());
         gameStateManager.AddGameState("hud", new HUD());
         gameStateManager.AddGameState("titleMenu", new TitleMenuState());
+        gameStateManager.AddGameState("sessionsMenu", new SessionsMenuState());
         gameStateManager.AddGameState("settingsMenuTitle", new SettingsMenuOverlay(gameStateManager.GetGameState("titleMenu")));
         gameStateManager.AddGameState("settingsMenuPause", new SettingsMenuOverlay(gameStateManager.GetGameState("pauseMenu")));
         gameStateManager.AddGameState("finish", new FinishState());
