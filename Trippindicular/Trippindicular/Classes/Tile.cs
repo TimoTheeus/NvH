@@ -21,7 +21,7 @@ class Tile : SpriteGameObject
 
     public virtual void LeftButtonAction()
     {
-        GameData.LevelObjects.Add(new Menu(this));
+        GameData.LevelObjects.Add(new TileMenu(this));
     }
 
     public virtual void Destroy()

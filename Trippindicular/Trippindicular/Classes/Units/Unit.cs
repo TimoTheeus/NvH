@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-
+using Microsoft.Xna.Framework.Graphics;
 
 class Unit : SpriteGameObject
 {
@@ -10,6 +10,7 @@ class Unit : SpriteGameObject
     bool selected;
     Timer attackTimer;
     Player.Faction faction;
+    HealthBar healthBar;
 
     public float AttackSpeed
     {
@@ -49,6 +50,7 @@ class Unit : SpriteGameObject
         selected = false;
         attackSpeed = 1;
         attackTimer = new Timer(this.AttackSpeed);
+        healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
     }
 
     public override void HandleInput(InputHelper ih)
@@ -77,7 +79,7 @@ class Unit : SpriteGameObject
         {
             if (ih.RightButtonPressed())
             {
-                for(int i = 0; i < GameData.Units.Objects?.Count; i++)
+                for(int i = 0; i < GameData.Units.Objects.Count; i++)
                 {
                     if(GameData.Units.Objects[i] is Unit)
                     {
@@ -111,6 +113,14 @@ class Unit : SpriteGameObject
             MoveToTile();
         }
         base.Update(gameTime);
+        healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
+        healthBar.ChangeHealth((health / maxHealth) * 2);
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        healthBar.Draw(gameTime, spriteBatch);
+        base.Draw(gameTime, spriteBatch);
     }
 
     protected void MoveToTile()

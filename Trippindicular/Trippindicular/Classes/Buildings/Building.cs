@@ -25,7 +25,7 @@ class Building:Tile
     }
     protected void RemoveMenu()
     {
-        Menu menu = GameData.LevelObjects.Find("menu") as Menu;
+        TileMenu menu = GameData.LevelObjects.Find("menu") as TileMenu;
         if (menu != null)
             GameData.LevelObjects.Remove(menu);
     }

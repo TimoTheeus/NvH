@@ -70,6 +70,12 @@ static class GameData
         unit.Position = new Vector2(500, 500);
         Unit unit2 = new Unit("selectedTile", "testUnit2", 4);
         unit2.Position = new Vector2(700, 500);
+        Unit unit3 = new Unit("selectedTile", "testUnit3", 4);
+        unit3.Position = new Vector2(500, 700);
+        Unit unit4 = new Unit("selectedTile", "testUnit4", 4);
+        unit4.Position = new Vector2(700, 700);
+        GameData.Units.Add(unit4);
+        GameData.Units.Add(unit3);
         GameData.Units.Add(unit2);
         GameData.Units.Add(unit);
 

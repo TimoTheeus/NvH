@@ -12,7 +12,7 @@ public class HealthBar : GameObject
     public const int barHeight = 10;
     protected float currWidth;
 
-    public HealthBar(Vector2 centerPosition) : base("healthbar", 2)
+    public HealthBar(Vector2 centerPosition) : base("healthbar", 10)
     {
         position = centerPosition;
         health = 1;
