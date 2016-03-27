@@ -9,6 +9,7 @@ class NatureBarracks:Building
     public NatureBarracks() : base("natureBarrack", "selectedTile")
     {
         Faction = Player.Faction.nature;
+        name = "NATURE BARRACKS";
     }
 }
 

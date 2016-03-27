@@ -14,47 +14,47 @@ class EventLog : GameObjectList
             Objects.Add(new TextGameObject("smallFont"));
     }
 
-    public void Add(GameObject target, GameObject attacker)
+    public void Add(string target, string attacker, bool building)
     {
         TextGameObject prompt = new TextGameObject("smallFont");
-        if(target is Unit)
+        if(!building)
             switch(GameWorld.Random.Next(6))
             {
                 case 0:
-                    prompt.Text = attacker.ID + " cashed in " + target.ID + "'s chips";
+                    prompt.Text = attacker + " cashed in " + target + "'s chips";
                     break;
                 case 1:
-                    prompt.Text = target.ID + " was no match for " + attacker.ID + "'s fists of fury";
+                    prompt.Text = target + " was no match for " + attacker + "'s fists of fury";
                     break;
                 case 2:
-                    prompt.Text = attacker.ID + " iced " + target.ID;
+                    prompt.Text = attacker + " iced " + target;
                     break;
                 case 3:
-                    prompt.Text = attacker.ID + " slaughtered " + target.ID + " in a crazed frenzy";
+                    prompt.Text = attacker + " slaughtered " + target + " in a crazed frenzy";
                     break;
                 case 4:
-                    prompt.Text = attacker.ID + " decided the world wasn't big enough for " + target.ID;
+                    prompt.Text = attacker + " decided the world wasn't big enough for " + target;
                     break;
                 case 5:
-                    prompt.Text = target.ID + "didn't have what it took to take on" + attacker.ID;
+                    prompt.Text = target + " didn't have what it took to take on " + attacker;
                     break;
             }
         
-        else if(target is Building)
+        else
         {
             switch(GameWorld.Random.Next(4))
             {
                 case 0:
-                    prompt.Text = target.ID + "crumbled under" + attacker.ID + "'s might";
+                    prompt.Text = target + " crumbled under " + attacker + "'s might";
                     break;
                 case 1:
-                    prompt.Text = attacker.ID + "rolled over" + target.ID + "like a bulldozer";
+                    prompt.Text = attacker + " crushed " + target + " like a bulldozer";
                     break;
                 case 2:
-                    prompt.Text = target.ID + "wasn't built with" + attacker.ID + "in mind";
+                    prompt.Text = target + " wasn't built with " + attacker + " in mind";
                     break;
                 case 3:
-                    prompt.Text = attacker.ID + "found a structural weakness in" + target.ID;
+                    prompt.Text = attacker + " found a structural weakness in " + target;
                     break;
             }
         }

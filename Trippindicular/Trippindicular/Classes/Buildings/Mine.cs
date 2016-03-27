@@ -11,6 +11,7 @@ class Mine : Building
     public Mine() : base("mine","selectedTile")
     {
         Faction = Player.Faction.humanity;
+        name = "COALMINE";
     }
 
     public override void HandleInput(InputHelper ih)

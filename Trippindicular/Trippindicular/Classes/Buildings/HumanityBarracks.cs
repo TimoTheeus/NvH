@@ -13,6 +13,7 @@ class HumanityBarrack : PolyTileBuilding
         this.maxHealth = 100;
         this.health = 100;
         Faction = Player.Faction.humanity;
+        name = "HUMAN BARRACKS";
     }
 
     public override void LeftButtonAction()

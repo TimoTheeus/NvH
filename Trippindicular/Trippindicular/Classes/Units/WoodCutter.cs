@@ -8,6 +8,7 @@ class WoodCutter : Unit
     public WoodCutter() : base("selectedTile", "WoodCutter")
     {
         Faction = Player.Faction.humanity;
+        name = "WOODCUTTER";
     }
 
     public override void Attack()

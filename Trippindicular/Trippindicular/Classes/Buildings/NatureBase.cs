@@ -11,6 +11,7 @@ class NatureBase : PolyTileBuilding
     {
         this.health = 1;
         Faction = Player.Faction.nature;
+        name = "NATURE BASE";
     }
     public override void HandleInput(InputHelper ih)
     {

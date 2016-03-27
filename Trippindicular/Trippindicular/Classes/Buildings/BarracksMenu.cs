@@ -39,7 +39,7 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new NatureWorker("selectedTile");
+                unit = new NatureWorker();
             }
             else
             {

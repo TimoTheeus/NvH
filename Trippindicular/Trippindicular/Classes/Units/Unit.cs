@@ -16,6 +16,8 @@ class Unit : SpriteGameObject
     protected bool inDiscoveredArea;
     protected Point mousePoint;
     protected string actionString;
+    public string name;
+    protected bool pacifist;
 
     public bool InDiscoveredArea
     {
@@ -82,21 +84,23 @@ class Unit : SpriteGameObject
         }
         if (BoundingBox.Contains(mousePoint))
         {
-            if (ih.LeftButtonPressed() && faction == GameData.player.GetFaction)
+            if (ih.LeftButtonPressed() && faction == GameData.player.GetFaction && GameData.Cursor.ClickedUnit == null)
             {
                 selected = true;
+                GameData.Cursor.ClickedUnit = this;
             }
         }
-        else if (!this.BoundingBox.Contains(mousePoint))
+        else if (!this.BoundingBox.Contains(mousePoint) && GameData.Cursor.ClickedUnit == this)
         {
             if (ih.LeftButtonPressed())
             {
                 selected = false;
+                GameData.Cursor.ClickedUnit = null;
                 //action = null
                 
             }
         }
-        if (selected)
+        if (GameData.Cursor.ClickedUnit == this)
         {
             if (ih.RightButtonPressed())
             {
@@ -260,15 +264,15 @@ class Unit : SpriteGameObject
         attackTimer.Reset();
     }
 
-    public void DealDamage(float amount,GameObject attacker)
+    public void DealDamage(float amount, GameObject attacker)
     {
         this.Health -= amount;
         if (Health <= 0)
         {
-            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this, attacker);
+            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Unit).name, false);
             Die();
         }
-        if(targetUnit== null)
+        if(targetUnit== null && pacifist != true)
         {
             if(attacker is Unit)
             {

@@ -11,6 +11,7 @@ class Building : Tile
     protected float health, maxHealth;
     protected HealthBar healthBar;
     protected Player.Faction faction;
+    public string name;
 
     public Player.Faction Faction
     {
@@ -48,9 +49,7 @@ class Building : Tile
         this.Health -= amount;
         if (this.Health <= 0)
         {
-            TextGameObject text = new TextGameObject("smallFont", 10);
-            text.Text = id + " was destroyed by " + attacker.ID;
-            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(text);
+            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Unit).name, this.name, true);
             Destroy();
         }
     }

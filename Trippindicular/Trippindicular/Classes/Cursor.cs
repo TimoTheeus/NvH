@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 class Cursor : SpriteGameObject
 {
     protected bool hasClickedTile;
+    protected Unit clickedUnit;
     protected Tile currentTile;
     protected Tile tileForOrigin;
     protected const int borderWidth = 100;
@@ -17,6 +18,12 @@ class Cursor : SpriteGameObject
     {
         get { return hasClickedTile; }
         set { hasClickedTile = value; }
+    }
+
+    public Unit ClickedUnit
+    {
+        get { return clickedUnit; }
+        set { clickedUnit = value; }
     }
     public Tile CurrentTile
     {

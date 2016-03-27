@@ -6,11 +6,13 @@ using Microsoft.Xna.Framework;
 
 class NatureWorker : Unit
 {
-    public NatureWorker(string assetName="") : base(assetName, "")
+    public NatureWorker() : base("selectedTile", "")
     {
         this.Damage = 0;
         this.Range = 0;
         Faction = Player.Faction.nature;
+        name = "NATURE BUILDER";
+        pacifist = true;
     }
     protected override void RightClickAction()
     {

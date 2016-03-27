@@ -13,7 +13,10 @@ class HumanityWorker : Unit
         this.Damage = 0;
         Range = 0;
         Faction = Player.Faction.humanity;
+        name = "HUMAN BUILDER";
+        pacifist = true;
     }
+
     protected override void RightClickAction()
     {
         Point p = new Point((int)this.Position.X + 20, (int)this.Position.Y + 20);
