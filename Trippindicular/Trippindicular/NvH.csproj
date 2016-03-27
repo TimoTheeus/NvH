@@ -61,7 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network">
-      <HintPath>..\..\..\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network.Xna">
       <HintPath>..\..\Lidgren.Network.Xna.dll</HintPath>
@@ -82,11 +82,13 @@
   <ItemGroup>
     <Compile Include="Classes\Buildings\BarracksMenu.cs" />
     <Compile Include="Classes\Buildings\Building.cs" />
+    <Compile Include="Classes\Buildings\CoTile.cs" />
     <Compile Include="Classes\Buildings\HumanityBarracks.cs" />
     <Compile Include="Classes\Buildings\HumanityBase.cs" />
     <Compile Include="Classes\Buildings\Mine.cs" />
     <Compile Include="Classes\Buildings\NatureBarracks.cs" />
     <Compile Include="Classes\Buildings\NatureBase.cs" />
+    <Compile Include="Classes\Buildings\PolyTileBuilding.cs" />
     <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\DropDown.cs" />
     <Compile Include="Classes\GameData.cs" />

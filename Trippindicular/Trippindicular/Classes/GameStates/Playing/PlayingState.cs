@@ -6,6 +6,7 @@ using Trippindicular.Classes;
 using System;
 using System.Collections.Generic;
 
+
 //Class used to update and draw everything that is needed when the player is playing the game.
 class PlayingState : IGameLoopObject
 {
@@ -92,6 +93,7 @@ class PlayingState : IGameLoopObject
                         }
                         Console.WriteLine(im.ReadString());
 
+            
                         break;
                     case NetIncomingMessageType.Data:
                         UpdateGameData(im.ReadString());

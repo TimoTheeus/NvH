@@ -60,7 +60,10 @@ class Tile : SpriteGameObject
                             objectsToBuild[i].Position = new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
                             GameData.LevelObjects.Add(objectsToBuild[i]);
                         }
-                        else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Tile); }
+                        else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Building);
+                            Building b = objectsToBuild[i] as Building;
+                            b.HasBeenBuiltAction();
+                        }
                         buildTimers.Remove(buildTimers[i]);
                         objectsToBuild.Remove(objectsToBuild[i]);
                         if (text[i] != null)
@@ -92,9 +95,6 @@ class Tile : SpriteGameObject
         GameData.LevelObjects.Add(new TileMenu(this));
     }
 
-    public virtual void Destroy()
-    {
-    }
     public void AddTimer(Timer timer, SpriteGameObject objectToBuild)
     {
         buildTimers.Add(timer);

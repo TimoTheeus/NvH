@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-class NatureBase : Building
+class NatureBase : PolyTileBuilding
 {
     public NatureBase() : base("natureBase", "selectedTile")
     {
