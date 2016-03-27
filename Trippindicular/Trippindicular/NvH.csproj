@@ -104,6 +104,7 @@
     <Compile Include="Classes\Network\ClientNetworkManager.cs" />
     <Compile Include="Classes\Network\INetworkManager.cs" />
     <Compile Include="Classes\Network\ServerNetworkManager.cs" />
+    <Compile Include="Classes\Spells\Fireball.cs" />
     <Compile Include="Classes\TileMenu.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Buildings\SunlightTree.cs" />

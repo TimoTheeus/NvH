@@ -192,7 +192,16 @@ class HexaGrid : GameObjectGrid
                 if (grid[i, j].Equals(search))
                 {
                     this.Add(replace, i, j);
-                    return;
+                    if (replace is PolyTileBuilding)
+                    {
+                        PolyTileBuilding p = replace as PolyTileBuilding;
+                        p.gridPosition = search.gridPosition;
+                        p.AddQuadCoTiles();
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
         }

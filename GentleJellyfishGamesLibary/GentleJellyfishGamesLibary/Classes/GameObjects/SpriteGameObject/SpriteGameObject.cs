@@ -92,7 +92,7 @@ public class SpriteGameObject : GameObject
 
     public override string getActionOutput()
     {
-        return null;
+        return base.getActionOutput();
     }
 }
 

@@ -19,6 +19,7 @@ class TitleMenuState : GameObjectList
 
     public TitleMenuState()
     {
+        GameData.Host = false;
         //Initialize playingState
         playingState = GameWorld.GameStateManager.GetGameState("playing") as PlayingState;
 
@@ -66,12 +67,12 @@ class TitleMenuState : GameObjectList
 
         if (inputHelper.KeyPressed(Keys.Home))
         {
-           
+            GameData.Host = true;
         }
         //Buttons
         if (newGame.Pressed)
         {
-            playingState.Initialize();
+            playingState.Initialize(GameData.Host);
             GameWorld.GameStateManager.SwitchTo("hud");
         }
         else if (options.Pressed)
