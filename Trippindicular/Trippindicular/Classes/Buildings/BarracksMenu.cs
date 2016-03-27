@@ -13,7 +13,7 @@ class BarracksMenu : Menu
     {
         this.tile = tile;
         background = new SpriteGameObject("button", 0, "background", 4);
-        background.Position = new Vector2(GameData.Cursor.CurrentTile.Position.X, GameData.Cursor.CurrentTile.Position.Y + (GameData.Cursor.CurrentTile.Height * 3 / 2));
+        background.Position = new Vector2(GameData.Cursor.CurrentTile.Position.X, GameData.Cursor.CurrentTile.Position.Y + (new Tile().Height * 3 / 2));
         background.Origin = background.Sprite.Center;
         this.Add(background);
         button1 = new Button("checkBox", "", "", 0, "", 4);

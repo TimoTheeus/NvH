@@ -15,6 +15,7 @@ class Unit : SpriteGameObject
     protected Timer checkIfInDiscoveredAreaTimer;
     protected bool inDiscoveredArea;
     protected Point mousePoint;
+    protected string actionString;
 
     public bool InDiscoveredArea
     {
@@ -51,6 +52,7 @@ class Unit : SpriteGameObject
     }
     public Unit(string assetName="",string id = "") : base(assetName,0, id,4)
     {
+        actionString = null;
         this.Origin = this.sprite.Center;
         speed = 200;
         range = 50;
@@ -67,7 +69,7 @@ class Unit : SpriteGameObject
     public override void HandleInput(InputHelper ih)
     {
         mousePoint = new Point((int)(ih.MousePosition.X + GameWorld.Camera.Pos.X), (int)(ih.MousePosition.Y + GameWorld.Camera.Pos.Y));
-
+        actionString = null;
         if (selected)
         {
             GameData.Cursor.HasClickedTile = false;
@@ -84,12 +86,15 @@ class Unit : SpriteGameObject
             if (ih.LeftButtonPressed())
             {
                 selected = false;
+                //action = null
+                
             }
         }
         if (selected)
         {
             if (ih.RightButtonPressed())
             {
+                //action != null
                 RightClickAction();
             }
         }
@@ -277,17 +282,15 @@ class Unit : SpriteGameObject
             }
         }
     }
-    protected virtual string ClickOnEmptyTileAction()
+    protected virtual void ClickOnEmptyTileAction()
     {
         try
         {
             targetPosition = GameData.Cursor.CurrentTile.Position;
-            return "unit:"+this.id+":move:"+targetPosition.X +","+targetPosition.Y;
         }
         catch
         {
             targetPosition = GameData.selectedTile.Position;
-            return "unit:" + this.id + ":move:" + targetPosition.X + "," + targetPosition.Y;
         }
     }
     protected virtual void ArrivedAtBuildingAction()
@@ -303,9 +306,9 @@ class Unit : SpriteGameObject
         targetPosition = Vector2.Zero;
         this.Velocity = Vector2.Zero;
     }
-    protected virtual string RightClickAction()
+    protected virtual void RightClickAction()
     {
-        string actionString = "";
+        actionString = "unit:"+this.ID;
         for (int i = 0; i < GameData.Units.Objects.Count; i++)
         {
             if (GameData.Units.Objects[i] is Unit)
@@ -313,8 +316,8 @@ class Unit : SpriteGameObject
                 Unit unit = GameData.Units.Objects[i] as Unit;
                 if (unit.BoundingBox.Contains(mousePoint) && unit != this)
                 {
+                    actionString += "targ:" + unit.ID;
                     targetUnit = unit;
-                    actionString = "unit:"+this.id+":target:"+unit.id;
                     break;
                 }
                 else targetUnit = null;
@@ -328,19 +331,20 @@ class Unit : SpriteGameObject
                 targetUnit = null;
                 targetBuilding = (Building)GameData.Cursor.CurrentTile;
                 targetPosition = GameData.Cursor.CurrentTile.Position;
-                actionString = "unit:"+this.id+":target:"+targetBuilding.ID;
+                actionString += "build:" + targetBuilding.ID;
             }
             else
             {
-               return ClickOnEmptyTileAction();
+               ClickOnEmptyTileAction();
+               actionString += "move:" + GameData.selectedTile.Position.ToString() ;
             }
         }
-        return actionString;
     }
 
-    public override string  getActionOutput()
+    public override string getActionOutput()
     {
-        return RightClickAction();
+        
+        return actionString;
     }
 }
 

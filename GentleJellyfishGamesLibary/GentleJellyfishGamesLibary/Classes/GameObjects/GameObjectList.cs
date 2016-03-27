@@ -95,17 +95,19 @@ public class GameObjectList : GameObject
             obj.Reset();
     }
 
-    public List<string> getActionOutputs()
+    public override string getActionOutput()
     {
-        List<string> ls = new List<string>();
+        string ls = "";
         foreach (GameObject obj in gameObjects)
         {
             string s = obj.getActionOutput();
-            if (s != null) {
-                ls.Add(s);
+            if (s != null)
+            {
+                ls += ";"+s;
             }
         }
         return ls;
     }
+
 }
 

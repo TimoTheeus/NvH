@@ -18,6 +18,8 @@ static class GameData
     static public ResourceController ResourceController;
     static public Player naturePlayer;
     static public Player humanityPlayer;
+    static bool host;
+    public static bool Host { get { return host; } set { host = value; } }
     static public Point Resolution
     {
         get { return resolution; }
@@ -92,6 +94,7 @@ static class GameData
     static public void AfterInitialize()
     {
     }
+
 
 
 }
