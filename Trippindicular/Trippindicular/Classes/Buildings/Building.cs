@@ -55,5 +55,8 @@ class Building : Tile
         healthBar.Draw(gameTime, spriteBatch);
         base.Draw(gameTime, spriteBatch);
     }
+    public virtual void HasBeenBuiltAction()
+    {
 
+    }
 }

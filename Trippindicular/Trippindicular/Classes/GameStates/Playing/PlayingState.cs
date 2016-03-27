@@ -26,12 +26,9 @@ class PlayingState : IGameLoopObject
 
     public void HandleInput(InputHelper ih)
     {
-
         GameData.LevelObjects.HandleInput(ih);
         if (ih.KeyPressed(Keys.F5))
             GameSettings.SetFullscreen(!GameSettings.Fullscreen);
-
-            
     }
 
     public void Reset()
