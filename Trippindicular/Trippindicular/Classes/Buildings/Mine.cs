@@ -10,8 +10,6 @@ class Mine : Building
     ResourceController resController;
     public Mine() : base("mine","selectedTile")
     {
-        resController = new ResourceController(1, 50, 0);
-        GameData.LevelObjects.Add(resController);
     }
 
     public override void HandleInput(InputHelper ih)
@@ -26,6 +24,11 @@ class Mine : Building
     {
         base.Destroy();
         GameData.LevelObjects.Remove(resController);
+    }
+    public override void HasBeenBuiltAction()
+    {
+        resController = new ResourceController(1, 50, 0);
+        GameData.LevelObjects.Add(resController);
     }
 }
 

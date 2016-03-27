@@ -62,5 +62,8 @@ class Building : Tile
         base.Draw(gameTime, spriteBatch);
         position += new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
     }
+    public virtual void HasBeenBuiltAction()
+    {
 
+    }
 }
