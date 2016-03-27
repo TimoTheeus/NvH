@@ -78,8 +78,11 @@ namespace Trippindicular.Classes
             NetOutgoingMessage om = this.netClient.CreateMessage();
             om.Write(gameMessage);
             //gameMessage.Encode(om);
-            NetConnection conn = this.netClient.Connections.First<NetConnection>();
-            this.netClient.SendMessage(om,  NetDeliveryMethod.ReliableUnordered);
+            if (this.netClient.Connections.Count<NetConnection>() > 0)
+            {
+                NetConnection conn = this.netClient.Connections.First<NetConnection>();
+                this.netClient.SendMessage(om, NetDeliveryMethod.ReliableUnordered);
+            }
         }
 
 

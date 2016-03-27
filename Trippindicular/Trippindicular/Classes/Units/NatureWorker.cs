@@ -11,12 +11,12 @@ class NatureWorker : Unit
         this.Damage = 0;
         this.Range = 0;
     }
-    protected override string RightClickAction()
+    protected override void RightClickAction()
     {
         Point p = new Point((int)this.Position.X + 20, (int)this.Position.Y + 20);
         GameData.LevelGrid.GetTile(p).IsBeingBuilt = false;
         base.RightClickAction();
-        return "unit:" + this.id + ":move:" + p.X + "," + p.Y;
+        //return "unit:" + this.id + ":move:" + p.X + "," + p.Y;
 
     }
     protected override void ArrivedAtTileAction()
@@ -28,7 +28,7 @@ class NatureWorker : Unit
 
     public override string getActionOutput()
     {
-        return RightClickAction();
+        return null;
     }
 }
 
