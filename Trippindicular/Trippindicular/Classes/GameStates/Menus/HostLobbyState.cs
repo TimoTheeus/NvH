@@ -1,17 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Net;
+using Lidgren.Network;
+using Lidgren.Network.Xna;
 using System;
 
 namespace Trippindicular.Classes
 {
     class HostLobbyState : GameObjectList
     {
-        
-        protected Button createSession, options, exitGame, sessions;
+
+        protected Button createSession, joinSession, options, exitGame, sessions;
         protected SpriteGameObject background;
         protected PlayingState playingState;
-
+        private  INetworkManager networkManager;
+        private bool connected = false;
+        public INetworkManager NetworkManager
+        {
+            get { return this.networkManager; }
+            set { this.networkManager = value; }
+        }
 
         public HostLobbyState()
         {
@@ -28,10 +36,10 @@ namespace Trippindicular.Classes
             createSession.Position = new Vector2(300, 150);
             this.Add(createSession);
 
-            //Options
-            options = new Button("button", "buttonFont", "font", 0, "Options", 0);
-            options.Position = new Vector2(300, 280);
-            this.Add(options);
+            joinSession = new Button("button", "buttonFont", "font", 0, "Join session", 0);
+            joinSession.Position = new Vector2(300, 280);
+            this.Add(joinSession);
+
 
             //Options
             exitGame = new Button("button", "buttonFont", "font", 0, "Exit", 0);
@@ -55,12 +63,20 @@ namespace Trippindicular.Classes
             //Buttons
             if (createSession.Pressed)
             {
-                //GameWorld.CreateSession();
+                if (!connected)
+                {
+                    this.networkManager = new ServerNetworkManager();
+                    this.networkManager.Connect();
+                    connected = true;
+                }
             }
-            else if (options.Pressed)
+            else if (joinSession.Pressed)
             {
-                GameWorld.GameStateManager.GetGameState("settingsMenuTitle").Reset();
-                GameWorld.GameStateManager.SwitchTo("settingsMenuTitle");
+                this.networkManager = new ClientNetworkManager();
+                this.networkManager.Connect();
+                connected = true;
+                this.networkManager.SendMessage("test");
+
             }
             else if (exitGame.Pressed)
             {
@@ -68,6 +84,63 @@ namespace Trippindicular.Classes
             }
 
         }
+
+        private void ProcessNetworkMessages()
+        {
+            NetIncomingMessage im;
+
+            while ((im = this.networkManager.ReadMessage()) != null)
+            {
+                switch (im.MessageType)
+                {
+                    case NetIncomingMessageType.VerboseDebugMessage:
+                    case NetIncomingMessageType.DebugMessage:
+                    case NetIncomingMessageType.WarningMessage:
+                    case NetIncomingMessageType.ErrorMessage:
+                        Console.WriteLine(im.ReadString());
+                        break;
+                    case NetIncomingMessageType.StatusChanged:
+                        switch ((NetConnectionStatus)im.ReadByte())
+                        {
+                            case NetConnectionStatus.Connected:
+                                if (!this.IsHost)
+                                {
+                                    Console.WriteLine("Connected to host");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Connected to client");
+                                }
+
+                                break;
+                            case NetConnectionStatus.Disconnected:
+                                Console.WriteLine(
+                                    this.IsHost ? "Disconnected" : "Disconnected from {0}", im.SenderEndpoint);
+                                break;
+                        }
+                        Console.WriteLine(im.ReadString());
+
+                        break;
+                    case NetIncomingMessageType.Data:
+                        Console.WriteLine(im.ReadString());
+
+                        break;
+                }
+
+                this.networkManager.Recycle(im);
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (connected)
+            {
+                ProcessNetworkMessages();
+            }
+            base.Update(gameTime);
+        }
+        private bool isHost = false;
+        public bool IsHost { get { return isHost; } set{isHost = value;} }
     }
 }
 

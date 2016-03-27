@@ -55,7 +55,7 @@ namespace Trippindicular.Classes
             //Buttons
             if (createSession.Pressed)
             {
-                //GameWorld.CreateSession();
+                //
             }
             else if (options.Pressed)
             {

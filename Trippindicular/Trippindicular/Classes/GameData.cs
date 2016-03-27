@@ -23,7 +23,9 @@ static class GameData
         get { return resolution; }
         set { if (resolution == null) resolution = value; }
     }
- 
+
+
+
     static public void Update(GameTime gameTime)
     {
         LevelObjects.Update(gameTime);
@@ -90,6 +92,7 @@ static class GameData
     static public void AfterInitialize()
     {
     }
-   
+
+
 }
 
