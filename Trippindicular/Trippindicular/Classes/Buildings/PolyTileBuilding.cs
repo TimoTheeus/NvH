@@ -13,7 +13,7 @@ class PolyTileBuilding : Building
         coTiles = new List<CoTile>();
     }
 
-    public void AddCoTiles()
+    public void AddQuadCoTiles()
     {
         CoTile newTile = new CoTile();
         newTile.mainTile = this;

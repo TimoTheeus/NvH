@@ -91,7 +91,7 @@ class TileMenu : Menu
             HumanityBarrack barracks = new HumanityBarrack();
             GameData.LevelGrid.replaceTile(this.tile, barracks);
             barracks.gridPosition = this.tile.gridPosition;
-            barracks.AddCoTiles();
+            barracks.AddQuadCoTiles();
             tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
         }
     }
