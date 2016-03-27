@@ -224,7 +224,7 @@ class Unit : SpriteGameObject
         }
 
     }
-    protected void Attack()
+    public virtual void Attack()
     {
         if(targetUnit != null)
         {

@@ -10,6 +10,7 @@ class NatureBase : PolyTileBuilding
     public NatureBase() : base("natureBase", "selectedTile")
     {
         this.health = 1;
+        
     }
     public override void HandleInput(InputHelper ih)
     {

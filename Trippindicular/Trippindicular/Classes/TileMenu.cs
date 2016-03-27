@@ -89,10 +89,10 @@ class TileMenu : Menu
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
             HumanityBarrack barracks = new HumanityBarrack();
-            GameData.LevelGrid.replaceTile(this.tile, barracks);
+            barracks.Position = this.tile.Position;
             barracks.gridPosition = this.tile.gridPosition;
             barracks.AddQuadCoTiles();
-            tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
+            tile.AddTimer(new Timer(sunlightTreeCooldown), barracks);
         }
     }
     public override void Update(GameTime gameTime)

@@ -27,7 +27,7 @@ class Mine : Building
     }
     public override void HasBeenBuiltAction()
     {
-        resController = new ResourceController(1, 50, 0);
+        resController = new ResourceController(1, 0, 50);
         GameData.LevelObjects.Add(resController);
     }
 }

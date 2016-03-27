@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 class PolyTileBuilding : Building
 {
@@ -62,6 +63,15 @@ class PolyTileBuilding : Building
         foreach (CoTile tile in coTiles)
             tile.Destroy();
         base.Destroy();
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        foreach(CoTile coTile in coTiles)
+        {
+            coTile.Draw(gameTime, spriteBatch);
+        }
+        base.Draw(gameTime, spriteBatch);
     }
 }
 

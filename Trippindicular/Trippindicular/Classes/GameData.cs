@@ -68,8 +68,8 @@ static class GameData
 
         
 
-        naturePlayer = new Player(Player.Faction.nature);
-        GameData.LevelObjects.Add(naturePlayer);
+        //naturePlayer = new Player(Player.Faction.nature);
+        //GameData.LevelObjects.Add(naturePlayer);
         humanityPlayer = new Player(Player.Faction.humanity);
         GameData.LevelObjects.Add(humanityPlayer);
         ResourceController = new ResourceController(1, 10, 10) ;

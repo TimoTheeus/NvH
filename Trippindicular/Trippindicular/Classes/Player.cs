@@ -56,7 +56,7 @@ class Player : GameObject
         }
     }
 
-    public Player(Faction faction)
+    public Player(Faction faction) : base("player")
     {
         this.faction = faction;
         MainResource = 0;

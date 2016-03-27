@@ -29,10 +29,7 @@ class Building : Tile
         maxHealth = 1;
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
     }
-    public override void LeftButtonAction()
-    {
-        base.LeftButtonAction();
-    }
+
     protected void RemoveMenu()
     {
         TileMenu menu = GameData.LevelObjects.Find("menu") as TileMenu;
@@ -53,6 +50,11 @@ class Building : Tile
         GameData.LevelGrid.replaceTile(this, new Tile());
     }
 
+    public virtual void HasBeenBuiltAction()
+    {
+
+    }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
@@ -62,8 +64,5 @@ class Building : Tile
         base.Draw(gameTime, spriteBatch);
         position += new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
     }
-    public virtual void HasBeenBuiltAction()
-    {
 
-    }
 }
