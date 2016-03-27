@@ -132,9 +132,12 @@ class Unit : SpriteGameObject
         {
             Point p = new Point((int)this.Position.X, (int)this.Position.Y);
             Tile t = GameData.LevelGrid.GetTile(p);
-            if (t.Discovered)
-                InDiscoveredArea = true;
-            else InDiscoveredArea = false;
+            if (t != null)
+            {
+                if (t.Discovered)
+                    InDiscoveredArea = true;
+                else InDiscoveredArea = false;
+            }
         }
         attackTimer.Update(gameTime);
         if (targetUnit != null)
