@@ -11,7 +11,7 @@ class TileMenu : Menu
     protected Tile tile;
     protected float sunlightTreeCooldown;
 
-    public TileMenu(Tile tile,string id = "menu"):base(4,id)
+    public TileMenu(Tile tile, string id = "menu"):base(4,id)
     {
         this.tile = tile;
         background = new SpriteGameObject("button", 0, "background", 4);
@@ -66,7 +66,6 @@ class TileMenu : Menu
             else
             {
                 tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
-               // GameData.LevelGrid.replaceTile(this.tile, new SunlightTree());
             }
         }
         else if (button2 != null && button2.Pressed)
@@ -74,21 +73,22 @@ class TileMenu : Menu
             button2.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            GameData.LevelGrid.replaceTile(this.tile, new Mine());
+            tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+
         }
         else if (button3 != null && button3.Pressed)
         {
             button3.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            GameData.LevelGrid.replaceTile(this.tile, new NatureBase());
+            tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBase());
         }
-       else if (button4 != null && button4.Pressed)
+        else if (button4 != null && button4.Pressed)
         {
             button4.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            GameData.LevelGrid.replaceTile(this.tile, new HumanityBarrack());
+            tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
         }
     }
     public override void Update(GameTime gameTime)
