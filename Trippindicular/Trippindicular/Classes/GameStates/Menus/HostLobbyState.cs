@@ -123,7 +123,7 @@ namespace Trippindicular.Classes
                         break;
                     case NetIncomingMessageType.Data:
                         Console.WriteLine(im.ReadString());
-
+                        //
                         break;
                 }
 

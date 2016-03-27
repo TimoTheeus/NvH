@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 //Class used to update and draw everything that is needed when the player is playing the game.
 class PlayingState : IGameLoopObject
@@ -30,7 +31,10 @@ class PlayingState : IGameLoopObject
         GameData.LevelObjects.HandleInput(ih);
         if (ih.KeyPressed(Keys.F5))
             GameSettings.SetFullscreen(!GameSettings.Fullscreen);
-
+        List<string> ls = GameData.LevelObjects.getActionOutputs();
+        foreach (string s in ls) {
+            Console.WriteLine(s);
+        }
             
     }
 

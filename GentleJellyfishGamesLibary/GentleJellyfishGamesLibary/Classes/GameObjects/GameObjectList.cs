@@ -94,5 +94,18 @@ public class GameObjectList : GameObject
         foreach (GameObject obj in gameObjects)
             obj.Reset();
     }
+
+    public List<string> getActionOutputs()
+    {
+        List<string> ls = new List<string>();
+        foreach (GameObject obj in gameObjects)
+        {
+            string s = obj.getActionOutput();
+            if (s != null) {
+                ls.Add(s);
+            }
+        }
+        return ls;
+    }
 }
 
