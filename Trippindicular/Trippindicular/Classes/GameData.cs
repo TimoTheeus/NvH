@@ -12,12 +12,12 @@ static class GameData
     //This is the list with all the objects of the current level in it.
     static public GameObjectList LevelObjects;
     static public GameObjectList Units;
+    static public EventLog eventLog;
     static public HexaGrid LevelGrid;
     static public SpriteGameObject selectedTile;
     static public Cursor Cursor;
     static public ResourceController ResourceController;
-    static public Player naturePlayer;
-    static public Player humanityPlayer;
+    static public Player player;
     static bool host;
     public static bool Host { get { return host; } set { host = value; } }
     static public Point Resolution
@@ -25,8 +25,6 @@ static class GameData
         get { return resolution; }
         set { if (resolution == null) resolution = value; }
     }
-
-
 
     static public void Update(GameTime gameTime)
     {
@@ -72,16 +70,15 @@ static class GameData
 
         //naturePlayer = new Player(Player.Faction.nature);
         //GameData.LevelObjects.Add(naturePlayer);
-        humanityPlayer = new Player(Player.Faction.humanity);
-        GameData.LevelObjects.Add(humanityPlayer);
+        player = new Player(Player.Faction.humanity);
+        GameData.LevelObjects.Add(player);
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
-
         Unit unit = new Unit("selectedTile","testUnit");
         unit.Position = new Vector2(500, 500);
         Unit unit2 = new Unit("selectedTile", "testUnit2");
         unit2.Position = new Vector2(700, 500);
-        Unit unit3 = new Unit("selectedTile", "testUnit3");
+        Unit unit3 = new WoodCutter();
         unit3.Position = new Vector2(500, 700);
         HumanityWorker unit4 = new HumanityWorker("selectedTile");
         unit4.Position = new Vector2(800, 700);

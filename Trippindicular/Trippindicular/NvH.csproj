@@ -91,6 +91,7 @@
     <Compile Include="Classes\Buildings\PolyTileBuilding.cs" />
     <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\DropDown.cs" />
+    <Compile Include="Classes\EventLog.cs" />
     <Compile Include="Classes\GameData.cs" />
     <Compile Include="Classes\GameStates\MenuInputState.cs" />
     <Compile Include="Classes\GameStates\Menus\HostLobbyState.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Classes\Buildings\SunlightTree.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\TileMenuItem.cs" />
+    <Compile Include="Classes\Units\FlameThrower.cs" />
     <Compile Include="Classes\Units\HumanityWorker.cs" />
     <Compile Include="Classes\Units\NatureWorker.cs" />
     <Compile Include="Classes\Units\Unit.cs" />

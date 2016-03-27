@@ -50,6 +50,12 @@ class Unit : SpriteGameObject
         get { return health; }
         set { health = value; }
     }
+
+    public Player.Faction Faction
+    {
+        get { return faction; }
+        set { faction = value; }
+    }
     public Unit(string assetName="",string id = "") : base(assetName,0, id,4)
     {
         actionString = null;
@@ -76,7 +82,7 @@ class Unit : SpriteGameObject
         }
         if (BoundingBox.Contains(mousePoint))
         {
-            if (ih.LeftButtonPressed())
+            if (ih.LeftButtonPressed() && faction == GameData.player.GetFaction)
             {
                 selected = true;
             }
@@ -233,16 +239,22 @@ class Unit : SpriteGameObject
     {
         if(targetUnit != null)
         {
-            targetUnit.DealDamage(this.Damage, this);
             if (targetUnit.Health <= 0)
+            {
                 targetUnit = null;
+                return;
+            }  
+            targetUnit.DealDamage(this.Damage, this);
         }
 
         else
         {
-            targetBuilding.DealDamage(this.Damage);
             if (targetBuilding.Health <= 0)
+            {
                 targetBuilding = null;
+                return;
+            } 
+            targetBuilding.DealDamage(this.Damage, this);
         }
         
         attackTimer.Reset();
@@ -253,6 +265,7 @@ class Unit : SpriteGameObject
         this.Health -= amount;
         if (Health <= 0)
         {
+            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this, attacker);
             Die();
         }
         if(targetUnit== null)
@@ -271,16 +284,17 @@ class Unit : SpriteGameObject
     }
     public void UpdateDiscoveredArea()
     {
-        foreach(Tile t in GameData.LevelGrid.Objects)
-        {
-            if (!t.Discovered)
+        if(faction == GameData.player.GetFaction)
+            foreach(Tile t in GameData.LevelGrid.Objects)
             {
-                Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
-                double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
-                if (absDistance < 300)
-                    t.Discovered = true;
+                if (!t.Discovered)
+                {
+                    Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
+                    double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
+                    if (absDistance < 300)
+                        t.Discovered = true;
+                }
             }
-        }
     }
     protected virtual void ClickOnEmptyTileAction()
     {
@@ -314,7 +328,7 @@ class Unit : SpriteGameObject
             if (GameData.Units.Objects[i] is Unit)
             {
                 Unit unit = GameData.Units.Objects[i] as Unit;
-                if (unit.BoundingBox.Contains(mousePoint) && unit != this)
+                if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
                 {
                     actionString += "targ:" + unit.ID;
                     targetUnit = unit;

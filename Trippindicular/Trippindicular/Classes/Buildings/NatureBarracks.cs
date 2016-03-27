@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-
-    class NatureBarracks:Building
-    {
+class NatureBarracks:Building
+{
     public NatureBarracks() : base("natureBarrack", "selectedTile")
     {
+        Faction = Player.Faction.nature;
     }
 }
 

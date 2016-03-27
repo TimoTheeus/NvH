@@ -12,6 +12,7 @@ class HumanityWorker : Unit
     {
         this.Damage = 0;
         Range = 0;
+        Faction = Player.Faction.humanity;
     }
     protected override void RightClickAction()
     {

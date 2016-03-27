@@ -10,7 +10,7 @@ class SunlightTree:Building
     ResourceController resController;
     public SunlightTree() : base("sunlightTree","selectedTile")
     {
-        
+        Faction = Player.Faction.nature;
     }
 
 

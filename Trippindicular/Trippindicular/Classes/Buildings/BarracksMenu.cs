@@ -77,7 +77,7 @@ class BarracksMenu : Menu
             }
             else
             {
-                unit = new Unit("selectedTile", "unit");
+                unit = new FlameThrower("selectedTile", "unit");
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.Units.Add(unit);

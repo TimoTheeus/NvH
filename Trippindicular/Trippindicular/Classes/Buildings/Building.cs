@@ -10,6 +10,13 @@ class Building : Tile
 {
     protected float health, maxHealth;
     protected HealthBar healthBar;
+    protected Player.Faction faction;
+
+    public Player.Faction Faction
+    {
+        get { return faction; }
+        set { faction = value; }
+    }
 
     public float Health
     {
@@ -36,11 +43,14 @@ class Building : Tile
         if (menu != null)
             GameData.LevelObjects.Remove(menu);
     }
-    public virtual void DealDamage(float amount)
+    public virtual void DealDamage(float amount, GameObject attacker)
     {
         this.Health -= amount;
         if (this.Health <= 0)
         {
+            TextGameObject text = new TextGameObject("smallFont", 10);
+            text.Text = id + " was destroyed by " + attacker.ID;
+            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(text);
             Destroy();
         }
     }

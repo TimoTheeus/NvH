@@ -22,8 +22,8 @@ class CoTile : Building
         }
     }
 
-    public override void DealDamage(float amount)
+    public override void DealDamage(float amount, GameObject attacker)
     {
-        mainTile.DealDamage(amount);
+        mainTile.DealDamage(amount, attacker);
     }
 }

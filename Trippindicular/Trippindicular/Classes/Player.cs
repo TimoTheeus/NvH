@@ -14,6 +14,7 @@ class Player : GameObject
     protected TextGameObject mainResource;
     protected TextGameObject secondaryResource;
     protected Timer updateDiscoveredAreaTimer;
+    protected EventLog eventLog;
 
     public Faction GetFaction
     {
@@ -65,9 +66,11 @@ class Player : GameObject
         mainResource.Position = new Vector2(1500, 0);
         secondaryResource = new TextGameObject("smallFont", 4, "secondaryResourceText");
         secondaryResource.Position = new Vector2(1200, 0);
+        eventLog = new EventLog();
         HUD hud = GameWorld.GameStateManager.GetGameState("hud") as HUD;
         hud.hud.Add(mainResource);
         hud.hud.Add(secondaryResource);
+        hud.hud.Add(eventLog);
         updateDiscoveredAreaTimer = new Timer((1 / 6));
     }
     public override void Update(GameTime gameTime)

@@ -10,6 +10,7 @@ class Mine : Building
     ResourceController resController;
     public Mine() : base("mine","selectedTile")
     {
+        Faction = Player.Faction.humanity;
     }
 
     public override void HandleInput(InputHelper ih)

@@ -38,10 +38,7 @@ public class TextGameObject : GameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (this.text == null)
-            this.text = "null";
-
-        if (visible)
+        if (visible && text != null)
             spriteBatch.DrawString(spriteFont, text, this.GlobalPosition, color);
     }
 }

@@ -12,6 +12,7 @@ class HumanityBarrack : PolyTileBuilding
     {
         this.maxHealth = 100;
         this.health = 100;
+        Faction = Player.Faction.humanity;
     }
 
     public override void LeftButtonAction()
