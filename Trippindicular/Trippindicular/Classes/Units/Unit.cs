@@ -12,6 +12,14 @@ class Unit : SpriteGameObject
     Timer attackTimer;
     Player.Faction faction;
     HealthBar healthBar;
+    protected Timer checkIfInDiscoveredAreaTimer;
+    protected bool inDiscoveredArea;
+
+    public bool InDiscoveredArea
+    {
+        get { return inDiscoveredArea; }
+        set { inDiscoveredArea = value; }
+    }
 
     public float AttackSpeed
     {
@@ -52,6 +60,7 @@ class Unit : SpriteGameObject
         attackSpeed = 1;
         attackTimer = new Timer(this.AttackSpeed);
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
+        checkIfInDiscoveredAreaTimer = new Timer((1 / 6));
     }
 
     public override void HandleInput(InputHelper ih)
@@ -104,7 +113,12 @@ class Unit : SpriteGameObject
                     }
                     else
                     {
+                        try {
                         targetPosition = GameData.Cursor.CurrentTile.Position;
+                        }
+                        catch {
+                            targetPosition = GameData.selectedTile.Position;
+                        }
                     }
                 }
             }
@@ -113,6 +127,15 @@ class Unit : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        checkIfInDiscoveredAreaTimer.Update(gameTime);
+        if (checkIfInDiscoveredAreaTimer.Ended)
+        {
+            Point p = new Point((int)this.Position.X, (int)this.Position.Y);
+            Tile t = GameData.LevelGrid.GetTile(p);
+            if (t.Discovered)
+                InDiscoveredArea = true;
+            else InDiscoveredArea = false;
+        }
         attackTimer.Update(gameTime);
         if (targetUnit != null)
         {
@@ -131,8 +154,11 @@ class Unit : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        healthBar.Draw(gameTime, spriteBatch);
-        base.Draw(gameTime, spriteBatch);
+        if (InDiscoveredArea)
+        {
+            healthBar.Draw(gameTime, spriteBatch);
+            base.Draw(gameTime, spriteBatch);
+        }
     }
 
     protected void MoveToTile()
@@ -268,6 +294,19 @@ class Unit : SpriteGameObject
     protected virtual void Die()
     {
         GameData.Units.Remove(this);
+    }
+    public void UpdateDiscoveredArea()
+    {
+        foreach(Tile t in GameData.LevelGrid.Objects)
+        {
+            if (!t.Discovered)
+            {
+                Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
+                double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
+                if (absDistance < 300)
+                    t.Discovered = true;
+            }
+        }
     }
 }
 

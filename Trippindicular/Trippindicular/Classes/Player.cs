@@ -13,6 +13,7 @@ class Player : GameObject
     protected int coal;
     protected TextGameObject mainResource;
     protected TextGameObject secondaryResource;
+    protected Timer updateDiscoveredAreaTimer;
 
     public Faction GetFaction
     {
@@ -67,11 +68,22 @@ class Player : GameObject
         HUD hud = GameWorld.GameStateManager.GetGameState("hud") as HUD;
         hud.hud.Add(mainResource);
         hud.hud.Add(secondaryResource);
+        updateDiscoveredAreaTimer = new Timer((1 / 6));
     }
     public override void Update(GameTime gameTime)
     {
         mainResource.Text = this.MainResource.ToString();
         secondaryResource.Text = this.SecondaryResource.ToString();
+        updateDiscoveredAreaTimer.Update(gameTime);
+        if(updateDiscoveredAreaTimer.Ended)
+            for(int i = 0; i < GameData.Units.Objects.Count; i++)
+            {
+                if (GameData.Units.Objects[i] != null)
+                {
+                    Unit u = GameData.Units.Objects[i] as Unit;
+                    u.UpdateDiscoveredArea();
+                }
+            }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

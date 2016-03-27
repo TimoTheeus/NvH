@@ -13,6 +13,12 @@ class Tile : SpriteGameObject
     protected List<SpriteGameObject> objectsToBuild;
     protected List<TextGameObject> text;
     TextGameObject descriptive;
+    protected bool discovered;
+    public bool Discovered
+    {
+        get { return discovered; }
+        set { discovered = value; }
+    }
 
     public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 1)
     {
@@ -57,12 +63,15 @@ class Tile : SpriteGameObject
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        base.Draw(gameTime, spriteBatch);
-        for (int i = 0; i < text.Count; i++)
+        if (discovered)
         {
-            if (text[i] != null)
+            base.Draw(gameTime, spriteBatch);
+            for (int i = 0; i < text.Count; i++)
             {
-                descriptive.Text = "constructing.." + (int)buildTimers[i].TimeLeft;
+                if (text[i] != null)
+                {
+                    descriptive.Text = "constructing.." + (int)buildTimers[i].TimeLeft;
+                }
             }
         }
     }
