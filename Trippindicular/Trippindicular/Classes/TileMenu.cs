@@ -10,6 +10,7 @@ class TileMenu : Menu
     protected Button button1, button2, button3, button4;
     protected Tile tile;
     protected float sunlightTreeCooldown;
+    protected string actionString;
 
     public TileMenu(Tile tile, string id = "menu"):base(4,id)
     {
@@ -27,13 +28,16 @@ class TileMenu : Menu
             background.Sprite.Color = Color.Green;
         }
         sunlightTreeCooldown = 5f;
+        actionString = null;
     }
 
     protected void AddButtons()
     {
-        if (tile is SunlightTree)
+        if (tile is HumanityBase)
         {
-            
+            button1= button1 = new Button("checkBox", "", "", 0, "", 4);
+            button1.Position = background.Position + new Vector2(-100, 0);
+            addButton(button1);
         }
         else {
             button1 = new Button("checkBox", "", "", 0, "", 4);
@@ -59,7 +63,7 @@ class TileMenu : Menu
             button1.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            if (this.tile is SunlightTree)
+            if (this.tile is HumanityBase)
             {
 
             }
@@ -73,7 +77,14 @@ class TileMenu : Menu
             button2.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+            if (this.tile is HumanityBase)
+            {
+
+            }
+            else
+            {
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+            }
 
         }
         else if (button3 != null && button3.Pressed)
@@ -81,23 +92,45 @@ class TileMenu : Menu
             button3.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBase());
+            if (this.tile is HumanityBase)
+            {
+
+            }
+            else
+            {
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBase());
+            }
         }
         else if (button4 != null && button4.Pressed)
         {
             button4.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            HumanityBarrack barracks = new HumanityBarrack();
-            GameData.LevelGrid.replaceTile(this.tile, barracks);
-            barracks.gridPosition = this.tile.gridPosition;
-            barracks.AddCoTiles();
-            tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
+            if (this.tile is HumanityBase)
+            {
+
+            }
+            else
+            {
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
+            }
         }
     }
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+    }
+    protected void FireFireball()
+    {
+
+    }
+    public override string getActionOutput()
+    {
+        if (actionString != null)
+        {
+            return actionString;
+        }
+        else return null;
     }
 }
 
