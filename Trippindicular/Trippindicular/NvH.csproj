@@ -107,6 +107,8 @@
     <Compile Include="Classes\Buildings\SunlightTree.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\TileMenuItem.cs" />
+    <Compile Include="Classes\Units\HumanityWorker.cs" />
+    <Compile Include="Classes\Units\NatureWorker.cs" />
     <Compile Include="Classes\Units\Unit.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

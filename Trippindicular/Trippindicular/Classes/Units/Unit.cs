@@ -14,6 +14,7 @@ class Unit : SpriteGameObject
     HealthBar healthBar;
     protected Timer checkIfInDiscoveredAreaTimer;
     protected bool inDiscoveredArea;
+    protected Point mousePoint;
 
     public bool InDiscoveredArea
     {
@@ -48,7 +49,7 @@ class Unit : SpriteGameObject
         get { return health; }
         set { health = value; }
     }
-    public Unit(string assetName="",string id = "", int layer = 0) : base(assetName,0, id,layer)
+    public Unit(string assetName="",string id = "") : base(assetName,0, id,4)
     {
         this.Origin = this.sprite.Center;
         speed = 200;
@@ -65,7 +66,7 @@ class Unit : SpriteGameObject
 
     public override void HandleInput(InputHelper ih)
     {
-        Point mousePoint = new Point((int)(ih.MousePosition.X + GameWorld.Camera.Pos.X), (int)(ih.MousePosition.Y + GameWorld.Camera.Pos.Y));
+        mousePoint = new Point((int)(ih.MousePosition.X + GameWorld.Camera.Pos.X), (int)(ih.MousePosition.Y + GameWorld.Camera.Pos.Y));
 
         if (selected)
         {
@@ -89,38 +90,7 @@ class Unit : SpriteGameObject
         {
             if (ih.RightButtonPressed())
             {
-                for(int i = 0; i < GameData.Units.Objects.Count; i++)
-                {
-                    if(GameData.Units.Objects[i] is Unit)
-                    {
-                        Unit unit = GameData.Units.Objects[i] as Unit;
-                        if (unit.BoundingBox.Contains(mousePoint))
-                        {
-                            targetUnit = unit;
-                            break;
-                        }
-                        else targetUnit = null;
-                    }
-                }
-
-                if(targetUnit== null)
-                {
-                    if (GameData.Cursor.CurrentTile is Building)
-                    {
-                        targetUnit = null;
-                        targetBuilding = (Building)GameData.Cursor.CurrentTile;
-                        targetPosition = GameData.Cursor.CurrentTile.Position; 
-                    }
-                    else
-                    {
-                        try {
-                        targetPosition = GameData.Cursor.CurrentTile.Position;
-                        }
-                        catch {
-                            targetPosition = GameData.selectedTile.Position;
-                        }
-                    }
-                }
+                RightClickAction();
             }
         }
     }
@@ -131,10 +101,9 @@ class Unit : SpriteGameObject
         if (checkIfInDiscoveredAreaTimer.Ended)
         {
             Point p = new Point((int)this.Position.X, (int)this.Position.Y);
-            Tile t = GameData.LevelGrid.GetTile(p);
-            if (t != null)
+            if (GameData.LevelGrid.GetTile(p) != null)
             {
-                if (t.Discovered)
+                if (GameData.LevelGrid.GetTile(p).Discovered)
                     InDiscoveredArea = true;
                 else InDiscoveredArea = false;
             }
@@ -197,21 +166,17 @@ class Unit : SpriteGameObject
                 this.Velocity = new Vector2(-xvelocity, yvelocity);
             }
         }
-        if ((targetBuilding != null && (Math.Sqrt(Math.Pow(differenceXPos, 2) + Math.Pow(differenceYPos, 2)) <= range) || (differenceXPos < marginForError && differenceXPos > -marginForError) &&(differenceYPos< marginForError && differenceYPos>-marginForError)))
+        if ((targetBuilding != null && (Math.Sqrt(Math.Pow(differenceXPos, 2) + Math.Pow(differenceYPos, 2)) <= range) || 
+            (differenceXPos < marginForError && differenceXPos > -marginForError) &&(differenceYPos< marginForError && differenceYPos>-marginForError)))
         {
             if(targetBuilding != null)
             {
-                if (attackTimer.Ended)
-                {
-                    Attack();
-                }
-                this.Velocity = Vector2.Zero;
+                ArrivedAtBuildingAction();
             }
 
             else
             {
-                targetPosition = Vector2.Zero;
-                this.Velocity = Vector2.Zero;
+                ArrivedAtTileAction();
             }
             
         }
@@ -291,6 +256,7 @@ class Unit : SpriteGameObject
             {
                 Unit target = attacker as Unit;
                 targetUnit = target;
+                attackTimer.Reset();
             }
         }
     }
@@ -308,6 +274,60 @@ class Unit : SpriteGameObject
                 double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
                 if (absDistance < 300)
                     t.Discovered = true;
+            }
+        }
+    }
+    protected virtual void ClickOnEmptyTileAction()
+    {
+        try
+        {
+            targetPosition = GameData.Cursor.CurrentTile.Position;
+        }
+        catch
+        {
+            targetPosition = GameData.selectedTile.Position;
+        }
+    }
+    protected virtual void ArrivedAtBuildingAction()
+    {
+        if (attackTimer.Ended)
+        {
+            Attack();
+        }
+        this.Velocity = Vector2.Zero;
+    }
+    protected virtual void ArrivedAtTileAction()
+    {
+        targetPosition = Vector2.Zero;
+        this.Velocity = Vector2.Zero;
+    }
+    protected virtual void RightClickAction()
+    {
+        for (int i = 0; i < GameData.Units.Objects.Count; i++)
+        {
+            if (GameData.Units.Objects[i] is Unit)
+            {
+                Unit unit = GameData.Units.Objects[i] as Unit;
+                if (unit.BoundingBox.Contains(mousePoint) && unit != this)
+                {
+                    targetUnit = unit;
+                    break;
+                }
+                else targetUnit = null;
+            }
+        }
+
+        if (targetUnit == null)
+        {
+            if (GameData.Cursor.CurrentTile is Building)
+            {
+                targetUnit = null;
+                targetBuilding = (Building)GameData.Cursor.CurrentTile;
+                targetPosition = GameData.Cursor.CurrentTile.Position;
+            }
+            else
+            {
+                ClickOnEmptyTileAction();
             }
         }
     }
