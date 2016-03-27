@@ -14,5 +14,7 @@ public interface INetworkManager : IDisposable
         void Recycle(NetIncomingMessage im);
 
         NetOutgoingMessage CreateMessage();
+
+        void SendMessage(string p);
     }
 

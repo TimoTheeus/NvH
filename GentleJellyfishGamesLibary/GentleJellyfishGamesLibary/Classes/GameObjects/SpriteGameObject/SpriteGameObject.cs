@@ -89,5 +89,10 @@ public class SpriteGameObject : GameObject
             }
         return false;
     }
+
+    public override string getActionOutput()
+    {
+        return null;
+    }
 }
 

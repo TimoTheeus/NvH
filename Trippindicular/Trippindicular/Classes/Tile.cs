@@ -14,6 +14,13 @@ class Tile : SpriteGameObject
     protected List<TextGameObject> text;
     TextGameObject descriptive;
     protected bool discovered;
+    protected bool isBeingBuilt;
+
+    public bool IsBeingBuilt
+    {
+        get { return isBeingBuilt; }
+        set { isBeingBuilt = value; }
+    }
     public bool Discovered
     {
         get { return discovered; }
@@ -27,6 +34,7 @@ class Tile : SpriteGameObject
         objectsToBuild = new List<SpriteGameObject>();
         text = new List<TextGameObject>();
         descriptive = new TextGameObject("smallFont", 4, "descriptive");
+        isBeingBuilt = false;
     }
 
     public override void HandleInput(InputHelper ih)
@@ -39,24 +47,26 @@ class Tile : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (IsBeingBuilt) { 
         for(int i = 0; i < buildTimers.Count; i++)
         {
-            if (buildTimers[i] != null)
-            {
-                buildTimers[i].Update(gameTime);
-                if (buildTimers[i].Ended)
+                if (buildTimers[i] != null)
                 {
-                    if (objectsToBuild[i] is Unit)
+                    buildTimers[i].Update(gameTime);
+                    if (buildTimers[i].Ended)
                     {
-                        objectsToBuild[i].Position = new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
-                        GameData.LevelObjects.Add(objectsToBuild[i]);
+                        if (objectsToBuild[i] is Unit)
+                        {
+                            objectsToBuild[i].Position = new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
+                            GameData.LevelObjects.Add(objectsToBuild[i]);
+                        }
+                        else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Tile); }
+                        buildTimers.Remove(buildTimers[i]);
+                        objectsToBuild.Remove(objectsToBuild[i]);
+                        if (text[i] != null)
+                            text.Remove(text[i]);
+                        GameData.LevelObjects.Remove(descriptive);
                     }
-                    else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Tile); }
-                    buildTimers.Remove(buildTimers[i]);
-                    objectsToBuild.Remove(objectsToBuild[i]);
-                    if (text[i] != null)
-                        text.Remove(text[i]);
-                    GameData.LevelObjects.Remove(descriptive);
                 }
             }
         }
@@ -68,10 +78,11 @@ class Tile : SpriteGameObject
             base.Draw(gameTime, spriteBatch);
             for (int i = 0; i < text.Count; i++)
             {
-                if (text[i] != null)
+                if (text[i] != null&&IsBeingBuilt)
                 {
                     descriptive.Text = "constructing.." + (int)buildTimers[i].TimeLeft;
                 }
+                else { descriptive.Text = "waiting for worker.."; }
             }
         }
     }

@@ -63,6 +63,9 @@
     <Reference Include="Lidgren.Network">
       <HintPath>..\..\..\..\..\Downloads\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="Lidgren.Network.Xna">
+      <HintPath>..\..\Lidgren.Network.Xna.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -106,6 +109,8 @@
     <Compile Include="Classes\Buildings\SunlightTree.cs" />
     <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\TileMenuItem.cs" />
+    <Compile Include="Classes\Units\HumanityWorker.cs" />
+    <Compile Include="Classes\Units\NatureWorker.cs" />
     <Compile Include="Classes\Units\Unit.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

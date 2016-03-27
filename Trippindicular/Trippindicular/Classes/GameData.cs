@@ -23,7 +23,9 @@ static class GameData
         get { return resolution; }
         set { if (resolution == null) resolution = value; }
     }
- 
+
+
+
     static public void Update(GameTime gameTime)
     {
         LevelObjects.Update(gameTime);
@@ -73,14 +75,14 @@ static class GameData
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
 
-        Unit unit = new Unit("selectedTile","testUnit", 4);
+        Unit unit = new Unit("selectedTile","testUnit");
         unit.Position = new Vector2(500, 500);
-        Unit unit2 = new Unit("selectedTile", "testUnit2", 4);
+        Unit unit2 = new Unit("selectedTile", "testUnit2");
         unit2.Position = new Vector2(700, 500);
-        Unit unit3 = new Unit("selectedTile", "testUnit3", 4);
+        Unit unit3 = new Unit("selectedTile", "testUnit3");
         unit3.Position = new Vector2(500, 700);
-        Unit unit4 = new Unit("selectedTile", "testUnit4", 4);
-        unit4.Position = new Vector2(700, 700);
+        HumanityWorker unit4 = new HumanityWorker("selectedTile");
+        unit4.Position = new Vector2(800, 700);
         GameData.Units.Add(unit4);
         GameData.Units.Add(unit3);
         GameData.Units.Add(unit2);
@@ -90,6 +92,7 @@ static class GameData
     static public void AfterInitialize()
     {
     }
-   
+
+
 }
 

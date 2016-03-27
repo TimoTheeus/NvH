@@ -15,18 +15,14 @@ using Lidgren.Network;
 //This is the main class, the game gets started from here.
 class MainGame : GameWorld
 {
-    INetworkManager networkManager;
+
     static void Main()
     {
         MainGame game = new MainGame();
         game.Run();
     }
 
-    public INetworkManager NetworkManager
-    {
-        get { return this.networkManager; }
-        set { this.networkManager = value; }
-    }
+
 
     public MainGame()
     {
@@ -60,16 +56,6 @@ class MainGame : GameWorld
         base.Update(gameTime);
     }
 
-    private void ProcessNetworkMessages()
-    {
-        NetIncomingMessage im;
 
-        while ((im = this.networkManager.ReadMessage()) != null)
-        {
-            Console.WriteLine(im);
-
-            this.networkManager.Recycle(im);
-        }
-    }
 }
 

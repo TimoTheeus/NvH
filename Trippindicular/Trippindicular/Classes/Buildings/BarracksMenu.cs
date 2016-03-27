@@ -39,11 +39,11 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Unit("selectedTile", "unit", 2);
+                unit = new Unit("selectedTile", "unit");
             }
             else
             {
-                unit = new Unit("selectedTile", "unit", 2);
+                unit = new Unit("selectedTile", "unit");
             }
             unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
             GameData.Units.Add(unit);
@@ -57,11 +57,11 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Unit("selectedTile", "unit", 2);
+                unit = new Unit("selectedTile", "unit");
             }
             else
             {
-                unit = new Unit("selectedTile", "unit", 2);
+                unit = new Unit("selectedTile", "unit");
             }
             unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
             GameData.Units.Add(unit);
@@ -74,11 +74,11 @@ class BarracksMenu : Menu
             Unit unit;
             if(tile is NatureBarracks)
             {
-                unit = new Unit("selectedTile", "unit", 2);
+                unit = new Unit("selectedTile", "unit");
             }
             else
             {
-                unit = new Unit("selectedTile", "unit", 2);
+                unit = new Unit("selectedTile", "unit");
             }
             unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
             GameData.Units.Add(unit);
