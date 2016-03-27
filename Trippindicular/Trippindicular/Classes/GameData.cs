@@ -12,7 +12,6 @@ static class GameData
     //This is the list with all the objects of the current level in it.
     static public GameObjectList LevelObjects;
     static public GameObjectList Units;
-    static public EventLog eventLog;
     static public HexaGrid LevelGrid;
     static public SpriteGameObject selectedTile;
     static public Cursor Cursor;
@@ -80,7 +79,7 @@ static class GameData
         unit2.Position = new Vector2(700, 500);
         NatureWorker unit3 = new NatureWorker();
         unit3.Position = new Vector2(900, 500);
-        NatureWorker unit4 = new NatureWorker();
+        HumanityWorker unit4 = new HumanityWorker();
         unit4.Position = new Vector2(1100, 500);
         FlameThrower unit5 = new FlameThrower();
         unit5.Position = new Vector2(500, 700);

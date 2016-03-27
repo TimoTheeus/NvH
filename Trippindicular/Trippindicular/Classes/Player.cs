@@ -78,15 +78,20 @@ class Player : GameObject
         mainResource.Text = this.MainResource.ToString();
         secondaryResource.Text = this.SecondaryResource.ToString();
         updateDiscoveredAreaTimer.Update(gameTime);
-        if(updateDiscoveredAreaTimer.Ended)
-            for(int i = 0; i < GameData.Units.Objects.Count; i++)
+        if (updateDiscoveredAreaTimer.Ended)
+        {
+            foreach (Tile t in GameData.LevelGrid.Objects)
+                t.IsDark = true;
+
+            for (int i = 0; i < GameData.Units.Objects.Count; i++)
             {
-                if (GameData.Units.Objects[i] != null)
+                if (GameData.Units.Objects[i] != null && (GameData.Units.Objects[i] as Unit).Faction == faction)
                 {
                     Unit u = GameData.Units.Objects[i] as Unit;
                     u.UpdateDiscoveredArea();
                 }
             }
+        }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

@@ -118,7 +118,7 @@ class Unit : SpriteGameObject
             Point p = new Point((int)this.Position.X, (int)this.Position.Y);
             if (GameData.LevelGrid.GetTile(p) != null)
             {
-                if (GameData.LevelGrid.GetTile(p).Discovered)
+                if (GameData.LevelGrid.GetTile(p).Discovered && !GameData.LevelGrid.GetTile(p).IsDark)
                     InDiscoveredArea = true;
                 else InDiscoveredArea = false;
             }
@@ -291,13 +291,15 @@ class Unit : SpriteGameObject
         if(faction == GameData.player.GetFaction)
             foreach(Tile t in GameData.LevelGrid.Objects)
             {
-                if (!t.Discovered)
+                Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
+                double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
+                if (absDistance < 300)
                 {
-                    Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
-                    double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
-                    if (absDistance < 300)
-                        t.Discovered = true;
+                    t.Discovered = true;
+                    t.IsDark = false;
                 }
+
+                
             }
     }
     protected virtual void ClickOnEmptyTileAction()
@@ -327,35 +329,43 @@ class Unit : SpriteGameObject
     protected virtual void RightClickAction()
     {
         actionString = "unit:"+this.ID;
-        for (int i = 0; i < GameData.Units.Objects.Count; i++)
+        if (!pacifist)
         {
-            if (GameData.Units.Objects[i] is Unit)
+            for (int i = 0; i < GameData.Units.Objects.Count; i++)
             {
-                Unit unit = GameData.Units.Objects[i] as Unit;
-                if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
+                if (GameData.Units.Objects[i] is Unit)
                 {
-                    actionString += "targ:" + unit.ID;
-                    targetUnit = unit;
-                    break;
+                    Unit unit = GameData.Units.Objects[i] as Unit;
+                    if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
+                    {
+                        actionString += "targ:" + unit.ID;
+                        targetUnit = unit;
+                        break;
+                    }
+                    else targetUnit = null;
                 }
-                else targetUnit = null;
+            }
+
+            if (targetUnit == null)
+            {
+                if (GameData.Cursor.CurrentTile is Building)
+                {
+                    targetUnit = null;
+                    targetBuilding = (Building)GameData.Cursor.CurrentTile;
+                    targetPosition = GameData.Cursor.CurrentTile.Position;
+                    actionString += "build:" + targetBuilding.ID;
+                }
+                else
+                {
+                    ClickOnEmptyTileAction();
+                    actionString += "move:" + GameData.selectedTile.Position.ToString();
+                }
             }
         }
-
-        if (targetUnit == null)
+        else
         {
-            if (GameData.Cursor.CurrentTile is Building)
-            {
-                targetUnit = null;
-                targetBuilding = (Building)GameData.Cursor.CurrentTile;
-                targetPosition = GameData.Cursor.CurrentTile.Position;
-                actionString += "build:" + targetBuilding.ID;
-            }
-            else
-            {
-               ClickOnEmptyTileAction();
-               actionString += "move:" + GameData.selectedTile.Position.ToString() ;
-            }
+            ClickOnEmptyTileAction();
+            actionString += "move:" + GameData.selectedTile.Position.ToString();
         }
     }
 

@@ -43,7 +43,7 @@ class BarracksMenu : Menu
             }
             else
             {
-                unit = new HumanityWorker("selectedTile");
+                unit = new HumanityWorker();
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.Units.Add(unit);
