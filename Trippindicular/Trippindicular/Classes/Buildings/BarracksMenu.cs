@@ -39,15 +39,14 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Unit("selectedTile", "unit");
+                unit = new NatureWorker("selectedTile");
             }
             else
             {
-                unit = new Unit("selectedTile", "unit");
+                unit = new HumanityWorker("selectedTile");
             }
-            unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
+            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.Units.Add(unit);
-            
         }
         else if (button2 != null && button2.Pressed)
         {
@@ -61,9 +60,9 @@ class BarracksMenu : Menu
             }
             else
             {
-                unit = new Unit("selectedTile", "unit");
+                unit = new WoodCutter();
             }
-            unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
+            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.Units.Add(unit);
         }
         else if (button3 != null && button3.Pressed)
@@ -72,7 +71,7 @@ class BarracksMenu : Menu
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
             Unit unit;
-            if(tile is NatureBarracks)
+            if (tile is NatureBarracks)
             {
                 unit = new Unit("selectedTile", "unit");
             }
@@ -80,7 +79,7 @@ class BarracksMenu : Menu
             {
                 unit = new Unit("selectedTile", "unit");
             }
-            unit.Position = new Vector2(tile.Position.X + tile.Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + tile.Sprite.Height / 2);
+            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.Units.Add(unit);
         }
     }
