@@ -196,7 +196,7 @@ class HexaGrid : GameObjectGrid
                     {
                         PolyTileBuilding p = replace as PolyTileBuilding;
                         p.gridPosition = search.gridPosition;
-                        p.AddCoTiles();
+                        p.AddQuadCoTiles();
                     }
                     else
                     {
