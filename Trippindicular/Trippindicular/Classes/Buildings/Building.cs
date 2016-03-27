@@ -39,13 +39,18 @@ class Building : Tile
         if (menu != null)
             GameData.LevelObjects.Remove(menu);
     }
-    public void DealDamage(float amount)
+    public virtual void DealDamage(float amount)
     {
         this.Health -= amount;
         if (this.Health <= 0)
         {
-            GameData.LevelGrid.replaceTile(this, new Tile());
+            Destroy();
         }
+    }
+
+    public virtual void Destroy()
+    {
+        GameData.LevelGrid.replaceTile(this, new Tile());
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -53,7 +58,9 @@ class Building : Tile
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
         healthBar.Draw(gameTime, spriteBatch);
+        position -= new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
         base.Draw(gameTime, spriteBatch);
+        position += new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
     }
 
 }

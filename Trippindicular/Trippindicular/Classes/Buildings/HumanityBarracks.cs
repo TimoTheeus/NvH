@@ -5,9 +5,10 @@ using System.Text;
 using Microsoft.Xna.Framework;
 
 
-class HumanityBarrack : Building
+class HumanityBarrack : PolyTileBuilding
 {
-    public HumanityBarrack() : base("humanityBarrack","selectedTile")
+
+    public HumanityBarrack() : base("humanityBarrack","humanityBarracks")
     {
         this.maxHealth = 100;
         this.health = 100;

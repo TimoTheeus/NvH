@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 class HexaGrid : GameObjectGrid
 {
-    bool startLeft;
-    int offsetX, offsetY;
+    public bool startLeft;
+    public int offsetX, offsetY;
     Tile hexagonTile;
 
     public HexaGrid(int columns, int rows, int cellWidth, int cellHeight, bool startLeft = true, string id = "") : base(columns, rows, cellWidth, cellHeight, id)
     {
         this.startLeft = startLeft;
         hexagonTile = new Tile();
-        offsetX = (int)(hexagonTile.Width * .75f);
+        offsetX = (int)(hexagonTile.Width * .75f + 1);
         offsetY = (int)(hexagonTile.Height * .5f);
     }
 
@@ -191,7 +191,6 @@ class HexaGrid : GameObjectGrid
             {
                 if (grid[i, j].Equals(search))
                 {
-                    search.Destroy();
                     this.Add(replace, i, j);
                     return;
                 }

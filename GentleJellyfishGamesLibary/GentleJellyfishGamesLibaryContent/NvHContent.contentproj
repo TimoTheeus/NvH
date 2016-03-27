@@ -131,18 +131,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Buildings\" />
     <Folder Include="SFX\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\Scroll.png">
       <Name>Scroll</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Tilesets\HexagonTile.png">
-      <Name>HexagonTile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -157,6 +151,20 @@
   <ItemGroup>
     <Compile Include="CursorDot.png">
       <Name>CursorDot</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilesets\HexagonTile.png">
+      <Name>HexagonTile</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilesets\HumanityBarracks.png">
+      <Name>HumanityBarracks</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

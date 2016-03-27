@@ -81,9 +81,6 @@ class Tile : SpriteGameObject
         GameData.LevelObjects.Add(new TileMenu(this));
     }
 
-    public virtual void Destroy()
-    {
-    }
     public void AddTimer(Timer timer, SpriteGameObject objectToBuild)
     {
         buildTimers.Add(timer);

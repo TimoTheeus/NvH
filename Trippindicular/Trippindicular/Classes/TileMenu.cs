@@ -88,7 +88,11 @@ class TileMenu : Menu
             button4.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            GameData.LevelGrid.replaceTile(this.tile, new HumanityBarrack());
+            HumanityBarrack barracks = new HumanityBarrack();
+            GameData.LevelGrid.replaceTile(this.tile, barracks);
+            barracks.gridPosition = this.tile.gridPosition;
+            barracks.AddCoTiles();
+            
         }
     }
     public override void Update(GameTime gameTime)
