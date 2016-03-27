@@ -53,5 +53,10 @@ public abstract class GameObject: Object
         Vector2.Multiply(ref velocity, (float)gameTime.ElapsedGameTime.TotalSeconds, out temp);
         Vector2.Add(ref temp, ref position, out position);
     }
+
+    public virtual string getActionOutput()
+    {
+        return null;
+    }
 }
 

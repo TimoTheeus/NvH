@@ -277,15 +277,17 @@ class Unit : SpriteGameObject
             }
         }
     }
-    protected virtual void ClickOnEmptyTileAction()
+    protected virtual string ClickOnEmptyTileAction()
     {
         try
         {
             targetPosition = GameData.Cursor.CurrentTile.Position;
+            return "unit:"+this.id+":move:"+targetPosition.X +","+targetPosition.Y;
         }
         catch
         {
             targetPosition = GameData.selectedTile.Position;
+            return "unit:" + this.id + ":move:" + targetPosition.X + "," + targetPosition.Y;
         }
     }
     protected virtual void ArrivedAtBuildingAction()
@@ -301,8 +303,9 @@ class Unit : SpriteGameObject
         targetPosition = Vector2.Zero;
         this.Velocity = Vector2.Zero;
     }
-    protected virtual void RightClickAction()
+    protected virtual string RightClickAction()
     {
+        string actionString = "";
         for (int i = 0; i < GameData.Units.Objects.Count; i++)
         {
             if (GameData.Units.Objects[i] is Unit)
@@ -311,6 +314,7 @@ class Unit : SpriteGameObject
                 if (unit.BoundingBox.Contains(mousePoint) && unit != this)
                 {
                     targetUnit = unit;
+                    actionString = "unit:"+this.id+":target:"+unit.id;
                     break;
                 }
                 else targetUnit = null;
@@ -324,12 +328,19 @@ class Unit : SpriteGameObject
                 targetUnit = null;
                 targetBuilding = (Building)GameData.Cursor.CurrentTile;
                 targetPosition = GameData.Cursor.CurrentTile.Position;
+                actionString = "unit:"+this.id+":target:"+targetBuilding.ID;
             }
             else
             {
-                ClickOnEmptyTileAction();
+               return ClickOnEmptyTileAction();
             }
         }
+        return actionString;
+    }
+
+    public override string  getActionOutput()
+    {
+        return RightClickAction();
     }
 }
 
