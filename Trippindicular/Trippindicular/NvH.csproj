@@ -117,6 +117,10 @@
     <Compile Include="Classes\TileMenuItem.cs" />
     <Compile Include="Classes\Units\FlameThrower.cs" />
     <Compile Include="Classes\Units\HumanityWorker.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Fast Melee.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Melee1.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Melee2.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Ranged.cs" />
     <Compile Include="Classes\Units\NatureWorker.cs" />
     <Compile Include="Classes\Units\Unit.cs" />
     <Compile Include="Classes\Units\WoodCutter.cs" />

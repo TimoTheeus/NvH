@@ -4,21 +4,31 @@ using Microsoft.Xna.Framework.Graphics;
 
 class Unit : SpriteGameObject
 {
-    float damage, maxHealth, health, speed, range,attackSpeed;
-    Vector2 targetPosition;
+    protected float damage, maxHealth, health, speed, range,attackSpeed;
+    protected Vector2 targetPosition;
+    protected Point resourceCosts;
     public Unit targetUnit;
     public Building targetBuilding;
     bool selected;
-    Timer attackTimer;
-    Player.Faction faction;
-    HealthBar healthBar;
+    protected Timer attackTimer;
+    protected Player.Faction faction;
+    protected HealthBar healthBar;
     protected Timer checkIfInDiscoveredAreaTimer;
     protected bool inDiscoveredArea;
     protected Point mousePoint;
     protected string actionString;
     public string name;
     protected bool pacifist, frozen;
+    protected float freezeTime;
+    protected Timer freezeTimer;
+    protected const float meleeRange = 50;
+    protected const float slowUnitSpeed = 150;
 
+    public Point ResourceCosts
+    {
+        get { return resourceCosts; }
+        set { resourceCosts = value; }
+    }
     public bool InDiscoveredArea
     {
         get { return inDiscoveredArea; }
@@ -68,8 +78,8 @@ class Unit : SpriteGameObject
     {
         actionString = null;
         this.Origin = this.sprite.Center;
-        speed = 200;
-        range = 50;
+        speed = slowUnitSpeed;
+        range = meleeRange;
         maxHealth = 100;
         damage = 20;
         this.health = maxHealth;
@@ -78,6 +88,7 @@ class Unit : SpriteGameObject
         attackTimer = new Timer(this.AttackSpeed);
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         checkIfInDiscoveredAreaTimer = new Timer((1 / 6));
+        freezeTime = 1f;
     }
 
     public override void HandleInput(InputHelper ih)
@@ -144,6 +155,12 @@ class Unit : SpriteGameObject
             }
             base.Update(gameTime);
         }
+        else if (frozen)
+        {
+            freezeTimer.Update(gameTime);
+            if (freezeTimer.Ended)
+                frozen = false;
+        }
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
     }
@@ -156,7 +173,12 @@ class Unit : SpriteGameObject
             base.Draw(gameTime, spriteBatch);
         }
     }
-
+    public void Freeze(float duration)
+    {
+        frozen = true;
+        freezeTimer = new Timer(duration);
+        freezeTimer.Reset();
+    }
     protected void MoveToTile()
     {
         float differenceXPos = Math.Abs(targetPosition.X - this.GlobalPosition.X);
@@ -284,6 +306,7 @@ class Unit : SpriteGameObject
                 ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Spell).name, false, true);
             Die();
         }
+        /*
         if(targetUnit== null && pacifist != true)
         {
             if(attacker is Unit)
@@ -291,8 +314,9 @@ class Unit : SpriteGameObject
                 Unit target = attacker as Unit;
                 targetUnit = target;
                 attackTimer.Reset();
+                ArrivedAtTileAction();
             }
-        }
+        }*/
     }
     protected virtual void Die()
     {
