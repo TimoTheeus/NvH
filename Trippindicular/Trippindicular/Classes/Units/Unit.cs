@@ -405,7 +405,7 @@ class Unit : SpriteGameObject
                 else
                 {
                     ClickOnEmptyTileAction();
-                    actionString += "$move:" + GameData.selectedTile.Position.ToString();
+                    actionString += "$move:" + GameData.selectedTile.Position.X + "," + GameData.selectedTile.Position.Y;
                 }
             }
         }
