@@ -19,6 +19,7 @@ class Player : GameObject
     public Faction GetFaction
     {
         get { return faction; }
+        set { if (faction == null) faction = value; }
     }
     public enum Faction
     {

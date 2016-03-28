@@ -26,6 +26,12 @@ public class Button : GUIGameObject
         get { return textColor; }
         set { textColor = value; }
     }
+    
+    public string Text
+    {
+        get { return text; }
+        set { text = value; }
+    }
 
     public bool Selected
     {
@@ -77,6 +83,11 @@ public class Button : GUIGameObject
             {
                 pressed = true;
                 textColor = Color.Purple;
+            }
+
+            else
+            {
+                pressed = false;
             }
 
             if ((ih.IsLeftMouseButtonDown() && ih.MouseInBox(BoundingBox)) || ih.IsKeyDown(Keys.Enter))

@@ -94,6 +94,7 @@
     <Compile Include="Classes\EventLog.cs" />
     <Compile Include="Classes\GameData.cs" />
     <Compile Include="Classes\GameStates\MenuInputState.cs" />
+    <Compile Include="Classes\GameStates\Menus\FactionMenuState.cs" />
     <Compile Include="Classes\GameStates\Menus\HostLobbyState.cs" />
     <Compile Include="Classes\GameStates\Playing\FinishState.cs" />
     <Compile Include="Classes\GameStates\Playing\PlayingState.cs" />
@@ -105,7 +106,9 @@
     <Compile Include="Classes\Network\ClientNetworkManager.cs" />
     <Compile Include="Classes\Network\INetworkManager.cs" />
     <Compile Include="Classes\Network\ServerNetworkManager.cs" />
-    <Compile Include="Classes\Spells\Fireball.cs" />
+    <Compile Include="Classes\Spells\MeteorStorm.cs" />
+    <Compile Include="Classes\Spells\SnowStorm.cs" />
+    <Compile Include="Classes\Spells\Spell.cs" />
     <Compile Include="Classes\TileMenu.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Buildings\SunlightTree.cs" />

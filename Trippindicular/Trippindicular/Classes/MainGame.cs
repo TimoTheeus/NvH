@@ -47,6 +47,7 @@ class MainGame : GameWorld
         gameStateManager.AddGameState("settingsMenuTitle", new SettingsMenuOverlay(gameStateManager.GetGameState("titleMenu")));
         gameStateManager.AddGameState("settingsMenuPause", new SettingsMenuOverlay(gameStateManager.GetGameState("pauseMenu")));
         gameStateManager.AddGameState("finish", new FinishState());
+        gameStateManager.AddGameState("factionMenuState", new FactionMenuState());
         gameStateManager.SwitchTo("titleMenu");
     }
 

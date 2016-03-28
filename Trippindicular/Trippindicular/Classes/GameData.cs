@@ -19,6 +19,8 @@ static class GameData
     static public Player player;
     static bool host;
     public static bool Host { get { return host; } set { host = value; } }
+
+
     static public Point Resolution
     {
         get { return resolution; }

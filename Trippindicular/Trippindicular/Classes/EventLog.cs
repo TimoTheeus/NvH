@@ -14,11 +14,11 @@ class EventLog : GameObjectList
             Objects.Add(new TextGameObject("smallFont"));
     }
 
-    public void Add(string target, string attacker, bool building)
+    public void Add(string target, string attacker, bool building, bool spell)
     {
         TextGameObject prompt = new TextGameObject("smallFont");
-        if(!building)
-            switch(GameWorld.Random.Next(6))
+        if(!building && !spell)
+            switch(GameWorld.Random.Next(7))
             {
                 case 0:
                     prompt.Text = attacker + " cashed in " + target + "'s chips";
@@ -38,9 +38,11 @@ class EventLog : GameObjectList
                 case 5:
                     prompt.Text = target + " didn't have what it took to take on " + attacker;
                     break;
+                case 6:
+                    prompt.Text = target + " got pummeled joyfully, jauntily and utterly onesidedly by " + attacker;
+                    break;
             }
-        
-        else
+        else if(building && !spell)
         {
             switch(GameWorld.Random.Next(4))
             {
@@ -56,6 +58,26 @@ class EventLog : GameObjectList
                 case 3:
                     prompt.Text = attacker + " found a structural weakness in " + target;
                     break;
+            }
+        }
+
+        else if(spell && !building)
+        {
+            switch(GameWorld.Random.Next(4))
+            {
+                case 0:
+                    prompt.Text = target + " couldn't get away from the " + attacker + " in time";
+                    break;
+                case 1:
+                    prompt.Text = "the " + attacker + " didn't turn out too well for " + target;
+                    break;
+                case 2:
+                    prompt.Text = target + " earned a nomination for the Darwin awards by dying to a " + attacker;
+                    break;
+                case 3:
+                    prompt.Text = "I'm out of ideas, " + target + " died to a " + attacker + ", what do you want from me?";
+                    break;
+
             }
         }
 

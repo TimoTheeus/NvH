@@ -49,7 +49,10 @@ class Building : Tile
         this.Health -= amount;
         if (this.Health <= 0)
         {
-            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Unit).name, this.name, true);
+            if(attacker is Unit)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Unit).name, this.name, true, false);
+            if(attacker is Spell)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Spell).name, this.name, true, true);
             Destroy();
         }
     }

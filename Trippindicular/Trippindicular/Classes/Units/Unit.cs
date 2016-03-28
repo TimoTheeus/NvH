@@ -17,12 +17,18 @@ class Unit : SpriteGameObject
     protected Point mousePoint;
     protected string actionString;
     public string name;
-    protected bool pacifist;
+    protected bool pacifist, frozen;
 
     public bool InDiscoveredArea
     {
         get { return inDiscoveredArea; }
         set { inDiscoveredArea = value; }
+    }
+
+    public bool Frozen
+    {
+        get { return frozen; }
+        set { frozen = value; }
     }
 
     public float AttackSpeed
@@ -123,18 +129,21 @@ class Unit : SpriteGameObject
                 else InDiscoveredArea = false;
             }
         }
-        attackTimer.Update(gameTime);
-        if (targetUnit != null)
+        if (!frozen && Faction == Player.Faction.humanity)
         {
-            MoveToUnit();
-        }
+            attackTimer.Update(gameTime);
+            if (targetUnit != null)
+            {
+                MoveToUnit();
+            }
 
 
-        else if (targetPosition != Vector2.Zero)
-        {
-            MoveToTile();
+            else if (targetPosition != Vector2.Zero)
+            {
+                MoveToTile();
+            }
+            base.Update(gameTime);
         }
-        base.Update(gameTime);
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
     }
@@ -269,7 +278,10 @@ class Unit : SpriteGameObject
         this.Health -= amount;
         if (Health <= 0)
         {
-            ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Unit).name, false);
+            if(attacker is Unit)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Unit).name, false, false);
+            if(attacker is Spell)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Spell).name, false, true);
             Die();
         }
         if(targetUnit== null && pacifist != true)
