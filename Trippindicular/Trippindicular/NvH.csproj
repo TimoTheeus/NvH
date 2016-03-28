@@ -61,7 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Lidgren.Network">
-      <HintPath>..\..\..\..\..\Downloads\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network.Xna">
       <HintPath>..\..\Lidgren.Network.Xna.dll</HintPath>
@@ -118,6 +118,10 @@
     <Compile Include="Classes\TileMenuItem.cs" />
     <Compile Include="Classes\Units\FlameThrower.cs" />
     <Compile Include="Classes\Units\HumanityWorker.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Fast Melee.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Melee1.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Melee2.cs" />
+    <Compile Include="Classes\Units\Main Combat units\Ranged.cs" />
     <Compile Include="Classes\Units\NatureWorker.cs" />
     <Compile Include="Classes\Units\Unit.cs" />
     <Compile Include="Classes\Units\WoodCutter.cs" />
