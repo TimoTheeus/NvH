@@ -111,17 +111,18 @@ class Unit : SpriteGameObject
         }
         if (BoundingBox.Contains(mousePoint))
         {
-            if (ih.LeftButtonPressed() && faction == GameData.player.GetFaction && GameData.Cursor.ClickedUnit == null)
+            if (ih.LeftButtonPressed() && faction == GameData.player.GetFaction)
             {
                 selected = true;
                 GameData.Cursor.ClickedUnit = this;
             }
         }
-        else if (!this.BoundingBox.Contains(mousePoint) && GameData.Cursor.ClickedUnit == this)
+        else if (!this.BoundingBox.Contains(mousePoint) )
         {
             if (ih.LeftButtonPressed())
             {
                 selected = false;
+                if(GameData.Cursor.ClickedUnit== this)
                 GameData.Cursor.ClickedUnit = null;
                 //action = null
                 
@@ -360,6 +361,22 @@ class Unit : SpriteGameObject
         }
         targetBuilding = null;
     }
+   
+    protected void checkCurrentPosition()
+    {
+        for (int i = 0; i < GameData.Units.Objects.Count; i++)
+        {
+            if (GameData.Units.Objects[i] != null&&GameData.Units.Objects[i]!=this)
+            {
+                if ((GameData.Units.Objects[i].Position.X-this.Position.X>-5&& GameData.Units.Objects[i].Position.X - this.Position.X<5)&&
+                    (GameData.Units.Objects[i].Position.Y - this.Position.Y > -5 && GameData.Units.Objects[i].Position.Y - this.Position.Y < 5))
+                {
+                    targetPosition = this.Position + new Vector2(20, 20);
+                    return;
+                }
+            }
+        }
+    }
     protected virtual void ArrivedAtBuildingAction()
     {
         if (attackTimer.Ended)
@@ -372,6 +389,7 @@ class Unit : SpriteGameObject
     {
         targetPosition = Vector2.Zero;
         this.Velocity = Vector2.Zero;
+        checkCurrentPosition();
     }
     protected virtual void RightClickAction()
     {
