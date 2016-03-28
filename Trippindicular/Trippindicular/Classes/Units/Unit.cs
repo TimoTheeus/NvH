@@ -24,6 +24,16 @@ class Unit : SpriteGameObject
     protected const float meleeRange = 50;
     protected const float slowUnitSpeed = 150;
 
+    public Unit TargetUnit
+    {
+        get { return targetUnit; }
+        set { targetUnit = value; }
+    }
+    public Vector2 TargetPosition
+    {
+        get { return targetPosition; }
+        set { targetPosition = value; }
+    }
     public Point ResourceCosts
     {
         get { return resourceCosts; }
@@ -365,7 +375,7 @@ class Unit : SpriteGameObject
     }
     protected virtual void RightClickAction()
     {
-        actionString = "unit:"+this.ID;
+        actionString = "$unit:"+this.ID;
         if (!pacifist)
         {
             for (int i = 0; i < GameData.Units.Objects.Count; i++)
@@ -375,7 +385,7 @@ class Unit : SpriteGameObject
                     Unit unit = GameData.Units.Objects[i] as Unit;
                     if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
                     {
-                        actionString += "targ:" + unit.ID;
+                        actionString += "$targ:" + unit.ID;
                         targetUnit = unit;
                         break;
                     }
@@ -390,12 +400,12 @@ class Unit : SpriteGameObject
                     targetUnit = null;
                     targetBuilding = (Building)GameData.Cursor.CurrentTile;
                     targetPosition = GameData.Cursor.CurrentTile.Position;
-                    actionString += "build:" + targetBuilding.ID;
+                    actionString += "$build:" + targetBuilding.ID;
                 }
                 else
                 {
                     ClickOnEmptyTileAction();
-                    actionString += "move:" + GameData.selectedTile.Position.ToString();
+                    actionString += "$move:" + GameData.selectedTile.Position.ToString();
                 }
             }
         }
