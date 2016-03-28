@@ -29,9 +29,5 @@ class NatureWorker : Unit
         GameData.LevelGrid.GetTile(p).IsBeingBuilt = true;
     }
 
-    public override string getActionOutput()
-    {
-        return null;
-    }
 }
 

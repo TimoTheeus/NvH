@@ -107,7 +107,46 @@ class PlayingState : IGameLoopObject
 
     private void UpdateGameData(string p)
     {
-        Console.WriteLine(p);
+        string[] actions = p.Split(';');
+        foreach (string s in actions)
+        {
+            if (s.Length > 3)
+            {
+                parseAction(s);
+            }
+        }
+    }
+
+    private void parseAction(string s)
+    {
+        string[] pairs = s.Split('$');
+        if (pairs.Length > 1){
+        if (pairs[1].Substring(0,4).Equals("unit")) {
+            string id = pairs[1].Substring(5,pairs[1].Length - 5);
+            for (int i = 2; i < pairs.Length; i++)
+            {
+                switch (pairs[i].Substring(0, 4))
+                {
+                    case "move":
+                        string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
+                        Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
+                        u.TargetPosition = new Vector2(int.Parse(coords[0]), int.Parse(coords[1]));
+                        u.TargetUnit = null;
+                        break;
+       
+                    case "targ":
+                        string targID = pairs[i].Substring(5, pairs[i].Length - 5);
+                        ((Unit)(GameData.LevelObjects.Find(id))).TargetUnit = (Unit) GameData.LevelObjects.Find(targID);
+                        break;
+                    case "buil":
+                        //build
+                        break;
+                }
+            }
+        }
+        }
+
+    
     }
 
     public void Reset()
