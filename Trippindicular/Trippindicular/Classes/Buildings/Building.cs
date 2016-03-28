@@ -69,8 +69,10 @@ class Building : Tile
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
+        if(!IsDark)
         healthBar.Draw(gameTime, spriteBatch);
         position -= new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
         base.Draw(gameTime, spriteBatch);

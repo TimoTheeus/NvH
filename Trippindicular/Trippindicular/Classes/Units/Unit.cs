@@ -260,7 +260,7 @@ class Unit : SpriteGameObject
             targetUnit.DealDamage(this.Damage, this);
         }
 
-        else
+        else 
         {
             if (targetBuilding.Health <= 0)
             {
@@ -324,6 +324,7 @@ class Unit : SpriteGameObject
         {
             targetPosition = GameData.selectedTile.Position;
         }
+        targetBuilding = null;
     }
     protected virtual void ArrivedAtBuildingAction()
     {

@@ -97,12 +97,17 @@ class Tile : SpriteGameObject
             base.Draw(gameTime, spriteBatch);
             for (int i = 0; i < text.Count; i++)
             {
-                if (text[i] != null&&IsBeingBuilt)
+                if (text[i] != null && IsBeingBuilt)
                 {
                     descriptive.Text = "constructing.." + (int)buildTimers[i].TimeLeft;
                 }
                 else { descriptive.Text = "waiting for worker.."; }
             }
+        }
+        else
+        {
+            Sprite.Color = Color.Gray;
+            base.Draw(gameTime, spriteBatch);
         }
     }
 
