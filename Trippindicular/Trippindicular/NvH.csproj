@@ -83,6 +83,7 @@
     <Compile Include="Classes\Buildings\BarracksMenu.cs" />
     <Compile Include="Classes\Buildings\Building.cs" />
     <Compile Include="Classes\Buildings\CoTile.cs" />
+    <Compile Include="Classes\Buildings\Forest.cs" />
     <Compile Include="Classes\Buildings\HumanityBarracks.cs" />
     <Compile Include="Classes\Buildings\HumanityBase.cs" />
     <Compile Include="Classes\Buildings\Mine.cs" />

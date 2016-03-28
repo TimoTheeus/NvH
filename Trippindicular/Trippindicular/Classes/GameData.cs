@@ -51,9 +51,26 @@ static class GameData
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
             {
-                Tile newTile = new Tile();
-                newTile.gridPosition = new Point(i, j);
-                GameData.LevelGrid.Add(newTile, i, j);
+                if (i > (int)(LevelGrid.Columns * .25) && i < (int)(LevelGrid.Columns * .75))
+                    switch (GameWorld.Random.Next(12))
+                    {
+                        case 0:
+                            Forest f = new Forest();
+                            f.gridPosition = new Point(i, j);
+                            GameData.LevelGrid.Add(f, i, j);
+                            break;
+                        default:
+                            Tile t = new Tile();
+                            t.gridPosition = new Point(i, j);
+                            GameData.LevelGrid.Add(t, i, j);
+                            break;
+                    }
+                else
+                {
+                    Tile t = new Tile();
+                    t.gridPosition = new Point(i, j);
+                    GameData.LevelGrid.Add(t, i, j);
+                }
             }
                     
         GameData.LevelObjects.Add(GameData.LevelGrid);
