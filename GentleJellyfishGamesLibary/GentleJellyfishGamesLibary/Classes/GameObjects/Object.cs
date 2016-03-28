@@ -14,7 +14,9 @@ public abstract class Object : IGameLoopObject
 
     //Readonly properties.
     public virtual Rectangle BoundingBox { get { return new Rectangle((int)GlobalPosition.X, (int)GlobalPosition.Y, 0, 0); } }
-    public string ID { get { return id; } }
+    public string ID { get { return id; }
+        set { id = value; }
+    }
     public virtual Vector2 GlobalPosition
     {
         get

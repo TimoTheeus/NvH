@@ -16,7 +16,7 @@ namespace Trippindicular.Classes
             var config = new NetPeerConfiguration("Asteroid")
             {
                 Port = Convert.ToInt32("14242"),
-                //SimulatedMinimumLatency = 0.1f, 
+                SimulatedMinimumLatency = 0.1f, 
                 //SimulatedLoss = 0.1f 
             };
             config.EnableMessageType(NetIncomingMessageType.WarningMessage);

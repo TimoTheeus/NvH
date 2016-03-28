@@ -18,7 +18,7 @@ class MeteorStorm : Spell
 
     public override void SpellEffect(GameTime gameTime, GameObject target)
     {
-        ((Unit)target).DealDamage((float)(10 * gameTime.ElapsedGameTime.TotalSeconds), this);
+        ((Unit)target).DealDamage((float)(10 * gameTime.ElapsedGameTime.TotalSeconds), this, true);
     }
 }
 

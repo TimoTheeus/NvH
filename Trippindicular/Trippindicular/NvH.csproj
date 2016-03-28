@@ -105,6 +105,7 @@
     <Compile Include="Classes\HexaGrid.cs" />
     <Compile Include="Classes\GameStates\Menus\SessionsMenuState.cs" />
     <Compile Include="Classes\Network\ClientNetworkManager.cs" />
+    <Compile Include="Classes\Network\GameNetworkMessage.cs" />
     <Compile Include="Classes\Network\INetworkManager.cs" />
     <Compile Include="Classes\Network\ServerNetworkManager.cs" />
     <Compile Include="Classes\Spells\MeteorStorm.cs" />

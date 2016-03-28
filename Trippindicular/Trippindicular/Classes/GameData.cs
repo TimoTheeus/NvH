@@ -17,6 +17,7 @@ static class GameData
     static public Cursor Cursor;
     static public ResourceController ResourceController;
     static public Player player;
+    static public int unitIdIndex;
     static bool host;
     public static bool Host { get { return host; } set { host = value; } }
 
@@ -88,7 +89,6 @@ static class GameData
 
         //naturePlayer = new Player(Player.Faction.nature);
         //GameData.LevelObjects.Add(naturePlayer);
-        player = new Player(Player.Faction.humanity);
         GameData.LevelObjects.Add(player);
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
@@ -108,18 +108,25 @@ static class GameData
         unit7.Position = new Vector2(900, 700);
         WoodCutter unit8 = new WoodCutter();
         unit8.Position = new Vector2(1100, 700);
-        GameData.Units.Add(unit8);
-        GameData.Units.Add(unit7);
-        GameData.Units.Add(unit6);
-        GameData.Units.Add(unit5);
-        GameData.Units.Add(unit4);
-        GameData.Units.Add(unit3);
-        GameData.Units.Add(unit2);
-        GameData.Units.Add(unit);
+        GameData.AddUnit(unit8);
+        GameData.AddUnit(unit7);
+        GameData.AddUnit(unit6);
+        GameData.AddUnit(unit5);
+        GameData.AddUnit(unit4);
+        GameData.AddUnit(unit3);
+        GameData.AddUnit(unit2);
+        GameData.AddUnit(unit);
 
     }
     static public void AfterInitialize()
     {
+    }
+
+    static public void AddUnit(Unit obj)
+    {
+        unitIdIndex++;
+        obj.ID = obj.ID + unitIdIndex.ToString();
+        GameData.Units.Add(obj);
     }
 
 

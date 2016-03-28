@@ -7,12 +7,9 @@ using Microsoft.Xna.Framework.GamerServices;
 //Main menu, access to all sub-menus
 class TitleMenuState : GameObjectList
 {
-    protected Button newGame, options, exitGame, sessions;
+    protected Button newGame,humanityGame, options, exitGame, sessions;
     protected SpriteGameObject background;
     protected PlayingState playingState;
-    NetworkSession networkSession;
-    AvailableNetworkSessionCollection availableSessions;
-    int selectedSessionIndex;
     PacketReader packetReader = new PacketReader();
     PacketWriter packetWriter = new PacketWriter();
     protected Button createGame;
@@ -29,9 +26,13 @@ class TitleMenuState : GameObjectList
 
         //Make buttons
                 //New Game
-                newGame = new Button("button", "buttonFont", "font", 0, "New Game", 0);
+                newGame = new Button("button", "buttonFont", "font", 0, "Nature", 0);
                 newGame.Position = new Vector2(300, 150);
                 this.Add(newGame);
+                //New Game
+                humanityGame = new Button("button", "buttonFont", "font", 0, "Humanity", 0);
+                humanityGame.Position = new Vector2(700, 150);
+                this.Add(humanityGame);
 
 
 
@@ -72,6 +73,13 @@ class TitleMenuState : GameObjectList
         //Buttons
         if (newGame.Pressed)
         {
+            GameData.player = new Player(Player.Faction.nature);
+            playingState.Initialize(GameData.Host);
+            GameWorld.GameStateManager.SwitchTo("hud");
+        }
+        else if (humanityGame.Pressed)
+        {
+            GameData.player = new Player(Player.Faction.humanity);
             playingState.Initialize(GameData.Host);
             GameWorld.GameStateManager.SwitchTo("hud");
         }
@@ -88,7 +96,8 @@ class TitleMenuState : GameObjectList
         {
             GameWorld.GameStateManager.SwitchTo("sessionsMenu");
         }
-        else if (createGame.Pressed) {
+        else if (createGame.Pressed)
+        {
             GameWorld.GameStateManager.SwitchTo("hostLobby");
         }
     }

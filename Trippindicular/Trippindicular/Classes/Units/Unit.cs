@@ -270,7 +270,12 @@ class Unit : SpriteGameObject
                 targetUnit = null;
                 return;
             }  
-            targetUnit.DealDamage(this.Damage, this);
+            if (this.Faction.Equals(GameData.player.GetFaction))
+            {
+                this.actionString = "$unit:" + targetUnit.id + "$damg:"+this.damage+","+this.ID;
+                targetUnit.DealDamage(this.Damage, this, true);
+            }
+            
         }
 
         else 
@@ -286,9 +291,12 @@ class Unit : SpriteGameObject
         attackTimer.Reset();
     }
 
-    public void DealDamage(float amount, GameObject attacker)
+    public void DealDamage(float amount, GameObject attacker, bool networkTest)
     {
-        this.Health -= amount;
+        this.actionString = "$unit:" + this.id;
+        {
+            this.Health -= amount;
+        }
         if (Health <= 0)
         {
             if(attacker is Unit)
@@ -303,12 +311,14 @@ class Unit : SpriteGameObject
             {
                 Unit target = attacker as Unit;
                 targetUnit = target;
+                actionString += "$targ:" + target.ID;
                 attackTimer.Reset();
             }
         }
     }
     protected virtual void Die()
     {
+
         GameData.Units.Remove(this);
     }
     public void UpdateDiscoveredArea()
