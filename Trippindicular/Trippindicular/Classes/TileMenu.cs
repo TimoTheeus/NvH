@@ -63,9 +63,9 @@ class TileMenu : Menu
             button1.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            if (this.tile is HumanityBase)
+            if (GameData.player.GetFaction == Player.Faction.humanity)
             {
-
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
             }
             else
             {
@@ -77,13 +77,13 @@ class TileMenu : Menu
             button2.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            if (this.tile is HumanityBase)
+            if (GameData.player.GetFaction == Player.Faction.humanity)
             {
-
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
             }
             else
             {
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
             }
 
         }
@@ -92,13 +92,13 @@ class TileMenu : Menu
             button3.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            if (this.tile is HumanityBase)
+            if (GameData.player.GetFaction == Player.Faction.humanity)
             {
-
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
             }
             else
             {
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBase());
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
             }
         }
         else if (button4 != null && button4.Pressed)
@@ -106,13 +106,17 @@ class TileMenu : Menu
             button4.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
-            if (this.tile is HumanityBase)
+            if (GameData.player.GetFaction == Player.Faction.humanity)
             {
-
+                HumanityBarrack barracks = new HumanityBarrack();
+                barracks.Position = this.tile.Position;
+                barracks.gridPosition = this.tile.gridPosition;
+                barracks.AddQuadCoTiles();
+                tile.AddTimer(new Timer(sunlightTreeCooldown), barracks);
             }
             else
             {
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
+                tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBarracks());
             }
         }
     }

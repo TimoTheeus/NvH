@@ -14,10 +14,12 @@ class Player : GameObject
     protected TextGameObject mainResource;
     protected TextGameObject secondaryResource;
     protected Timer updateDiscoveredAreaTimer;
+    protected EventLog eventLog;
 
     public Faction GetFaction
     {
         get { return faction; }
+        set { if (faction == null) faction = value; }
     }
     public enum Faction
     {
@@ -56,7 +58,7 @@ class Player : GameObject
         }
     }
 
-    public Player(Faction faction)
+    public Player(Faction faction) : base("player")
     {
         this.faction = faction;
         MainResource = 0;
@@ -65,9 +67,11 @@ class Player : GameObject
         mainResource.Position = new Vector2(1500, 0);
         secondaryResource = new TextGameObject("smallFont", 4, "secondaryResourceText");
         secondaryResource.Position = new Vector2(1200, 0);
+        eventLog = new EventLog();
         HUD hud = GameWorld.GameStateManager.GetGameState("hud") as HUD;
         hud.hud.Add(mainResource);
         hud.hud.Add(secondaryResource);
+        hud.hud.Add(eventLog);
         updateDiscoveredAreaTimer = new Timer((1 / 6));
     }
     public override void Update(GameTime gameTime)
@@ -75,15 +79,20 @@ class Player : GameObject
         mainResource.Text = this.MainResource.ToString();
         secondaryResource.Text = this.SecondaryResource.ToString();
         updateDiscoveredAreaTimer.Update(gameTime);
-        if(updateDiscoveredAreaTimer.Ended)
-            for(int i = 0; i < GameData.Units.Objects.Count; i++)
+        if (updateDiscoveredAreaTimer.Ended)
+        {
+            foreach (Tile t in GameData.LevelGrid.Objects)
+                t.IsDark = true;
+
+            for (int i = 0; i < GameData.Units.Objects.Count; i++)
             {
-                if (GameData.Units.Objects[i] != null)
+                if (GameData.Units.Objects[i] != null && (GameData.Units.Objects[i] as Unit).Faction == faction)
                 {
                     Unit u = GameData.Units.Objects[i] as Unit;
                     u.UpdateDiscoveredArea();
                 }
             }
+        }
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

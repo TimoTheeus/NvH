@@ -10,6 +10,8 @@ class Mine : Building
     ResourceController resController;
     public Mine() : base("mine","selectedTile")
     {
+        Faction = Player.Faction.humanity;
+        name = "COALMINE";
     }
 
     public override void HandleInput(InputHelper ih)
@@ -27,7 +29,7 @@ class Mine : Building
     }
     public override void HasBeenBuiltAction()
     {
-        resController = new ResourceController(1, 50, 0);
+        resController = new ResourceController(1, 0, 50);
         GameData.LevelObjects.Add(resController);
     }
 }

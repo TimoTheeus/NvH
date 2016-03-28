@@ -10,6 +10,8 @@ class HumanityBase : PolyTileBuilding
     public HumanityBase() : base("humanityBase", "selectedTile")
     {
         this.health = 100;
+        Faction = Player.Faction.humanity;
+        name = "HUMAN BASE";
     }
 
     public override void Destroy()

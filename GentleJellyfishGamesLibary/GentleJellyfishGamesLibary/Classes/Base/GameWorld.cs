@@ -21,7 +21,7 @@ public class GameWorld : Game
     protected static Point resolution;
     protected static AssetLoader assetLoader;
     protected static GameStateManager gameStateManager;
-    protected static R random;
+    protected static Random random;
     protected static Point screen;
     protected static Camera cam;
     protected static bool exited;
@@ -53,6 +53,11 @@ public class GameWorld : Game
         get { return screen; }
     }
 
+    public static Random Random
+    {
+        get { return random; }
+    }
+
     //Initialize the gameworld (also initializes settings).
     public GameWorld()
     {
@@ -64,7 +69,7 @@ public class GameWorld : Game
         cam.ScaleMatrix = ScaleMatrix;
         gameStateManager = new GameStateManager();
         inputHelper = new InputHelper();
-        random = new R();
+        random = new Random();
         screen = new Point(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
 

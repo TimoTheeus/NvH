@@ -15,6 +15,7 @@ class Tile : SpriteGameObject
     TextGameObject descriptive;
     protected bool discovered;
     protected bool isBeingBuilt;
+    protected bool isDark;
 
     public bool IsBeingBuilt
     {
@@ -25,6 +26,12 @@ class Tile : SpriteGameObject
     {
         get { return discovered; }
         set { discovered = value; }
+    }
+    
+    public bool IsDark
+    {
+        get { return isDark; }
+        set { isDark = value; }
     }
 
     public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 1)
@@ -47,9 +54,10 @@ class Tile : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (IsBeingBuilt) { 
-        for(int i = 0; i < buildTimers.Count; i++)
+        if (IsBeingBuilt)
         {
+            for (int i = 0; i < buildTimers.Count; i++)
+            {
                 if (buildTimers[i] != null)
                 {
                     buildTimers[i].Update(gameTime);
@@ -60,7 +68,9 @@ class Tile : SpriteGameObject
                             objectsToBuild[i].Position = new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
                             GameData.LevelObjects.Add(objectsToBuild[i]);
                         }
-                        else { GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Building);
+                        else
+                        {
+                            GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Building);
                             Building b = objectsToBuild[i] as Building;
                             b.HasBeenBuiltAction();
                         }
@@ -74,19 +84,30 @@ class Tile : SpriteGameObject
             }
         }
     }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         if (discovered)
         {
+            if (isDark)
+                Sprite.Color = Color.Gray;
+            else
+                Sprite.Color = Color.White;
+
             base.Draw(gameTime, spriteBatch);
             for (int i = 0; i < text.Count; i++)
             {
-                if (text[i] != null&&IsBeingBuilt)
+                if (text[i] != null && IsBeingBuilt)
                 {
                     descriptive.Text = "constructing.." + (int)buildTimers[i].TimeLeft;
                 }
                 else { descriptive.Text = "waiting for worker.."; }
             }
+        }
+        else
+        {
+            Sprite.Color = Color.Gray;
+            base.Draw(gameTime, spriteBatch);
         }
     }
 

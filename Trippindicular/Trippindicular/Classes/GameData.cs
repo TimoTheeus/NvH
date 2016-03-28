@@ -16,17 +16,16 @@ static class GameData
     static public SpriteGameObject selectedTile;
     static public Cursor Cursor;
     static public ResourceController ResourceController;
-    static public Player naturePlayer;
-    static public Player humanityPlayer;
+    static public Player player;
     static bool host;
     public static bool Host { get { return host; } set { host = value; } }
+
+
     static public Point Resolution
     {
         get { return resolution; }
         set { if (resolution == null) resolution = value; }
     }
-
-
 
     static public void Update(GameTime gameTime)
     {
@@ -52,9 +51,26 @@ static class GameData
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
             {
-                Tile newTile = new Tile();
-                newTile.gridPosition = new Point(i, j);
-                GameData.LevelGrid.Add(newTile, i, j);
+                if (i > (int)(LevelGrid.Columns * .25) && i < (int)(LevelGrid.Columns * .75))
+                    switch (GameWorld.Random.Next(12))
+                    {
+                        case 0:
+                            Forest f = new Forest();
+                            f.gridPosition = new Point(i, j);
+                            GameData.LevelGrid.Add(f, i, j);
+                            break;
+                        default:
+                            Tile t = new Tile();
+                            t.gridPosition = new Point(i, j);
+                            GameData.LevelGrid.Add(t, i, j);
+                            break;
+                    }
+                else
+                {
+                    Tile t = new Tile();
+                    t.gridPosition = new Point(i, j);
+                    GameData.LevelGrid.Add(t, i, j);
+                }
             }
                     
         GameData.LevelObjects.Add(GameData.LevelGrid);
@@ -70,21 +86,32 @@ static class GameData
 
         
 
-        naturePlayer = new Player(Player.Faction.nature);
-        GameData.LevelObjects.Add(naturePlayer);
-        humanityPlayer = new Player(Player.Faction.humanity);
-        GameData.LevelObjects.Add(humanityPlayer);
+        //naturePlayer = new Player(Player.Faction.nature);
+        //GameData.LevelObjects.Add(naturePlayer);
+        player = new Player(Player.Faction.humanity);
+        GameData.LevelObjects.Add(player);
         ResourceController = new ResourceController(1, 10, 10) ;
         GameData.LevelObjects.Add(ResourceController);
-
-        Unit unit = new Unit("selectedTile","testUnit");
+        NatureWorker unit = new NatureWorker();
         unit.Position = new Vector2(500, 500);
-        Unit unit2 = new Unit("selectedTile", "testUnit2");
+        NatureWorker unit2 = new NatureWorker();
         unit2.Position = new Vector2(700, 500);
-        Unit unit3 = new Unit("selectedTile", "testUnit3");
-        unit3.Position = new Vector2(500, 700);
-        HumanityWorker unit4 = new HumanityWorker("selectedTile");
-        unit4.Position = new Vector2(800, 700);
+        NatureWorker unit3 = new NatureWorker();
+        unit3.Position = new Vector2(900, 500);
+        HumanityWorker unit4 = new HumanityWorker();
+        unit4.Position = new Vector2(1100, 500);
+        FlameThrower unit5 = new FlameThrower();
+        unit5.Position = new Vector2(500, 700);
+        FlameThrower unit6 = new FlameThrower();
+        unit6.Position = new Vector2(700, 700);
+        WoodCutter unit7 = new WoodCutter();
+        unit7.Position = new Vector2(900, 700);
+        WoodCutter unit8 = new WoodCutter();
+        unit8.Position = new Vector2(1100, 700);
+        GameData.Units.Add(unit8);
+        GameData.Units.Add(unit7);
+        GameData.Units.Add(unit6);
+        GameData.Units.Add(unit5);
         GameData.Units.Add(unit4);
         GameData.Units.Add(unit3);
         GameData.Units.Add(unit2);

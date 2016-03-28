@@ -16,6 +16,8 @@ class Unit : SpriteGameObject
     protected bool inDiscoveredArea;
     protected Point mousePoint;
     protected string actionString;
+    public string name;
+    protected bool pacifist, frozen;
 
 
     public Unit TargetUnit
@@ -33,6 +35,13 @@ class Unit : SpriteGameObject
     {
         get { return targetPosition; }
         set { targetPosition = value; }
+    }
+
+
+    public bool Frozen
+    {
+        get { return frozen; }
+        set { frozen = value; }
     }
 
     public float AttackSpeed
@@ -62,6 +71,12 @@ class Unit : SpriteGameObject
         get { return health; }
         set { health = value; }
     }
+
+    public Player.Faction Faction
+    {
+        get { return faction; }
+        set { faction = value; }
+    }
     public Unit(string assetName="",string id = "") : base(assetName,0, id,4)
     {
         actionString = null;
@@ -88,21 +103,23 @@ class Unit : SpriteGameObject
         }
         if (BoundingBox.Contains(mousePoint))
         {
-            if (ih.LeftButtonPressed())
+            if (ih.LeftButtonPressed() && faction == GameData.player.GetFaction && GameData.Cursor.ClickedUnit == null)
             {
                 selected = true;
+                GameData.Cursor.ClickedUnit = this;
             }
         }
-        else if (!this.BoundingBox.Contains(mousePoint))
+        else if (!this.BoundingBox.Contains(mousePoint) && GameData.Cursor.ClickedUnit == this)
         {
             if (ih.LeftButtonPressed())
             {
                 selected = false;
+                GameData.Cursor.ClickedUnit = null;
                 //action = null
                 
             }
         }
-        if (selected)
+        if (GameData.Cursor.ClickedUnit == this)
         {
             if (ih.RightButtonPressed())
             {
@@ -120,23 +137,26 @@ class Unit : SpriteGameObject
             Point p = new Point((int)this.Position.X, (int)this.Position.Y);
             if (GameData.LevelGrid.GetTile(p) != null)
             {
-                if (GameData.LevelGrid.GetTile(p).Discovered)
+                if (GameData.LevelGrid.GetTile(p).Discovered && !GameData.LevelGrid.GetTile(p).IsDark)
                     InDiscoveredArea = true;
                 else InDiscoveredArea = false;
             }
         }
-        attackTimer.Update(gameTime);
-        if (targetUnit != null)
+        if (!frozen && Faction == Player.Faction.humanity)
         {
-            MoveToUnit();
-        }
+            attackTimer.Update(gameTime);
+            if (targetUnit != null)
+            {
+                MoveToUnit();
+            }
 
 
-        else if (targetPosition != Vector2.Zero)
-        {
-            MoveToTile();
+            else if (targetPosition != Vector2.Zero)
+            {
+                MoveToTile();
+            }
+            base.Update(gameTime);
         }
-        base.Update(gameTime);
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
     }
@@ -241,33 +261,43 @@ class Unit : SpriteGameObject
         }
 
     }
-    protected void Attack()
+    public virtual void Attack()
     {
         if(targetUnit != null)
         {
-            targetUnit.DealDamage(this.Damage, this);
             if (targetUnit.Health <= 0)
+            {
                 targetUnit = null;
+                return;
+            }  
+            targetUnit.DealDamage(this.Damage, this);
         }
 
-        else
+        else 
         {
-            targetBuilding.DealDamage(this.Damage);
             if (targetBuilding.Health <= 0)
+            {
                 targetBuilding = null;
+                return;
+            } 
+            targetBuilding.DealDamage(this.Damage, this);
         }
         
         attackTimer.Reset();
     }
 
-    public void DealDamage(float amount,GameObject attacker)
+    public void DealDamage(float amount, GameObject attacker)
     {
         this.Health -= amount;
         if (Health <= 0)
         {
+            if(attacker is Unit)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Unit).name, false, false);
+            if(attacker is Spell)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Spell).name, false, true);
             Die();
         }
-        if(targetUnit== null)
+        if(targetUnit== null && pacifist != true)
         {
             if(attacker is Unit)
             {
@@ -283,16 +313,19 @@ class Unit : SpriteGameObject
     }
     public void UpdateDiscoveredArea()
     {
-        foreach(Tile t in GameData.LevelGrid.Objects)
-        {
-            if (!t.Discovered)
+        if(faction == GameData.player.GetFaction)
+            foreach(Tile t in GameData.LevelGrid.Objects)
             {
                 Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
                 double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
                 if (absDistance < 300)
+                {
                     t.Discovered = true;
+                    t.IsDark = false;
+                }
+
+                
             }
-        }
     }
     protected virtual void ClickOnEmptyTileAction()
     {
@@ -304,6 +337,7 @@ class Unit : SpriteGameObject
         {
             targetPosition = GameData.selectedTile.Position;
         }
+        targetBuilding = null;
     }
     protected virtual void ArrivedAtBuildingAction()
     {
@@ -321,35 +355,43 @@ class Unit : SpriteGameObject
     protected virtual void RightClickAction()
     {
         actionString = "$unit:"+this.ID;
-        for (int i = 0; i < GameData.Units.Objects.Count; i++)
+        if (!pacifist)
         {
-            if (GameData.Units.Objects[i] is Unit)
+            for (int i = 0; i < GameData.Units.Objects.Count; i++)
             {
-                Unit unit = GameData.Units.Objects[i] as Unit;
-                if (unit.BoundingBox.Contains(mousePoint) && unit != this)
+                if (GameData.Units.Objects[i] is Unit)
                 {
+                    Unit unit = GameData.Units.Objects[i] as Unit;
+                    if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
+                    {
                     actionString += "$targ:" + unit.ID;
-                    targetUnit = unit;
-                    break;
+                        targetUnit = unit;
+                        break;
+                    }
+                    else targetUnit = null;
                 }
-                else targetUnit = null;
+            }
+
+            if (targetUnit == null)
+            {
+                if (GameData.Cursor.CurrentTile is Building)
+                {
+                    targetUnit = null;
+                    targetBuilding = (Building)GameData.Cursor.CurrentTile;
+                    targetPosition = GameData.Cursor.CurrentTile.Position;
+                actionString += "$buil:" + targetBuilding.ID;
+                }
+                else
+                {
+                    ClickOnEmptyTileAction();
+               actionString += "$move:" + GameData.selectedTile.Position.X + "," + GameData.selectedTile.Position.Y;
+                }
             }
         }
-
-        if (targetUnit == null)
+        else
         {
-            if (GameData.Cursor.CurrentTile is Building)
-            {
-                targetUnit = null;
-                targetBuilding = (Building)GameData.Cursor.CurrentTile;
-                targetPosition = GameData.Cursor.CurrentTile.Position;
-                actionString += "$buil:" + targetBuilding.ID;
-            }
-            else
-            {
-               ClickOnEmptyTileAction();
-               actionString += "$move:" + GameData.selectedTile.Position.X + "," + GameData.selectedTile.Position.Y;
-            }
+            ClickOnEmptyTileAction();
+            actionString += "move:" + GameData.selectedTile.Position.ToString();
         }
     }
 

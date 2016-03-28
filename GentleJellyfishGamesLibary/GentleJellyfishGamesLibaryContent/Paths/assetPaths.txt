@@ -16,6 +16,11 @@ hexagonTile-Tilesets/HexagonTile
 selectedTile-Tilesets/SelectedTile
 humanityBarracks-Tilesets/HumanityBarracks
 #
+#Buttons:
+backButton-Buttons/BackButton
+humanityButton-Buttons/HumanityButton
+natureButton-Buttons/NatureButton
+#
 #GUI:
 button-GUI/Button
 scroll-GUI/Scroll

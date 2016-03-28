@@ -10,6 +10,14 @@ class Building : Tile
 {
     protected float health, maxHealth;
     protected HealthBar healthBar;
+    protected Player.Faction faction;
+    public string name;
+
+    public Player.Faction Faction
+    {
+        get { return faction; }
+        set { faction = value; }
+    }
 
     public float Health
     {
@@ -29,21 +37,22 @@ class Building : Tile
         maxHealth = 1;
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
     }
-    public override void LeftButtonAction()
-    {
-        base.LeftButtonAction();
-    }
+
     protected void RemoveMenu()
     {
         TileMenu menu = GameData.LevelObjects.Find("menu") as TileMenu;
         if (menu != null)
             GameData.LevelObjects.Remove(menu);
     }
-    public virtual void DealDamage(float amount)
+    public virtual void DealDamage(float amount, GameObject attacker)
     {
         this.Health -= amount;
         if (this.Health <= 0)
         {
+            if(attacker is Unit)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Unit).name, this.name, true, false);
+            if(attacker is Spell)
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Spell).name, this.name, true, true);
             Destroy();
         }
     }
@@ -53,17 +62,21 @@ class Building : Tile
         GameData.LevelGrid.replaceTile(this, new Tile());
     }
 
+    public virtual void HasBeenBuiltAction()
+    {
+
+    }
+
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
+        if(!IsDark)
         healthBar.Draw(gameTime, spriteBatch);
         position -= new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
         base.Draw(gameTime, spriteBatch);
         position += new Vector2(0, sprite.Height / 2 - new Tile().Sprite.Height / 2);
     }
-    public virtual void HasBeenBuiltAction()
-    {
 
-    }
 }

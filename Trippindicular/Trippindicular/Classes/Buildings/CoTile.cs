@@ -9,17 +9,21 @@ class CoTile : Building
 {
     public Building mainTile;
 
-    public CoTile() : base("coTile", "selectedTile")
+    public CoTile() : base("coTile", "hexagonTile")
     {
-
+        healthBar.Visible = false;
     }
 
-    public override void DealDamage(float amount)
+    public override void HandleInput(InputHelper ih)
     {
-        mainTile.DealDamage(amount);
+        if (GameData.Cursor.CurrentTile == this && ih.LeftButtonPressed() && GameData.Cursor.HasClickedTile)
+        {
+            mainTile.LeftButtonAction();
+        }
     }
 
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public override void DealDamage(float amount, GameObject attacker)
     {
+        mainTile.DealDamage(amount, attacker);
     }
 }

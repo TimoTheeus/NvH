@@ -8,11 +8,15 @@ using Microsoft.Xna.Framework;
 class HumanityWorker : Unit
 {
 
-    public HumanityWorker(string assetName="") : base(assetName, "")
+    public HumanityWorker() : base("selectedTile", "")
     {
         this.Damage = 0;
         Range = 0;
+        Faction = Player.Faction.humanity;
+        name = "HUMAN BUILDER";
+        pacifist = true;
     }
+
     protected override void RightClickAction()
     {
         Point p = new Point((int)this.Position.X + 20, (int)this.Position.Y + 20);

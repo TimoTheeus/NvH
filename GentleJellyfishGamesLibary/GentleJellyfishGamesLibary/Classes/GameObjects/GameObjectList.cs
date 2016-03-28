@@ -14,6 +14,7 @@ public class GameObjectList : GameObject
     public List<GameObject> Objects
     {
         get { return gameObjects; }
+        set { gameObjects = value; }
     }
 
     public GameObjectList(int layer = 0, string id = "") : base(id, layer)
