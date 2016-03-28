@@ -51,21 +51,23 @@ class Cursor : SpriteGameObject
             hasClickedTile = true;
         }
 
-        if (inputHelper.IsKeyDown(Keys.Right) || inputHelper.MousePosition.X > GameSettings.GameWidth - borderWidth)
+        bool mouseEnabled = false;
+
+        if (inputHelper.IsKeyDown(Keys.Right) || (mouseEnabled && inputHelper.MousePosition.X > GameSettings.GameWidth - borderWidth))
         {
             GameWorld.Camera.Move(new Vector2(15, 0));
 
         }
-        else if (inputHelper.IsKeyDown(Keys.Left) || inputHelper.MousePosition.X < borderWidth)
+        else if (inputHelper.IsKeyDown(Keys.Left) || (mouseEnabled && inputHelper.MousePosition.X < borderWidth))
         {
             GameWorld.Camera.Move(new Vector2(-15, 0));
 
         }
-        else if (inputHelper.IsKeyDown(Keys.Up) || inputHelper.MousePosition.Y < borderWidth)
+        else if (inputHelper.IsKeyDown(Keys.Up) || (mouseEnabled && inputHelper.MousePosition.Y < borderWidth))
         {
             GameWorld.Camera.Move(new Vector2(0, -15));
         }
-        else if (inputHelper.IsKeyDown(Keys.Down) || inputHelper.MousePosition.Y > GameSettings.GameHeight - borderWidth)
+        else if (inputHelper.IsKeyDown(Keys.Down) || (mouseEnabled && inputHelper.MousePosition.Y > GameSettings.GameHeight - borderWidth))
         {
             GameWorld.Camera.Move(new Vector2(0, 15));
         }
