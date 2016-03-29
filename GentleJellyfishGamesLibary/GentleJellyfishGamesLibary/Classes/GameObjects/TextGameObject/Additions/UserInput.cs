@@ -3,7 +3,7 @@
 //Class used to draw a string that the user typed himself.
 public class UserInput : TextGameObject
 {
-    const int maxSize = 16;
+    const int maxSize = 100;
     protected InputHelper ihTemp;
     public bool Locked = false;
     public bool AutoReset = false;
@@ -11,6 +11,7 @@ public class UserInput : TextGameObject
     public UserInput() :base("font")
     {
         text = "";
+        ihTemp = new InputHelper();
     }
 
     //Get the keypresses and make a string from them in the inputhandler, then draw it on screen by putting it in this object.

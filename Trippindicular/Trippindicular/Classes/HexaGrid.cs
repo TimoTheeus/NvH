@@ -6,6 +6,7 @@ class HexaGrid : GameObjectGrid
     public bool startLeft;
     public int offsetX, offsetY;
     Tile hexagonTile;
+    private string actionString;
 
     public HexaGrid(int columns, int rows, int cellWidth, int cellHeight, bool startLeft = true, string id = "") : base(columns, rows, cellWidth, cellHeight, id)
     {
@@ -183,8 +184,12 @@ class HexaGrid : GameObjectGrid
 
     }
 
-    public void replaceTile(Tile search, Tile replace)
+    public void replaceTile(Tile search, Tile replace, bool sendMessage)
     {
+        if (sendMessage)
+        {
+            this.actionString = "$bdng:" + replace.ID + "$type:" + replace.GetType() + "$posi:" + search.gridPosition.X + "," + search.gridPosition.Y + "$fnsh";
+        }
         for (int i = 0; i < grid.GetLength(0); i++)
         {
             for (int j = 0; j < grid.GetLength(1); j++)
@@ -242,5 +247,15 @@ class HexaGrid : GameObjectGrid
     public int GetHeight()
     {
         return (int)((rows + 1) * cellHeight * .5);
+    }
+
+    public override string getActionOutput()
+    {
+        string s = this.actionString;
+        if (this.actionString != null)
+        {
+            this.actionString = null;
+        }
+        return s;
     }
 }

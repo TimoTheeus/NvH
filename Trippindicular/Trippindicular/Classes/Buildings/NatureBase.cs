@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 class NatureBase : PolyTileBuilding
 {
-    public NatureBase() : base("natureBase", "selectedTile")
+    public NatureBase() : base("natureBase", "natureBase")
     {
         this.health = 1;
         Faction = Player.Faction.nature;
@@ -15,13 +15,7 @@ class NatureBase : PolyTileBuilding
         level = 1;
         maxLevel = 3;
     }
-    public override void HandleInput(InputHelper ih)
-    {
-        base.HandleInput(ih);
-        if (ih.KeyPressed(Keys.K)){
-            DealDamage(50, this);
-        }
-    }
+
     public override void Destroy()
     {
         base.Destroy();

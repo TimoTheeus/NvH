@@ -86,13 +86,13 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Melee1(Player.Faction.nature, "selectedTile", "unit");
+                unit = new Melee1(Player.Faction.nature, "natureWolf", "unit");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             else
             {
-                unit = new WoodCutter();
+                unit = new Melee1(Player.Faction.humanity, "flamethrower","flamethrowerUnit");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
@@ -107,13 +107,13 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Unicorn("selectedTile", "unicorn");
+                unit = new Unicorn("unicorn", "unicorn");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             else
             {
-                unit = new FlameThrower("selectedTile", "unit");
+                unit = new Unicorn("selectedTile", "unit");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }

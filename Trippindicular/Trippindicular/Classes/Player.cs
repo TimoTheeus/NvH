@@ -14,6 +14,7 @@ class Player : GameObject
     protected TextGameObject mainResource;
     protected TextGameObject secondaryResource;
     protected Timer updateDiscoveredAreaTimer;
+    protected Timer updateDiscoveredAreaTimerBuildings;
     protected EventLog eventLog;
 
     public Faction GetFaction
@@ -73,12 +74,14 @@ class Player : GameObject
         hud.hud.Add(secondaryResource);
         hud.hud.Add(eventLog);
         updateDiscoveredAreaTimer = new Timer((1 / 6));
+        updateDiscoveredAreaTimerBuildings = new Timer((1/61));
     }
     public override void Update(GameTime gameTime)
     {
         mainResource.Text = this.MainResource.ToString();
         secondaryResource.Text = this.SecondaryResource.ToString();
         updateDiscoveredAreaTimer.Update(gameTime);
+        updateDiscoveredAreaTimerBuildings.Update(gameTime);
         if (updateDiscoveredAreaTimer.Ended)
         {
             foreach (Tile t in GameData.LevelGrid.Objects)
@@ -92,7 +95,23 @@ class Player : GameObject
                     u.UpdateDiscoveredArea();
                 }
             }
+            updateDiscoveredAreaTimer.Reset();
+
         }
+        if (updateDiscoveredAreaTimerBuildings.Ended)
+         {
+             for (int i = 0; i < GameData.Buildings.Objects.Count; i++)
+             {
+                 if (GameData.Buildings.Objects[i] != null && (GameData.Buildings.Objects[i] as Building).Faction == faction)
+                 {
+                     Building b = GameData.Buildings.Objects[i] as Building;
+                     b.UpdateDiscoveredArea();
+                 }
+             }
+            updateDiscoveredAreaTimerBuildings.Reset();
+
+    }
+        
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {

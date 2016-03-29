@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class HumanityBarrack : PolyTileBuilding
 {
 
-    public HumanityBarrack() : base("humanityBarrack","humanityBarracks")
+    public HumanityBarrack() : base("humanityBarrack", "humanityBarracks")
     {
         this.maxHealth = 100;
         this.health = 100;

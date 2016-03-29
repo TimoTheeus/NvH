@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class SunlightTree:Building
 {
     ResourceController resController;
-    public SunlightTree() : base("sunlightTree","selectedTile")
+    public SunlightTree() : base("sunlightTree", "natureLightTree")
     {
         Faction = Player.Faction.nature;
     }
@@ -21,6 +21,7 @@ class SunlightTree:Building
     }
     public override void HasBeenBuiltAction()
     {
+        base.HasBeenBuiltAction();
         resController = new ResourceController(1, 50, 0);
         GameData.LevelObjects.Add(resController);
     }

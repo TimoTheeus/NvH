@@ -18,18 +18,18 @@ class FactionMenuState : GameObjectList
         this.Add(background);
 
         humanityButton = new Button("humanityButton", "buttonFont", "font", 0, "Humanity", 0);
-        humanityButton.Position = new Vector2(GameWorld.Screen.X / 2 - humanityButton.Width / 2 - 50, GameWorld.Screen.Y / 2);
+        humanityButton.Position = new Vector2(300, 150);
         this.Add(humanityButton);
 
         natureButton = new Button("natureButton", "buttonFont", "font", 0, "Nature", 0);
-        natureButton.Position = new Vector2(GameWorld.Screen.X / 2 + natureButton.Width / 2 + 50, GameWorld.Screen.Y / 2);
+        natureButton.Position = new Vector2(700, 150);
         this.Add(natureButton);
 
         backButton = new Button("backButton", "buttonFont", "font", 0, "Back", 0);
         backButton.Position = new Vector2(GameWorld.Screen.X / 2 - humanityButton.Width / 2 - 100, GameWorld.Screen.Y / 2 + humanityButton.Height / 2 + 100);
         this.Add(backButton);
 
-        startButton = new Button("backButton", "buttonFont", "font", 0, "Start", 0);
+        startButton = new Button("startButton", "buttonFont", "font", 0, "Start", 0);
         startButton.Position = new Vector2(GameWorld.Screen.X / 2, GameWorld.Screen.Y / 2 + humanityButton.Height / 2 + 100);
     }
 

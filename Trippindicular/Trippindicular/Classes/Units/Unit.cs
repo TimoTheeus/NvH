@@ -290,10 +290,13 @@ class Unit : SpriteGameObject
         {
             if (targetBuilding.Health <= 0)
             {
+                this.actionString = "$bdng:" + targetBuilding.ID + "$damg:" + this.damage + "," + this.ID;
                 targetBuilding = null;
                 return;
             } 
             targetBuilding.DealDamage(this.Damage, this);
+
+            this.actionString = "$bdng:" + targetBuilding.ID + "$damg:" + this.damage + "," + this.ID;
         }
         
         attackTimer.Reset();
@@ -412,7 +415,7 @@ class Unit : SpriteGameObject
 
             if (targetUnit == null)
             {
-                if (GameData.Cursor.CurrentTile is Building)
+                if (GameData.Cursor.CurrentTile is Building&& (GameData.Cursor.CurrentTile as Building).Faction!=this.faction)
                 {
                     targetUnit = null;
                     if (((Building)GameData.Cursor.CurrentTile).Faction != GameData.player.GetFaction)
@@ -421,6 +424,7 @@ class Unit : SpriteGameObject
                         actionString += "$build:" + targetBuilding.ID;
                     }
                     targetPosition = GameData.Cursor.CurrentTile.Position;
+                    actionString += "$tgbd:" + targetBuilding.ID + "$move:" + targetPosition.X +","+ targetPosition.Y;
                 }
                 else
                 {
