@@ -76,7 +76,16 @@ static class GameData
                     GameData.LevelGrid.Add(t, i, j);
                 }
             }
-                    
+        HumanityBase hBase = new HumanityBase();
+        hBase.gridPosition = new Point(2, 11);
+        hBase.Position = GameData.LevelGrid.Objects[2, 11].Position;
+        GameData.LevelGrid.Objects[2, 11] = hBase;
+        GameData.Buildings.Add(hBase);
+        NatureBase nBase = new NatureBase();
+        nBase.gridPosition = new Point(GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11);
+        nBase.Position = GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11].Position;
+        GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11] = nBase;
+        GameData.Buildings.Add(nBase);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
         GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X - (int)(0.5*GameWorld.Screen.X), -(int)tile.Sprite.Center.Y - 
