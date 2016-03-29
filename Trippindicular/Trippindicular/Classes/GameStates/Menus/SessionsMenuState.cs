@@ -8,9 +8,10 @@ namespace Trippindicular.Classes
     class SessionsMenuState : GameObjectList
     {
 
-        protected Button joinGame, options, exitGame, sessions;
-        protected SpriteGameObject background;
+        protected Button joinGame, options, exitGame, sessions,thisisjustfortextdisplay;
+        protected SpriteGameObject background,nameBar;
         protected PlayingState playingState;
+        protected UserInput input;
 
 
         public SessionsMenuState()
@@ -38,7 +39,21 @@ namespace Trippindicular.Classes
             exitGame.Position = new Vector2(300, 410);
             this.Add(exitGame);
 
-            
+            //nameBar
+            nameBar = new SpriteGameObject("nameBar");
+            nameBar.Position= new Vector2(100, 540);
+            this.Add(nameBar);
+            //UseInput
+            input = new UserInput();
+            input.Position = new Vector2(150, 560);
+            this.Add(input);
+            //Text cuz textgameobject didnt work for some reason
+            thisisjustfortextdisplay = new Button("sliderBack", "buttonFont", "font", 0, "Insert Opponent's IP down below", 1);
+            thisisjustfortextdisplay.Position = new Vector2(300, 510);
+            this.Add(thisisjustfortextdisplay);
+
+
+
         }
 
 
@@ -53,8 +68,9 @@ namespace Trippindicular.Classes
             base.HandleInput(inputHelper);
 
             //Buttons
-            if (joinGame.Pressed)
+            if (joinGame.Pressed&&input!= null)
             {
+                //Do something with input.Text
                 playingState.Initialize(GameData.Host);
                 GameWorld.GameStateManager.SwitchTo("hud");
             }

@@ -41,6 +41,7 @@ mediumButton-GUI/MediumButton
 smallButton-GUI/SmallButton
 menuBackground-GUI/MenuBackground
 disabledButton-GUI/disabledButton
+nameBar-GUI/nameBar
 #
 #Font:
 buttonFont-Fonts/ButtonFont
