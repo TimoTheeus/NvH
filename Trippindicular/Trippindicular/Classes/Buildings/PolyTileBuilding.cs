@@ -20,7 +20,8 @@ class PolyTileBuilding : Building
         newTile.mainTile = this;
         newTile.Position = new Vector2(Position.X, Position.Y - GameData.LevelGrid.offsetY * 2);
         newTile.gridPosition = new Point(gridPosition.X, gridPosition.Y - 2);
-        GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+       // GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+        GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y], newTile);
         coTiles.Add(newTile);
 
         if ((GameData.LevelGrid.startLeft && gridPosition.Y % 2 == 0) || (!GameData.LevelGrid.startLeft && gridPosition.Y % 2 == 1))
@@ -29,14 +30,16 @@ class PolyTileBuilding : Building
             newTile.mainTile = this;
             newTile.Position = new Vector2(Position.X - GameData.LevelGrid.offsetX, Position.Y - GameData.LevelGrid.offsetY);
             newTile.gridPosition = new Point(gridPosition.X, gridPosition.Y - 1);
-            GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+           // GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+            GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y], newTile);
             coTiles.Add(newTile);
 
             newTile = new CoTile();
             newTile.mainTile = this;
             newTile.Position = new Vector2(Position.X + GameData.LevelGrid.offsetX, Position.Y - GameData.LevelGrid.offsetY);
             newTile.gridPosition = new Point(gridPosition.X + 1, gridPosition.Y - 1);
-            GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+           // GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+            GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y], newTile);
             coTiles.Add(newTile);
         }
 
@@ -46,30 +49,34 @@ class PolyTileBuilding : Building
             newTile.mainTile = this;
             newTile.Position = new Vector2(Position.X - GameData.LevelGrid.offsetX, Position.Y - GameData.LevelGrid.offsetY);
             newTile.gridPosition = new Point(gridPosition.X - 1, gridPosition.Y - 1);
-            GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+           // GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+            GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y], newTile);
             coTiles.Add(newTile);
 
             newTile = new CoTile();
             newTile.mainTile = this;
             newTile.Position = new Vector2(Position.X + GameData.LevelGrid.offsetX, Position.Y - GameData.LevelGrid.offsetY);
             newTile.gridPosition = new Point(gridPosition.X, gridPosition.Y - 1);
-            GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+           // GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y] = newTile;
+            GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[newTile.gridPosition.X, newTile.gridPosition.Y], newTile);
             coTiles.Add(newTile);
         }
     }
 
     public override void Destroy()
     {
-        foreach (CoTile tile in coTiles)
-            tile.Destroy();
+        foreach(CoTile t in coTiles)
+        {
+            t.Destroy();
+        }
         base.Destroy();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        foreach(CoTile coTile in coTiles)
+        foreach (CoTile t in coTiles)
         {
-            coTile.Draw(gameTime, spriteBatch);
+        //    t.Draw(gameTime,spriteBatch);
         }
         base.Draw(gameTime, spriteBatch);
     }

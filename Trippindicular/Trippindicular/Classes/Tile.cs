@@ -34,7 +34,7 @@ class Tile : SpriteGameObject
         set { isDark = value; }
     }
 
-    public Tile(string assetName="hexagonTile", string id="tile") : base(assetName, 0, id, 1)
+    public Tile(string assetName="hexagonTile", string id="tile",int layer=1) : base(assetName, 0, id, layer)
     {
         this.Origin = this.sprite.Center;
         buildTimers = new List<Timer>();
@@ -72,6 +72,7 @@ class Tile : SpriteGameObject
                         {
                             GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Building);
                             Building b = objectsToBuild[i] as Building;
+                            GameData.Buildings.Add(b);
                             b.HasBeenBuiltAction();
                         }
                         buildTimers.Remove(buildTimers[i]);

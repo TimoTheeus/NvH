@@ -12,6 +12,7 @@ static class GameData
     //This is the list with all the objects of the current level in it.
     static public GameObjectList LevelObjects;
     static public GameObjectList Units;
+    static public GameObjectList Buildings;
     static public HexaGrid LevelGrid;
     static public SpriteGameObject selectedTile;
     static public Cursor Cursor;
@@ -43,6 +44,8 @@ static class GameData
     static public void Initialize()
     {
         LevelObjects = new GameObjectList();
+        Buildings = new GameObjectList(4);
+        GameData.LevelObjects.Add(Buildings);
         Units = new GameObjectList(4);
         LevelObjects.Add(Units);
         Cursor = new Cursor();

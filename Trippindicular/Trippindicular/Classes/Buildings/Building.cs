@@ -60,6 +60,7 @@ class Building : Tile
     public virtual void Destroy()
     {
         GameData.LevelGrid.replaceTile(this, new Tile());
+        GameData.Buildings.Remove(this);
     }
 
     public virtual void HasBeenBuiltAction()

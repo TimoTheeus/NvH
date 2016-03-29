@@ -16,7 +16,7 @@ class NatureWorker : Unit
     }
     protected override void RightClickAction()
     {
-        Point p = new Point((int)this.Position.X + 20, (int)this.Position.Y + 20);
+        Point p = new Point((int)this.Position.X + 30, (int)this.Position.Y + 30);
         GameData.LevelGrid.GetTile(p).IsBeingBuilt = false;
         base.RightClickAction();
         //return "unit:" + this.id + ":move:" + p.X + "," + p.Y;
@@ -25,7 +25,7 @@ class NatureWorker : Unit
     protected override void ArrivedAtTileAction()
     {
         base.ArrivedAtTileAction();
-        Point p = new Point((int)this.Position.X + 20, (int)this.Position.Y + 20);
+        Point p = new Point((int)this.Position.X + 30, (int)this.Position.Y + 30);
         GameData.LevelGrid.GetTile(p).IsBeingBuilt = true;
     }
 
