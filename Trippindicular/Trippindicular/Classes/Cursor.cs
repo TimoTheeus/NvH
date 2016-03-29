@@ -12,6 +12,7 @@ class Cursor : SpriteGameObject
     protected Unit clickedUnit;
     protected Tile currentTile;
     protected Tile tileForOrigin;
+    protected Spell spell;
     protected const int borderWidth = 100;
 
     public bool HasClickedTile
@@ -25,6 +26,13 @@ class Cursor : SpriteGameObject
         get { return clickedUnit; }
         set { clickedUnit = value; }
     }
+
+    public Spell Spell
+    {
+        get { return spell; }
+        set { spell = value; }
+    }
+
     public Tile CurrentTile
     {
         get { return currentTile; }
@@ -56,6 +64,16 @@ class Cursor : SpriteGameObject
         if (inputHelper.LeftButtonPressed() && currentTile != null && !hasClickedTile && !HoveringOverUnit(inputHelper))
         {
             hasClickedTile = true;
+        }
+
+        if (spell != null)
+        {
+            if (inputHelper.RightButtonPressed())
+            {
+                spell.Position = GameWorld.Camera._pos + GameData.Cursor.Position;
+                GameData.LevelObjects.Add(spell);
+                Spell = null;
+            }
         }
 
         bool mouseEnabled = false;

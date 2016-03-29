@@ -89,6 +89,7 @@
     <Compile Include="Classes\Buildings\Mine.cs" />
     <Compile Include="Classes\Buildings\NatureBarracks.cs" />
     <Compile Include="Classes\Buildings\NatureBase.cs" />
+    <Compile Include="Classes\Buildings\NatureBaseMenu.cs" />
     <Compile Include="Classes\Buildings\PolyTileBuilding.cs" />
     <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\DropDown.cs" />

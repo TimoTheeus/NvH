@@ -25,6 +25,12 @@ class NatureBase : PolyTileBuilding
         base.Destroy();
         GameWorld.GameStateManager.SwitchTo("finish");
     }
+
+    public override void LeftButtonAction()
+    {
+        GameData.LevelObjects.Add(new NatureBaseMenu(this));
+        GameData.Cursor.HasClickedTile = false;
+    }
     
 }
 

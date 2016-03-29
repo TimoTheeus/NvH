@@ -57,7 +57,6 @@ class Unicorn : Unit
                             //knockback+stun+dmg unit+decrease speed a little
                             slowed = true;
                             Speed = 180;
-                            u.Freeze(stunTime);
                             u.DealDamage(this.Damage*2, this);
                         }
                     }
