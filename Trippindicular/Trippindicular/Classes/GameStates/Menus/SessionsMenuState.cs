@@ -8,7 +8,7 @@ namespace Trippindicular.Classes
     class SessionsMenuState : GameObjectList
     {
 
-        protected Button createSession, options, exitGame, sessions;
+        protected Button joinGame, options, exitGame, sessions;
         protected SpriteGameObject background;
         protected PlayingState playingState;
 
@@ -24,9 +24,9 @@ namespace Trippindicular.Classes
 
             //Make buttons
             //New Game
-            createSession = new Button("button", "buttonFont", "font", 0, "Create session", 0);
-            createSession.Position = new Vector2(300, 150);
-            this.Add(createSession);
+            joinGame = new Button("button", "buttonFont", "font", 0, "Join Game", 0);
+            joinGame.Position = new Vector2(300, 150);
+            this.Add(joinGame);
 
             //Options
             options = new Button("button", "buttonFont", "font", 0, "Options", 0);
@@ -53,9 +53,10 @@ namespace Trippindicular.Classes
             base.HandleInput(inputHelper);
 
             //Buttons
-            if (createSession.Pressed)
+            if (joinGame.Pressed)
             {
-                //
+                playingState.Initialize(GameData.Host);
+                GameWorld.GameStateManager.SwitchTo("hud");
             }
             else if (options.Pressed)
             {

@@ -142,11 +142,23 @@ class PlayingState : IGameLoopObject
     {
         string[] pairs = msg.Split('$');
         List<Point> trees = new List<Point>();
+        Player player = null; ;
         for (int i = 2; i < pairs.Length; i++)
         {
             string tag = pairs[i].Substring(0, 5);
             switch (tag)
             {
+                case "factn":
+                    switch (pairs[i].Substring(6, pairs[i].Length - 6))
+                    {
+                        case "nature":
+                            player = new Player(Player.Faction.humanity);
+                            break;
+                        case "humanity":
+                            player = new Player(Player.Faction.nature);
+                            break;
+                    }
+                    break;
                 case "trees":
                     string[] coords = pairs[i].Substring(6, pairs[i].Length - 6).Split('|');
                     foreach (string p in coords)
@@ -164,7 +176,7 @@ class PlayingState : IGameLoopObject
         }
 
         //Initialize gamedata
-        GameData.ClientInitialize(trees);
+        GameData.ClientInitialize(trees, player);
         this.initialized = true;
     }
 

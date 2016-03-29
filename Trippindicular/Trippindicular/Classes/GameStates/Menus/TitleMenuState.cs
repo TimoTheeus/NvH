@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.GamerServices;
 //Main menu, access to all sub-menus
 class TitleMenuState : GameObjectList
 {
-    protected Button newGame,humanityGame, options, exitGame, sessions;
+    protected Button hostGame,joinGame, options, exitGame, sessions;
     protected SpriteGameObject background;
     protected PlayingState playingState;
     PacketReader packetReader = new PacketReader();
@@ -17,8 +17,7 @@ class TitleMenuState : GameObjectList
     public TitleMenuState()
     {
         GameData.Host = true;
-        //Initialize playingState
-        playingState = GameWorld.GameStateManager.GetGameState("playing") as PlayingState;
+
 
         //Background
         background = new SpriteGameObject("menuBackground");
@@ -26,13 +25,13 @@ class TitleMenuState : GameObjectList
 
         //Make buttons
                 //New Game
-                newGame = new Button("button", "buttonFont", "font", 0, "Nature", 0);
-                newGame.Position = new Vector2(300, 150);
-                this.Add(newGame);
+                hostGame = new Button("button", "buttonFont", "font", 0, "Host game", 0);
+                hostGame.Position = new Vector2(300, 150);
+                this.Add(hostGame);
                 //New Game
-                humanityGame = new Button("button", "buttonFont", "font", 0, "Humanity", 0);
-                humanityGame.Position = new Vector2(700, 150);
-                this.Add(humanityGame);
+                joinGame = new Button("button", "buttonFont", "font", 0, "Join game", 0);
+                joinGame.Position = new Vector2(700, 150);
+                this.Add(joinGame);
 
 
 
@@ -41,19 +40,13 @@ class TitleMenuState : GameObjectList
                 options.Position = new Vector2(300, 280);
                 this.Add(options);
 
-                //Options
-                sessions = new Button("button", "buttonFont", "font", 0, "Sessions", 0);
-                sessions.Position = new Vector2(300, 410);
-                this.Add(sessions);
+
 
                 //Exit Game
                 exitGame = new Button("button", "buttonFont", "font", 0, "Exit Game", 0);
                 exitGame.Position = new Vector2(300, 540);
                 this.Add(exitGame);
 
-                createGame = new Button("button", "buttonFont", "font", 0, "Create Game", 0);
-                createGame.Position = new Vector2(300, 670);
-                this.Add(createGame);
     }
 
     public override void Reset()
@@ -68,20 +61,18 @@ class TitleMenuState : GameObjectList
 
         if (inputHelper.KeyPressed(Keys.Home))
         {
-            GameData.Host = false;
+           
         }
         //Buttons
-        if (newGame.Pressed)
+        if (hostGame.Pressed)
         {
-            GameData.player = new Player(Player.Faction.nature);
-            playingState.Initialize(GameData.Host);
-            GameWorld.GameStateManager.SwitchTo("hud");
+
+            GameWorld.GameStateManager.SwitchTo("hostLobby");
         }
-        else if (humanityGame.Pressed)
+        else if (joinGame.Pressed)
         {
-            GameData.player = new Player(Player.Faction.humanity);
-            playingState.Initialize(GameData.Host);
-            GameWorld.GameStateManager.SwitchTo("hud");
+            GameData.Host = false;
+            GameWorld.GameStateManager.SwitchTo("sessionsMenu");
         }
         else if (options.Pressed)
         {
@@ -91,14 +82,6 @@ class TitleMenuState : GameObjectList
         else if (exitGame.Pressed)
         {
             GameWorld.Exited = true;
-        }
-        else if (sessions.Pressed)
-        {
-            GameWorld.GameStateManager.SwitchTo("sessionsMenu");
-        }
-        else if (createGame.Pressed)
-        {
-            GameWorld.GameStateManager.SwitchTo("hostLobby");
         }
     }
 }

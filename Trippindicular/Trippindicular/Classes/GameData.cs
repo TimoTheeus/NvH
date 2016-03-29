@@ -33,6 +33,7 @@ static class GameData
     static public void Update(GameTime gameTime)
     {
         LevelObjects.Update(gameTime);
+        Console.WriteLine(GameWorld.Camera.Pos.ToString());
     }
 
     //This is where the objects in the game (LevelObjects) are drawn.
@@ -41,10 +42,10 @@ static class GameData
         LevelObjects.Draw(gameTime, spriteBatch);
     }
 
-    static public void ClientInitialize(List<Point> trees)
+    static public void ClientInitialize(List<Point> trees, Player plyr)
     {
         Tile tile = new Tile();
-
+        GameData.Player = plyr;
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
@@ -94,7 +95,18 @@ static class GameData
 
         GameWorld.Camera.Bounds = new Rectangle(0 - (int)tile.Sprite.Center.X - (int)(0.5 * GameWorld.Screen.X), -(int)tile.Sprite.Center.Y -
             (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
-        GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+        if (plyr.GetFaction == Player.Faction.humanity)
+        {
+            GameWorld.Camera.Pos = new Vector2(0, 0);
+        }
+        else
+        {
+            //GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+            int y = GameData.LevelGrid.GetHeight();
+            int x = GameData.LevelGrid.GetWidth();
+            GameWorld.Camera.Pos = new Vector2(3380, 85);
+
+        }
 
         selectedTile = new SpriteGameObject("selectedTile", 0, "selectedTile", 1);
         selectedTile.Origin = selectedTile.Sprite.Center;
@@ -185,12 +197,22 @@ static class GameData
         {
             msg += p.X.ToString() + "," + p.Y.ToString() + "|";
         }
+        string facString = "";
+        if (GameData.Player.GetFaction == Player.Faction.nature)
+        {
+            facString = "nature";
+        } else {
+            facString = "humanity";
+        }
+
+        msg += "$factn:" + facString;
         return msg;
     }
 
     public static void HostInitialize()
     {
         Tile tile = new Tile();
+        GameData.player.GetFaction = Player.Faction.nature;
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
@@ -232,6 +254,18 @@ static class GameData
         GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X - (int)(0.5*GameWorld.Screen.X), -(int)tile.Sprite.Center.Y - 
             (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
         GameWorld.Camera.Pos= new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+        if (player.GetFaction == Player.Faction.humanity)
+        {
+            GameWorld.Camera.Pos = new Vector2(0, 0);
+        }
+        else
+        {
+            //GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+            int y = GameData.LevelGrid.GetHeight();
+            int x = GameData.LevelGrid.GetWidth();
+            GameWorld.Camera.Pos = new Vector2(3380, 85);
+
+        }
 
         selectedTile = new SpriteGameObject("selectedTile", 0, "selectedTile", 1);
         selectedTile.Origin = selectedTile.Sprite.Center;
@@ -282,5 +316,7 @@ static class GameData
         }
 
     }
+
+    public static Player Player { get { return player; } set { player = value; } }
 }
 

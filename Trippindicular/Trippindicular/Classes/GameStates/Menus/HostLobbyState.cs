@@ -10,7 +10,7 @@ namespace Trippindicular.Classes
     class HostLobbyState : GameObjectList
     {
 
-        protected Button createSession, joinSession, options, exitGame, sessions;
+        protected Button createAsHumanity, createAsNature, options, exitGame, sessions;
         protected SpriteGameObject background;
         protected PlayingState playingState;
         private  INetworkManager networkManager;
@@ -32,13 +32,13 @@ namespace Trippindicular.Classes
 
             //Make buttons
             //New Game
-            createSession = new Button("button", "buttonFont", "font", 0, "Create session", 0);
-            createSession.Position = new Vector2(300, 150);
-            this.Add(createSession);
+            createAsHumanity = new Button("button", "buttonFont", "font", 0, "Humanity", 0);
+            createAsHumanity.Position = new Vector2(300, 150);
+            this.Add(createAsHumanity);
 
-            joinSession = new Button("button", "buttonFont", "font", 0, "Join session", 0);
-            joinSession.Position = new Vector2(300, 280);
-            this.Add(joinSession);
+            createAsNature = new Button("button", "buttonFont", "font", 0, "Nature", 0);
+            createAsNature.Position = new Vector2(300, 280);
+            this.Add(createAsNature);
 
 
             //Options
@@ -61,21 +61,22 @@ namespace Trippindicular.Classes
             base.HandleInput(inputHelper);
 
             //Buttons
-            if (createSession.Pressed)
+            if (createAsHumanity.Pressed)
             {
                 if (!connected)
                 {
-                    this.networkManager = new ServerNetworkManager();
-                    this.networkManager.Connect();
-                    connected = true;
+                    GameData.Host = true;
+                    GameData.player = new Player(Player.Faction.humanity);
+                    playingState.Initialize(GameData.Host);
+                    GameWorld.GameStateManager.SwitchTo("playing"); 
                 }
             }
-            else if (joinSession.Pressed)
+            else if (createAsNature.Pressed)
             {
-                this.networkManager = new ClientNetworkManager();
-                this.networkManager.Connect();
-                connected = true;
-                this.networkManager.SendMessage("test");
+                GameData.Host = true;
+                GameData.player = new Player(Player.Faction.nature);
+                playingState.Initialize(GameData.Host);
+                GameWorld.GameStateManager.SwitchTo("playing");
 
             }
             else if (exitGame.Pressed)
