@@ -19,8 +19,6 @@ class Unit : SpriteGameObject
     protected string actionString;
     public string name;
     protected bool pacifist, frozen;
-    protected float freezeTime;
-    protected Timer freezeTimer;
     protected const float meleeRange = 50;
     protected const float slowUnitSpeed = 150;
 
@@ -98,7 +96,6 @@ class Unit : SpriteGameObject
         attackTimer = new Timer(this.AttackSpeed);
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         checkIfInDiscoveredAreaTimer = new Timer((1 / 6));
-        freezeTime = 1f;
     }
 
     public override void HandleInput(InputHelper ih)
@@ -167,12 +164,6 @@ class Unit : SpriteGameObject
             }
             base.Update(gameTime);
         }
-        else if (frozen)
-        {
-            freezeTimer.Update(gameTime);
-            if (freezeTimer.Ended)
-                frozen = false;
-        }
         healthBar.Update(new Vector2(position.X, position.Y - sprite.Height / 2 - 10));
         healthBar.ChangeHealth((float)((health / maxHealth) * 1.5));
     }
@@ -185,12 +176,7 @@ class Unit : SpriteGameObject
             base.Draw(gameTime, spriteBatch);
         }
     }
-    public void Freeze(float duration)
-    {
-        frozen = true;
-        freezeTimer = new Timer(duration);
-        freezeTimer.Reset();
-    }
+
     protected void MoveToTile()
     {
         float differenceXPos = Math.Abs(targetPosition.X - this.GlobalPosition.X);
@@ -415,7 +401,8 @@ class Unit : SpriteGameObject
                     Unit unit = GameData.Units.Objects[i] as Unit;
                     if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
                     {
-                        actionString += "$targ:" + unit.ID;
+                        actionString += "$targ:" + unit.ID + "$move:" + "0,0";
+                        targetPosition = Vector2.Zero;
                         targetUnit = unit;
                         break;
                     }

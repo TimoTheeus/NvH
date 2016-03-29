@@ -89,6 +89,7 @@
     <Compile Include="Classes\Buildings\Mine.cs" />
     <Compile Include="Classes\Buildings\NatureBarracks.cs" />
     <Compile Include="Classes\Buildings\NatureBase.cs" />
+    <Compile Include="Classes\Buildings\NatureBaseMenu.cs" />
     <Compile Include="Classes\Buildings\PolyTileBuilding.cs" />
     <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\DropDown.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Classes\TileMenuItem.cs" />
     <Compile Include="Classes\Units\FlameThrower.cs" />
     <Compile Include="Classes\Units\HumanityWorker.cs" />
-    <Compile Include="Classes\Units\Main Combat units\Fast Melee.cs" />
+    <Compile Include="Classes\Units\Unicorn.cs" />
     <Compile Include="Classes\Units\Main Combat units\Melee1.cs" />
     <Compile Include="Classes\Units\Main Combat units\Melee2.cs" />
     <Compile Include="Classes\Units\Main Combat units\Ranged.cs" />

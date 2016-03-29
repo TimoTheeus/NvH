@@ -11,5 +11,11 @@ class NatureBarracks:Building
         Faction = Player.Faction.nature;
         name = "NATURE BARRACKS";
     }
+
+    public override void LeftButtonAction()
+    {
+        GameData.LevelObjects.Add(new BarracksMenu(this));
+        GameData.Cursor.HasClickedTile = false;
+    }
 }
 
