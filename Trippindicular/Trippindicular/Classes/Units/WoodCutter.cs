@@ -9,6 +9,7 @@ class WoodCutter : Unit
     {
         Faction = Player.Faction.humanity;
         name = "WOODCUTTER";
+        this.ResourceCosts = new Microsoft.Xna.Framework.Point(10, 10);
     }
 
     public override void Attack()
