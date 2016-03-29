@@ -16,6 +16,7 @@ class Tile : SpriteGameObject
     protected bool discovered;
     protected bool isBeingBuilt;
     protected bool isDark;
+    private string actionString;
 
     public bool IsBeingBuilt
     {
@@ -53,6 +54,7 @@ class Tile : SpriteGameObject
     }
     public override void Update(GameTime gameTime)
     {
+
         base.Update(gameTime);
         if (IsBeingBuilt)
         {
@@ -67,12 +69,16 @@ class Tile : SpriteGameObject
                         {
                             objectsToBuild[i].Position = new Vector2(this.Position.X + this.Sprite.Width / 2 - objectsToBuild[i].Sprite.Width / 2, this.Position.Y + this.Sprite.Height / 2);
                             GameData.LevelObjects.Add(objectsToBuild[i]);
+                            //this.actionString = "$mkun:" + b.ID + "$fnsh";
                         }
                         else
                         {
-                            GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Building);
+                            GameData.LevelGrid.replaceTile(this, objectsToBuild[i] as Building, true);
                             Building b = objectsToBuild[i] as Building;
                             GameData.Buildings.Add(b);
+                            
+
+                            
                             b.HasBeenBuiltAction();
                         }
                         buildTimers.Remove(buildTimers[i]);
@@ -128,6 +134,16 @@ class Tile : SpriteGameObject
             descriptive.Position = Position + new Vector2(-50, -50);
             GameData.LevelObjects.Add(descriptive);
         }
+    }
+
+    public override string getActionOutput()
+    {
+        string s = this.actionString;
+        if (this.actionString != null)
+        {
+            this.actionString = null;
+        }
+        return s;
     }
 
 }

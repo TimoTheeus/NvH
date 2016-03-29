@@ -77,6 +77,20 @@ public class GameObjectGrid : GameObject
             if(obj!= null)
             obj.Draw(gameTime, spriteBatch);
     }
+
+    public override string getActionOutput()
+    {
+        string ls = "";
+        foreach (GameObject obj in grid)
+        {
+            string s = obj.getActionOutput();
+            if (s != null)
+            {
+                ls += ";" + s;
+            }
+        }
+        return ls;
+    }
 }
 
 
