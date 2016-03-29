@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class SunlightTree:Building
 {
     ResourceController resController;
-    public SunlightTree() : base("sunlightTree","selectedTile")
+    public SunlightTree() : base("sunlightTree", "natureLightTree")
     {
         Faction = Player.Faction.nature;
     }

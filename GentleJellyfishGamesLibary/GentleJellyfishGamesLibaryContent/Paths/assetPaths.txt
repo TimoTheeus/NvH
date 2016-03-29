@@ -15,6 +15,15 @@
 hexagonTile-Tilesets/HexagonTile
 selectedTile-Tilesets/SelectedTile
 humanityBarracks-Tilesets/HumanityBarracks
+natureWaterTree-Tilesets/NatureWaterCollection
+natureLightTree-Tilesets/NatureLightCollection
+defenceThorn-Tilesets/NatureDefenceThorns
+natureDefence-Tilesets/NatureDefence
+natureBase-Tilesets/NatureBase
+mine-Tilesets/HumanityMiningResource
+humanityBase-Tilesets/HumanityBase
+humanityBarracks-Tilesets/HumanityMilitary
+humanityHouse-Tilesets/HumanityHouse
 #
 #Buttons:
 backButton-Buttons/BackButton
@@ -46,4 +55,11 @@ description-Fonts/AchievementDescription
 #
 #RandomStuff:
 cursorDot-CursorDot
+#
+#Units:
+unicorn-Tilesets/NatureUnicornUnit
+natureWolf-Tilesets/NatureWolfUnit
+flamethrower-Tilesets/HumanityFlamethrowerUnit
+
+
 

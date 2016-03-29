@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class Mine : Building
 {
     ResourceController resController;
-    public Mine() : base("mine","selectedTile")
+    public Mine() : base("mine","mine")
     {
         Faction = Player.Faction.humanity;
         name = "COALMINE";

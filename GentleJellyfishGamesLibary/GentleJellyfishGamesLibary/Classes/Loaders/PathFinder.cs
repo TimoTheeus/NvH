@@ -34,7 +34,7 @@ public class PathFinder : FileLoader
     {
         string temp = GetPath(assetName);
         if (temp == "")
-            return "Placeholders/placeholder";
+            return "Tilesets/selectedTile";
         return temp;
     }
     //Returns the path corresponding to the sound with given assetname.

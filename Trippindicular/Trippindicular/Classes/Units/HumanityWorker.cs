@@ -30,6 +30,12 @@ class HumanityWorker : Unit
         Point p = new Point((int)this.Position.X+30, (int)this.Position.Y+30);
         GameData.LevelGrid.GetTile(p).IsBeingBuilt = true;
     }
+    protected override void Die()
+    {
+        Point p = new Point((int)this.Position.X + 30, (int)this.Position.Y + 30);
+        GameData.LevelGrid.GetTile(p).IsBeingBuilt = false;
+        base.Die();
+    }
 
 }
 

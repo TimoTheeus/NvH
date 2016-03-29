@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 class HumanityBase : PolyTileBuilding
 {
 
-    public HumanityBase() : base("humanityBase", "selectedTile")
+    public HumanityBase() : base("humanityBase", "humanityBase")
     {
         this.health = 100;
         Faction = Player.Faction.humanity;

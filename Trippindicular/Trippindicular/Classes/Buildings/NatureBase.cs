@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 class NatureBase : PolyTileBuilding
 {
-    public NatureBase() : base("natureBase", "selectedTile")
+    public NatureBase() : base("natureBase", "natureBase")
     {
         this.health = 1;
         Faction = Player.Faction.nature;
