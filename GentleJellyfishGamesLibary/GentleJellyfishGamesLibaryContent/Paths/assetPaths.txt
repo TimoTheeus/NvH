@@ -16,6 +16,7 @@ hexagonTile-Tilesets/HexagonTile
 selectedTile-Tilesets/SelectedTile
 humanityBarracks-Tilesets/HumanityMilitary
 humanityBase-Tilesets/HumanityBase
+slime-Tilesets/CoolSlimeUnit
 #
 #Buttons:
 backButton-Buttons/BackButton

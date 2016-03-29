@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 class NatureBaseMenu : Menu
 {
-    protected Button button1, button2;
+    protected Button button1, button2, button3;
     protected Tile tile;
     protected Spell spell;
 
@@ -19,23 +19,28 @@ class NatureBaseMenu : Menu
         background.Origin = background.Sprite.Center;
         this.Add(background);
         button1 = new Button("checkBox", "", "", 0, "", 4);
-        button1.Position = background.Position + new Vector2(-100, 0);
+        button1.Position = background.Position + new Vector2(-120, 0);
         button2 = new Button("checkBox", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
+        button3 = new Button("checkBox", "", "", 0, "", 4);
+        button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
         addButton(button1);
-        addButton(button2);
+        if((tile as Building).level >= 2)
+            addButton(button2);
+        if ((tile as Building).level >= 3)
+            addButton(button3);
+        
     }
 
     public override void HandleInput(InputHelper inputHelper)
     {
         base.HandleInput(inputHelper);
 
-        if (button1 != null && button1.Pressed)
+        if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
-            spell = new MeteorStorm();
-            GameData.Cursor.Spell = spell;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
+            (this.tile as Building).level += 1;
         }
         else if (button2 != null && button2.Pressed)
         {
@@ -44,6 +49,14 @@ class NatureBaseMenu : Menu
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
         }
+        else if (button3 != null && button3.Pressed)
+        {
+            spell = new MeteorStorm();
+            GameData.Cursor.Spell = spell;
+            GameData.Cursor.HasClickedTile = false;
+            GameData.LevelObjects.Remove(this);
+        }
+
     }
 }
 

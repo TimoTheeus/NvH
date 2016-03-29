@@ -128,17 +128,6 @@ static class GameData
         GameData.AddUnit(unit3);
         GameData.AddUnit(unit2);
         GameData.AddUnit(unit);
-        foreach (Unit u in GameData.Units.Objects)
-        {
-            if (u.Faction == Player.Faction.humanity)
-            {
-                u.Sprite.Color = Color.Red;
-            }
-            else
-            {
-                u.Sprite.Color = Color.Green;
-            }
-        }
 
     }
     static public void AfterInitialize()

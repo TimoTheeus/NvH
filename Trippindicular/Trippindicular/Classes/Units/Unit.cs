@@ -415,9 +415,12 @@ class Unit : SpriteGameObject
                 if (GameData.Cursor.CurrentTile is Building)
                 {
                     targetUnit = null;
-                    targetBuilding = (Building)GameData.Cursor.CurrentTile;
+                    if (((Building)GameData.Cursor.CurrentTile).Faction != GameData.player.GetFaction)
+                    {
+                        targetBuilding = (Building)GameData.Cursor.CurrentTile;
+                        actionString += "$build:" + targetBuilding.ID;
+                    }
                     targetPosition = GameData.Cursor.CurrentTile.Position;
-                    actionString += "$build:" + targetBuilding.ID;
                 }
                 else
                 {

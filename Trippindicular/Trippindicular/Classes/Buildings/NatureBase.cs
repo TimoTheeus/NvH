@@ -12,6 +12,8 @@ class NatureBase : PolyTileBuilding
         this.health = 1;
         Faction = Player.Faction.nature;
         name = "NATURE BASE";
+        level = 1;
+        maxLevel = 3;
     }
     public override void HandleInput(InputHelper ih)
     {

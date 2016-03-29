@@ -12,6 +12,9 @@ class Building : Tile
     protected HealthBar healthBar;
     protected Player.Faction faction;
     public string name;
+    public int level;
+    public int maxLevel;
+    public int buildCost, levelUpCost2, levelUpCost3;
 
     public Player.Faction Faction
     {
@@ -36,6 +39,7 @@ class Building : Tile
         health = 1;
         maxHealth = 1;
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
+        level = 1;
     }
 
     protected void RemoveMenu()
@@ -50,9 +54,9 @@ class Building : Tile
         if (this.Health <= 0)
         {
             if(attacker is Unit)
-                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Unit).name, this.name, true, false);
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Unit).name, true, false);
             if(attacker is Spell)
-                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add((attacker as Spell).name, this.name, true, true);
+                ((GameWorld.GameStateManager.GetGameState("hud") as HUD).hud.Find("eventLog") as EventLog).Add(this.name, (attacker as Spell).name, true, true);
             Destroy();
         }
     }

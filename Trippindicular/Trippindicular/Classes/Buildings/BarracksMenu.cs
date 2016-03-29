@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 class BarracksMenu : Menu
 {
-    protected Button button1, button2, button3, button4;
+    protected Button button1, button2, button3, button4, button5;
     protected Tile tile;
     protected Player player;
 
@@ -18,17 +18,23 @@ class BarracksMenu : Menu
         background.Origin = background.Sprite.Center;
         this.Add(background);
         button1 = new Button("checkBox", "", "", 0, "", 4);
-        button1.Position = background.Position + new Vector2(-100, 0);
+        button1.Position = background.Position + new Vector2(-120, 0);
         button2 = new Button("checkBox", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
         button3 = new Button("checkBox", "", "", 0, "", 4);
         button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
         button4 = new Button("checkBox", "", "", 0, "", 4);
         button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
+        button5 = new Button("checkBox", "", "", 0, "", 4);
+        button5.Position = button1.Position + new Vector2(button1.Width * 4, 0);
         addButton(button1);
         addButton(button2);
         addButton(button3);
-        addButton(button4);
+        if((tile as Building).level >= 2)
+            addButton(button4);
+        if((tile as Building).level >= 3)
+            addButton(button5);
+
         for (int i = 0; i < GameData.LevelObjects.Objects.Count; i++)
         {
             if (GameData.LevelObjects.Objects[i] is Player)
@@ -43,9 +49,17 @@ class BarracksMenu : Menu
     {
         base.HandleInput(inputHelper);
 
-        if (button1 != null && button1.Pressed)
+        if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
             button1.Sprite.SheetIndex = 1;
+            (tile as Building).level += 1;
+            GameData.Cursor.HasClickedTile = false;
+            GameData.LevelObjects.Remove(this);
+        }
+
+        if (button2 != null && button2.Pressed)
+        {
+            button2.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
             Unit unit;
@@ -64,9 +78,9 @@ class BarracksMenu : Menu
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.AddUnit(unit);
         }
-        else if (button2 != null && button2.Pressed)
+        else if (button3 != null && button3.Pressed)
         {
-            button2.Sprite.SheetIndex = 1;
+            button3.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
             Unit unit;
@@ -85,9 +99,9 @@ class BarracksMenu : Menu
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.AddUnit(unit);
         }
-        else if (button3 != null && button3.Pressed)
+        else if (button4 != null && button4.Pressed)
         {
-            button3.Sprite.SheetIndex = 1;
+            button4.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
             Unit unit;
@@ -106,9 +120,9 @@ class BarracksMenu : Menu
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.AddUnit(unit);
         }
-        else if (button4 != null && button4.Pressed)
+        else if (button5 != null && button5.Pressed)
         {
-            button4.Sprite.SheetIndex = 1;
+            button5.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
             Unit unit;
