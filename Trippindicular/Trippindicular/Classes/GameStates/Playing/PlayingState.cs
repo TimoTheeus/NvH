@@ -61,6 +61,7 @@ class PlayingState : IGameLoopObject
         if (ls.Length > 3 && connected)
         {
             this.networkManager.SendMessage(ls);
+            Console.WriteLine(ls);
         }
 
             
@@ -126,13 +127,20 @@ class PlayingState : IGameLoopObject
             string id = pairs[1].Substring(5,pairs[1].Length - 5);
             for (int i = 2; i < pairs.Length; i++)
             {
-                switch (pairs[i].Substring(0, 4))
+                 switch (pairs[i].Substring(0, 4))
                 {
                     case "move":
-                        string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
-                        Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
-                        u.TargetPosition = new Vector2(int.Parse(coords[0]), int.Parse(coords[1]));
-                        u.TargetUnit = null;
+                        try
+                        {
+                            string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
+                            Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
+                            u.TargetPosition = new Vector2(int.Parse(coords[0]), int.Parse(coords[1]));
+                            u.TargetUnit = null;
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Console.WriteLine("null");
+                        }
                         break;
        
                     case "targ":
@@ -143,10 +151,29 @@ class PlayingState : IGameLoopObject
                         //build
                         break;
                     case "damg":
-                        string[] parameters = pairs[i].Substring(5, pairs.Length - 5).Split(',');
-                        string attackerID = parameters[1];
-                        Unit attacker  = (Unit)(GameData.LevelObjects.Find(attackerID));
-                        ((Unit)(GameData.LevelObjects.Find(id))).DealDamage(int.Parse(parameters[0]), attacker, true);
+                        try
+                        {
+                            string[] parameters = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
+                            string attackerID = parameters[1];
+                            Unit attacker = (Unit)(GameData.LevelObjects.Find(attackerID));
+                            ((Unit)(GameData.LevelObjects.Find(id))).DealDamage(int.Parse(parameters[0]), attacker);
+                            Console.WriteLine(s);
+                            
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
+                        break;
+                     case "dead":
+                        try
+                        {
+                            GameData.Units.Remove(((Unit)(GameData.LevelObjects.Find(id))));
+                        }
+                        catch (NullReferenceException e) {
+                            Console.WriteLine(e.ToString());
+
+                        }
                         break;
                 }
             }

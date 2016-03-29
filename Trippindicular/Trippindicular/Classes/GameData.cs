@@ -96,7 +96,7 @@ static class GameData
         unit.Position = new Vector2(500, 500);
         NatureWorker unit2 = new NatureWorker();
         unit2.Position = new Vector2(700, 500);
-        NatureWorker unit3 = new NatureWorker();
+        Melee1 unit3 = new Melee1(Player.Faction.nature, "selectedTile", "natMelee");
         unit3.Position = new Vector2(900, 500);
         HumanityWorker unit4 = new HumanityWorker();
         unit4.Position = new Vector2(1100, 500);
@@ -116,6 +116,17 @@ static class GameData
         GameData.AddUnit(unit3);
         GameData.AddUnit(unit2);
         GameData.AddUnit(unit);
+        foreach (Unit u in GameData.Units.Objects)
+        {
+            if (u.Faction == Player.Faction.humanity)
+            {
+                u.Sprite.Color = Color.Red;
+            }
+            else
+            {
+                u.Sprite.Color = Color.Green;
+            }
+        }
 
     }
     static public void AfterInitialize()
