@@ -415,7 +415,7 @@ class Unit : SpriteGameObject
 
             if (targetUnit == null)
             {
-                if (GameData.Cursor.CurrentTile is Building)
+                if (GameData.Cursor.CurrentTile is Building&& (GameData.Cursor.CurrentTile as Building).Faction!=this.faction)
                 {
                     targetUnit = null;
                     targetBuilding = (Building)GameData.Cursor.CurrentTile;

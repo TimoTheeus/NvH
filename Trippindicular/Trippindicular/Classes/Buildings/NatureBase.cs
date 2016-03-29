@@ -13,13 +13,7 @@ class NatureBase : PolyTileBuilding
         Faction = Player.Faction.nature;
         name = "NATURE BASE";
     }
-    public override void HandleInput(InputHelper ih)
-    {
-        base.HandleInput(ih);
-        if (ih.KeyPressed(Keys.K)){
-            DealDamage(50, this);
-        }
-    }
+
     public override void Destroy()
     {
         base.Destroy();

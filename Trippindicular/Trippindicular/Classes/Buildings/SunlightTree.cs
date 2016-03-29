@@ -21,6 +21,7 @@ class SunlightTree:Building
     }
     public override void HasBeenBuiltAction()
     {
+        base.HasBeenBuiltAction();
         resController = new ResourceController(1, 50, 0);
         GameData.LevelObjects.Add(resController);
     }
