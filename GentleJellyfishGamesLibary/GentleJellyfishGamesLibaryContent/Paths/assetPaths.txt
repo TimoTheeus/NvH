@@ -14,7 +14,8 @@
 #Tilesets:
 hexagonTile-Tilesets/HexagonTile
 selectedTile-Tilesets/SelectedTile
-humanityBarracks-Tilesets/HumanityBarracks
+humanityBarracks-Tilesets/HumanityMilitary
+humanityBase-Tilesets/HumanityBase
 #
 #Buttons:
 backButton-Buttons/BackButton

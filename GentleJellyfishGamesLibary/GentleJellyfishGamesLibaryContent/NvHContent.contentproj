@@ -163,8 +163,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tilesets\HumanityBarracks.png">
-      <Name>HumanityBarracks</Name>
+    <Compile Include="Tilesets\HumanityBase.png">
+      <Name>HumanityBase</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
