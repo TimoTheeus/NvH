@@ -31,7 +31,7 @@ class Melee2 : Unit
                 targetUnit = null;
                 return;
             }
-            if (targetUnit is Fast_Melee)
+            if (targetUnit is Unicorn)
             {
                 targetUnit.DealDamage(this.Damage*2, this);
             }

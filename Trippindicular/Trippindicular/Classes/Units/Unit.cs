@@ -415,7 +415,8 @@ class Unit : SpriteGameObject
                     Unit unit = GameData.Units.Objects[i] as Unit;
                     if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
                     {
-                        actionString += "$targ:" + unit.ID;
+                        actionString += "$targ:" + unit.ID + "$move:" + "0,0";
+                        targetPosition = Vector2.Zero;
                         targetUnit = unit;
                         break;
                     }
