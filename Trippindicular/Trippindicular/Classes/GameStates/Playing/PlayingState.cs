@@ -134,7 +134,7 @@ class PlayingState : IGameLoopObject
                         {
                             string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
                             Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
-                            u.TargetPosition = new Vector2(int.Parse(coords[0]), int.Parse(coords[1]));
+                            u.TargetPosition = new Vector2(float.Parse(coords[0]), float.Parse(coords[1]));
                             u.TargetUnit = null;
                         }
                         catch (NullReferenceException e)

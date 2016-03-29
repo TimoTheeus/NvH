@@ -383,6 +383,7 @@ class Unit : SpriteGameObject
                     (GameData.Units.Objects[i].Position.Y - this.Position.Y > -5 && GameData.Units.Objects[i].Position.Y - this.Position.Y < 5))
                 {
                     targetPosition = this.Position + new Vector2(20, 20);
+                    this.actionString = "$unit:"+this.ID+"$move:" + this.targetPosition.X + "," + this.targetPosition.Y;
                     return;
                 }
             }
