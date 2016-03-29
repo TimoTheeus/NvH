@@ -16,7 +16,7 @@ class TitleMenuState : GameObjectList
 
     public TitleMenuState()
     {
-        GameData.Host = false;
+        GameData.Host = true;
         //Initialize playingState
         playingState = GameWorld.GameStateManager.GetGameState("playing") as PlayingState;
 
@@ -68,7 +68,7 @@ class TitleMenuState : GameObjectList
 
         if (inputHelper.KeyPressed(Keys.Home))
         {
-            GameData.Host = true;
+            GameData.Host = false;
         }
         //Buttons
         if (newGame.Pressed)
