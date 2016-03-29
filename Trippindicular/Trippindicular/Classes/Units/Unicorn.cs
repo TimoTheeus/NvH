@@ -7,27 +7,18 @@ using Microsoft.Xna.Framework;
 //Has high move speed and ability to stun+damage
 //melee1 and ranged by running over them.
 //countered by melee2
-class Fast_Melee : Unit
+class Unicorn : Unit
 {
     protected bool slowed;
     protected Timer slowTimer;
     protected float stunTime;
-    public Fast_Melee(Player.Faction faction,string assetName="", string id="") : base(assetName, id)
+    public Unicorn(string assetName="", string id="") : base(assetName, id)
     {
-        this.faction = faction;
-        if (this.faction == Player.Faction.nature)
-        {
-            this.Speed = 250f;
-            Damage = 25;
-            maxHealth = 200;
-            health = maxHealth;
-        }
-        else {
-            this.Speed = 250f;
-            Damage = 25;
-            maxHealth = 200;
-            health = maxHealth;
-        }
+        this.faction = Player.Faction.nature;
+        this.Speed = 250f;
+        Damage = 25;
+        maxHealth = 200;
+        health = maxHealth;
         slowTimer = new Timer(2f);
         stunTime = 0.5f;
     }

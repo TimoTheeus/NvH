@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 class FlameThrower : Unit
 {
@@ -9,5 +10,6 @@ class FlameThrower : Unit
     {
         Faction = Player.Faction.humanity;
         name = "FLAMETHROWER";
+        this.Sprite.Color = Color.Red;
     }
 }

@@ -60,6 +60,8 @@ class Cursor : SpriteGameObject
 
         bool mouseEnabled = false;
 
+        if (inputHelper.IsKeyDown(Keys.K)) { MeteorStorm s = new MeteorStorm(); s.Position = this.Position + GameWorld.Camera.Pos; GameData.LevelObjects.Add(s); }
+
         if (inputHelper.IsKeyDown(Keys.Right) || (mouseEnabled && inputHelper.MousePosition.X > GameSettings.GameWidth - borderWidth))
         {
             GameWorld.Camera.Move(new Vector2(15, 0));

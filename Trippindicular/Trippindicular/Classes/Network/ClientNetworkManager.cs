@@ -19,8 +19,8 @@ namespace Trippindicular.Classes
         {
             var config = new NetPeerConfiguration("Asteroid")
             {
-                SimulatedMinimumLatency = 0.2f, 
-                SimulatedLoss = 0.1f
+                //SimulatedMinimumLatency = 0.2f, 
+                //SimulatedLoss = 0.1f
             };
             config.EnableMessageType(NetIncomingMessageType.WarningMessage);
             config.EnableMessageType(NetIncomingMessageType.VerboseDebugMessage);

@@ -105,6 +105,7 @@
     <Compile Include="Classes\HexaGrid.cs" />
     <Compile Include="Classes\GameStates\Menus\SessionsMenuState.cs" />
     <Compile Include="Classes\Network\ClientNetworkManager.cs" />
+    <Compile Include="Classes\Network\GameNetworkMessage.cs" />
     <Compile Include="Classes\Network\INetworkManager.cs" />
     <Compile Include="Classes\Network\ServerNetworkManager.cs" />
     <Compile Include="Classes\Spells\MeteorStorm.cs" />
@@ -117,7 +118,7 @@
     <Compile Include="Classes\TileMenuItem.cs" />
     <Compile Include="Classes\Units\FlameThrower.cs" />
     <Compile Include="Classes\Units\HumanityWorker.cs" />
-    <Compile Include="Classes\Units\Main Combat units\Fast Melee.cs" />
+    <Compile Include="Classes\Units\Unicorn.cs" />
     <Compile Include="Classes\Units\Main Combat units\Melee1.cs" />
     <Compile Include="Classes\Units\Main Combat units\Melee2.cs" />
     <Compile Include="Classes\Units\Main Combat units\Ranged.cs" />

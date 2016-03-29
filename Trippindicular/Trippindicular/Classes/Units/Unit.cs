@@ -104,7 +104,7 @@ class Unit : SpriteGameObject
     public override void HandleInput(InputHelper ih)
     {
         mousePoint = new Point((int)(ih.MousePosition.X + GameWorld.Camera.Pos.X), (int)(ih.MousePosition.Y + GameWorld.Camera.Pos.Y));
-        actionString = null;
+
         if (selected)
         {
             GameData.Cursor.HasClickedTile = false;
@@ -140,6 +140,7 @@ class Unit : SpriteGameObject
 
     public override void Update(GameTime gameTime)
     {
+        actionString = null;
         checkIfInDiscoveredAreaTimer.Update(gameTime);
         if (checkIfInDiscoveredAreaTimer.Ended)
         {
@@ -151,7 +152,7 @@ class Unit : SpriteGameObject
                 else InDiscoveredArea = false;
             }
         }
-        if (!frozen && Faction == Player.Faction.humanity)
+        if (!frozen && (Faction == Player.Faction.humanity || Faction == Player.Faction.nature))
         {
             attackTimer.Update(gameTime);
             if (targetUnit != null)
@@ -287,10 +288,16 @@ class Unit : SpriteGameObject
         {
             if (targetUnit.Health <= 0)
             {
+                this.actionString = "$unit:" + targetUnit.id + "$damg:" + this.damage + "," + this.ID;
                 targetUnit = null;
                 return;
             }  
-            targetUnit.DealDamage(this.Damage, this);
+            if (this.Faction.Equals(GameData.player.GetFaction))
+            {
+                this.actionString = "$unit:" + targetUnit.id + "$damg:"+this.damage+","+this.ID;
+                targetUnit.DealDamage(this.Damage, this);
+            }
+            
         }
 
         else 
@@ -307,7 +314,7 @@ class Unit : SpriteGameObject
     }
 
     public void DealDamage(float amount, GameObject attacker)
-    {
+    {        
         this.Health -= amount;
         if (Health <= 0)
         {
@@ -324,6 +331,7 @@ class Unit : SpriteGameObject
             {
                 Unit target = attacker as Unit;
                 targetUnit = target;
+                actionString += "$targ:" + target.ID;
                 attackTimer.Reset();
                 ArrivedAtTileAction();
             }
@@ -331,6 +339,9 @@ class Unit : SpriteGameObject
     }
     protected virtual void Die()
     {
+        this.actionString = "$unit:" + this.ID + "$dead:true";
+        this.selected = false;
+        GameData.Cursor.ClickedUnit = null;
         GameData.Units.Remove(this);
     }
     public void UpdateDiscoveredArea()
@@ -372,6 +383,7 @@ class Unit : SpriteGameObject
                     (GameData.Units.Objects[i].Position.Y - this.Position.Y > -5 && GameData.Units.Objects[i].Position.Y - this.Position.Y < 5))
                 {
                     targetPosition = this.Position + new Vector2(20, 20);
+                    this.actionString = "$unit:"+this.ID+"$move:" + this.targetPosition.X + "," + this.targetPosition.Y;
                     return;
                 }
             }
@@ -403,7 +415,8 @@ class Unit : SpriteGameObject
                     Unit unit = GameData.Units.Objects[i] as Unit;
                     if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
                     {
-                        actionString += "$targ:" + unit.ID;
+                        actionString += "$targ:" + unit.ID + "$move:" + "0,0";
+                        targetPosition = Vector2.Zero;
                         targetUnit = unit;
                         break;
                     }
@@ -430,7 +443,7 @@ class Unit : SpriteGameObject
         else
         {
             ClickOnEmptyTileAction();
-            actionString += "move:" + GameData.selectedTile.Position.ToString();
+            actionString += "$move:" + GameData.selectedTile.Position.X + "," + GameData.selectedTile.Position.Y;
         }
     }
 

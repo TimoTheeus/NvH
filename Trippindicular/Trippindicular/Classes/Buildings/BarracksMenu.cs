@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 class BarracksMenu : Menu
 {
-    protected Button button1, button2, button3;
+    protected Button button1, button2, button3, button4;
     protected Tile tile;
 
     public BarracksMenu(Tile tile) : base(4, "barracksMenu")
@@ -22,9 +22,12 @@ class BarracksMenu : Menu
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
         button3 = new Button("checkBox", "", "", 0, "", 4);
         button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
+        button4 = new Button("checkBox", "", "", 0, "", 4);
+        button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
         addButton(button1);
         addButton(button2);
         addButton(button3);
+        addButton(button4);
     }
 
     public override void HandleInput(InputHelper inputHelper)
@@ -46,7 +49,7 @@ class BarracksMenu : Menu
                 unit = new HumanityWorker();
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.Units.Add(unit);
+            GameData.AddUnit(unit);
         }
         else if (button2 != null && button2.Pressed)
         {
@@ -56,14 +59,14 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Unit("selectedTile", "unit");
+                unit = new Melee1(Player.Faction.nature, "selectedTile", "unit");
             }
             else
             {
                 unit = new WoodCutter();
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.Units.Add(unit);
+            GameData.AddUnit(unit);
         }
         else if (button3 != null && button3.Pressed)
         {
@@ -73,14 +76,31 @@ class BarracksMenu : Menu
             Unit unit;
             if (tile is NatureBarracks)
             {
-                unit = new Unit("selectedTile", "unit");
+                unit = new Unicorn("selectedTile", "unicorn");
             }
             else
             {
                 unit = new FlameThrower("selectedTile", "unit");
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.Units.Add(unit);
+            GameData.AddUnit(unit);
+        }
+        else if (button4 != null && button4.Pressed)
+        {
+            button4.Sprite.SheetIndex = 1;
+            GameData.Cursor.HasClickedTile = false;
+            GameData.LevelObjects.Remove(this);
+            Unit unit;
+            if (tile is NatureBarracks)
+            {
+                unit = new Ranged(Player.Faction.nature, "selectedTile", "unicorn");
+            }
+            else
+            {
+                unit = new Ranged(Player.Faction.humanity, "selectedTile", "unit");
+            }
+            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
+            GameData.AddUnit(unit);
         }
     }
 }
