@@ -14,4 +14,8 @@ class Forest : Building
         maxHealth = 500;
         health = 500;
     }
+    public override void Destroy()
+    {
+        base.Destroy();
+    }
 }

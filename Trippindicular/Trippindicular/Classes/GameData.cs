@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Audio;
 
 //Class used for all static data used in the game.
 static class GameData
@@ -19,6 +20,7 @@ static class GameData
     static public ResourceController ResourceController;
     static public Player player;
     static public int unitIdIndex;
+    static public SoundEffect music;
     static bool host;
     static List<Forest> forests;
     public static bool Host { get { return host; } set { host = value; } }
@@ -106,13 +108,16 @@ static class GameData
         if (GameData.Cursor != null)
         {
             GameData.LevelObjects.Remove(GameData.Cursor);
+            
         }
         if (GameData.player.GetFaction == Player.Faction.humanity)
         {
             GameData.Cursor = new Cursor("humanityCursor");
+            GameWorld.AssetLoader.PlayMusic("hMusic");
         }
         else {
             GameData.Cursor = new Cursor("natureCursor");
+            GameWorld.AssetLoader.PlayMusic("nMusic");
         }
         GameData.LevelObjects.Add(GameData.Cursor);
 
@@ -312,9 +317,11 @@ static class GameData
         if (GameData.player.GetFaction == Player.Faction.humanity)
         {
             GameData.Cursor = new Cursor("humanityCursor");
+            GameWorld.AssetLoader.PlayMusic("hMusic");
         }
         else {
-            GameData.Cursor = new Cursor("humanityCursor");
+            GameData.Cursor = new Cursor("natureCursor");
+            GameWorld.AssetLoader.PlayPlaylist(new string[] { "nMusic", "nMusic" });
         }
 
         

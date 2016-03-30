@@ -59,5 +59,19 @@ public class AssetLoader
 
         return content.Load<SpriteFont>(pathFinder.GetFontPath(assetName));
     }
+
+    public void PlayPlaylist(string[] p)
+    {
+        if (p == null)
+            return;
+        foreach (string assetName in p)
+        {
+            Song song = content.Load<Song>(pathFinder.GetSongPath(assetName));
+            if (song == null) return;
+            MediaPlayer.Stop();
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(song);
+        }
+    }
 }
 

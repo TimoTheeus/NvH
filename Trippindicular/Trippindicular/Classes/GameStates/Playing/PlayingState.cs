@@ -220,17 +220,24 @@ class PlayingState : IGameLoopObject
                             string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
                             Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
                             u.TargetPosition = new Vector2(float.Parse(coords[0]), float.Parse(coords[1]));
-                            u.TargetUnit = null;
+                            //u.TargetUnit = null;
                         }
                         catch (NullReferenceException e)
                         {
+
+                            string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
+                            Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
+                            u.TargetPosition = new Vector2(float.Parse(coords[0]), float.Parse(coords[1]));
+                            u.TargetUnit = null;
                             Console.WriteLine("null");
                         }
                         break;
        
                     case "targ":
                         string targID = pairs[i].Substring(5, pairs[i].Length - 5);
-                        ((Unit)(GameData.LevelObjects.Find(id))).TargetUnit = (Unit) GameData.LevelObjects.Find(targID);
+                        Unit theUnit = ((Unit)(GameData.LevelObjects.Find(id)));
+                        Unit targetU = (Unit) GameData.LevelObjects.Find(targID);
+                        theUnit.SetTargetUnit(targID);
                         break;
                     case "tgbd":
                         string bdtgID = pairs[i].Substring(5, pairs[i].Length - 5);

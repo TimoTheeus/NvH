@@ -267,6 +267,7 @@ class Unit : SpriteGameObject
             }
         }
 
+
     }
     public virtual void Attack()
     {
@@ -444,6 +445,12 @@ class Unit : SpriteGameObject
     {
         
         return actionString;
+    }
+
+    internal void SetTargetUnit(string targetID)
+    {
+        this.targetUnit = (Unit) GameData.Units.Find(targetID);
+        MoveToUnit();
     }
 }
 
