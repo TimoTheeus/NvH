@@ -14,7 +14,7 @@ class NatureBaseMenu : Menu
     protected Player player;
 
     public NatureBaseMenu(Tile tile)
-        : base(10, "natureBaseMenu")
+        : base(10, "barracksMenu")
     {
         actionString = null;
         actionSent = false;
