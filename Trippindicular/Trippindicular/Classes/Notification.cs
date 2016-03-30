@@ -16,6 +16,7 @@ class Notification : TextGameObject
     public Notification(string header = "", string line1 = "", string line2 = "", float displayTime = visibleTime) : base("font", 1, "notification")
     {
         this.header = header;
+        this.Color = Color.White;
         this.line1 = line1;
         this.line2 = line2;
         time = displayTime;
