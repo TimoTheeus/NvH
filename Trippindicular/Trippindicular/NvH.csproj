@@ -130,6 +130,7 @@
     <Compile Include="Classes\Units\WoodCutter.cs" />
     <Compile Include="Classes\BuildingMenus\Menu.cs" />
     <Compile Include="Classes\MenuCursor.cs" />
+    <Compile Include="CursorToolTip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\MainGame.cs" />
     <Compile Include="Classes\ResourceController.cs" />

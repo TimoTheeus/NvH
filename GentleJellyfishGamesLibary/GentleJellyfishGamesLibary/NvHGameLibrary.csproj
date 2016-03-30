@@ -113,6 +113,7 @@
     <Compile Include="Classes\Base\Random.cs" />
     <Compile Include="Classes\GameObjects\SpriteGameObject\Additions\SpriteSheet.cs" />
     <Compile Include="Classes\GameObjects\TextGameObject\Additions\UserInput.cs" />
+    <Compile Include="ToolTip.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
