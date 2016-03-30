@@ -54,34 +54,61 @@ class NatureBaseMenu : Menu
         Unit unit = null;
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
-            (this.tile as Building).level += 1;
+            if (GameData.player.MainResource - 300 >= 0 && GameData.player.SecondaryResource - 200 >= 0)
+            {
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+                (this.tile as Building).level += 1;
+            }
+            else {
+                Notification n = new Notification("Not enough resources, upgrading costs:", " 300 Sunlight and 200 Water", "", 3);
+                n.CreateNotification();
+            }
 
         }
         else if (button2 != null && button2.Pressed)
         {
             unit = new NatureWorker();
-            player.MainResource -= unit.ResourceCosts.X;
-            player.SecondaryResource -= unit.ResourceCosts.Y;
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
-                new Tile().Sprite.Height / 2);
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
+            if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+            {
+                player.MainResource -= unit.ResourceCosts.X;
+                player.SecondaryResource -= unit.ResourceCosts.Y;
+                unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
+                    new Tile().Sprite.Height / 2);
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+            }
+            else {
+                Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Sunlight and " + unit.ResourceCosts.Y.ToString() + " Water", "", 3);
+                n.CreateNotification(); unit = null; }
         }
         else if (button3 != null && button3.Pressed)
         {
-            spell = new SnowStorm();
-            GameData.Cursor.Spell = spell;
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
+            if (GameData.player.MainResource - 500 >= 0 && GameData.player.SecondaryResource - 500 >= 0)
+            {
+                spell = new SnowStorm();
+                GameData.Cursor.Spell = spell;
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+            }
+            else {
+                Notification n = new Notification("Not enough resources, it costs:", " 500 Sunlight and 500 Water", "", 3);
+                n.CreateNotification();
+            }
         }
         else if (button4 != null && button4.Pressed)
         {
-            spell = new MeteorStorm();
-            GameData.Cursor.Spell = spell;
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
+            if (GameData.player.MainResource - 500 >= 0 && GameData.player.SecondaryResource - 500 >= 0)
+            {
+                spell = new MeteorStorm();
+                GameData.Cursor.Spell = spell;
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+            }
+            else {
+                Notification n = new Notification("Not enough resources, it costs:", " 500 Sunlight and 500 Water", "", 3);
+                n.CreateNotification();
+            }
         }      
         if(unit!= null)
         {

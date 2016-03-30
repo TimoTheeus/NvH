@@ -59,22 +59,34 @@ class HumanityBaseMenu : Menu
         else if (button2 != null && button2.Pressed)
         {
             unit = new HumanityWorker();
-            player.MainResource -= unit.ResourceCosts.X;
-            player.SecondaryResource -= unit.ResourceCosts.Y;
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
-                new Tile().Sprite.Height / 2);
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
+            if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+            {
+                player.MainResource -= unit.ResourceCosts.X;
+                player.SecondaryResource -= unit.ResourceCosts.Y;
+                unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
+                    new Tile().Sprite.Height / 2);
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+            }
+            else {
+                Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                n.CreateNotification(); unit = null; }
         }
         else if (button3 != null && button3.Pressed)
         {
             unit = new WoodCutter();
-            player.MainResource -= unit.ResourceCosts.X;
-            player.SecondaryResource -= unit.ResourceCosts.Y;
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
-                new Tile().Sprite.Height / 2);
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
+            if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+            {
+                player.MainResource -= unit.ResourceCosts.X;
+                player.SecondaryResource -= unit.ResourceCosts.Y;
+                unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
+                    new Tile().Sprite.Height / 2);
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+            }
+            else {
+                Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                n.CreateNotification(); unit = null; }
         }
         else if (button4 != null && button4.Pressed)
         {

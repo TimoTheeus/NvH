@@ -58,12 +58,32 @@ class TileMenu : Menu
             if (GameData.player.GetFaction == Player.Faction.humanity)
             {
                 b = new Mine();
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+                if (GameData.player.MainResource - b.ResourceCosts.X >= 0 && GameData.player.SecondaryResource - b.ResourceCosts.Y >= 0)
+                {
+                    GameData.player.MainResource -= b.ResourceCosts.X;
+                    GameData.player.SecondaryResource -= b.ResourceCosts.Y;
+                    tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+                }
+                else
+                {
+                    Notification n = new Notification("Not enough resources, it costs:", b.ResourceCosts.X.ToString() + " Coal and " + b.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                    n.CreateNotification();
+                }
             }
             else
             {
                 b = new SunlightTree();
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
+                if (GameData.player.MainResource - b.ResourceCosts.X >= 0 && GameData.player.SecondaryResource - b.ResourceCosts.Y >= 0)
+                {
+                    GameData.player.MainResource -= b.ResourceCosts.X;
+                    GameData.player.SecondaryResource -= b.ResourceCosts.Y;
+                    tile.AddTimer(new Timer(sunlightTreeCooldown), new SunlightTree());
+                }
+                else
+                {
+                    Notification n = new Notification("Not enough resources, it costs:", b.ResourceCosts.X.ToString() + " Sunlight and " + b.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification();
+                }
             }
         }
         //Barracks, barracks
@@ -75,12 +95,32 @@ class TileMenu : Menu
             if (GameData.player.GetFaction == Player.Faction.humanity)
             {
                 b = new HumanityBarrack();
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
+                if (GameData.player.MainResource - b.ResourceCosts.X >= 0 && GameData.player.SecondaryResource - b.ResourceCosts.Y >= 0)
+                {
+                    GameData.player.MainResource -= b.ResourceCosts.X;
+                    GameData.player.SecondaryResource -= b.ResourceCosts.Y;
+                    tile.AddTimer(new Timer(sunlightTreeCooldown), new HumanityBarrack());
+                }
+                else
+                {
+                    Notification n = new Notification("Not enough resources, it costs:", b.ResourceCosts.X.ToString() + " Coal and " + b.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                    n.CreateNotification();
+                }
             }
             else
             {
                 b = new NatureBarracks();
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBarracks());
+                if (GameData.player.MainResource - b.ResourceCosts.X >= 0 && GameData.player.SecondaryResource - b.ResourceCosts.Y >= 0)
+                {
+                    GameData.player.MainResource -= b.ResourceCosts.X;
+                    GameData.player.SecondaryResource -= b.ResourceCosts.Y;
+                    tile.AddTimer(new Timer(sunlightTreeCooldown), new NatureBarracks());
+                }
+                else
+                {
+                    Notification n = new Notification("Not enough resources, it costs:", b.ResourceCosts.X.ToString() + " Sunlight and " + b.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification();
+                }
             }
 
         }
@@ -92,18 +132,31 @@ class TileMenu : Menu
             if (GameData.player.GetFaction == Player.Faction.humanity)
             {
                 b = new Mine();
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+                if (GameData.player.MainResource - b.ResourceCosts.X >= 0 && GameData.player.SecondaryResource - b.ResourceCosts.Y >= 0)
+                {
+                    GameData.player.MainResource -= b.ResourceCosts.X;
+                    GameData.player.SecondaryResource -= b.ResourceCosts.Y;
+                    tile.AddTimer(new Timer(sunlightTreeCooldown), new Mine());
+                }
+                else { Notification n = new Notification("Not enough resources, it costs:", b.ResourceCosts.X.ToString()+" Coal and "+b.ResourceCosts.Y.ToString()+" Wood", "", 3);
+                    n.CreateNotification();
+                }
             }
             else
             {
                 b = new WaterTree();
-                tile.AddTimer(new Timer(sunlightTreeCooldown), new WaterTree());
+                if (GameData.player.MainResource - b.ResourceCosts.X >= 0 && GameData.player.SecondaryResource - b.ResourceCosts.Y >= 0)
+                {
+                    GameData.player.MainResource -= b.ResourceCosts.X;
+                    GameData.player.SecondaryResource -= b.ResourceCosts.Y;
+                    tile.AddTimer(new Timer(sunlightTreeCooldown), new WaterTree());
+                }
+                else
+                {
+                    Notification n = new Notification("Not enough resources, it costs:", b.ResourceCosts.X.ToString() + " Sunlight and " + b.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification();
+                }
             }
-        }
-        if (b != null)
-        {
-            GameData.player.MainResource -= b.ResourceCosts.X;
-            GameData.player.SecondaryResource -= b.ResourceCosts.Y;
         }
     }
     public override void Update(GameTime gameTime)
