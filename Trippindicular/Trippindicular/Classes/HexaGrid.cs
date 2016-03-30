@@ -4,7 +4,7 @@ using System.Collections.Generic;
 class HexaGrid : GameObjectGrid
 {
     public bool startLeft;
-    public int offsetX, offsetY;
+    public float offsetX, offsetY;
     Tile hexagonTile;
     private string actionString;
 
@@ -12,8 +12,8 @@ class HexaGrid : GameObjectGrid
     {
         this.startLeft = startLeft;
         hexagonTile = new Tile();
-        offsetX = (int)(hexagonTile.Width * .75f + 1);
-        offsetY = (int)(hexagonTile.Height * .5f);
+        offsetX = (hexagonTile.Width * .75f);
+        offsetY = (hexagonTile.Height * .5f);
     }
 
     public override void Add(GameObject obj, int x, int y)
@@ -34,20 +34,20 @@ class HexaGrid : GameObjectGrid
     /// <returns>The corresponding tile</returns>
     public Tile GetTile(Point p)
     {
-        int col = p.X / offsetX;
-        int colOffset = p.X % offsetX;
+        int col = p.X / (int)offsetX;
+        int colOffset = p.X % (int)offsetX;
 
         int x = col / 2;
         int y = 0;
         if (col % 2 == 0)
-            y = ((p.Y + offsetY) / cellHeight) * 2 - 1;
+            y = ((p.Y + (int)offsetY) / cellHeight) * 2 - 1;
         else
             y = (p.Y / cellHeight) * 2;
 
         if (colOffset < cellWidth / 4)
         {
-            int row = p.Y / offsetY;
-            int rowOffset = p.Y % offsetY;
+            int row = p.Y / (int)offsetY;
+            int rowOffset = p.Y % (int)offsetY;
             int dx = (col + 1) % 2;
             if ((row + (col % 2)) % 2 == 0)
             {
