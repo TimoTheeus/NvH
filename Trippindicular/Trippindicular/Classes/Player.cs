@@ -74,7 +74,13 @@ class Player : GameObject
         secondaryResource = new TextGameObject("smallFont", 4, "secondaryResourceText");
         secondaryResource.Position = new Vector2(1200, 0);
         eventLog = new EventLog();
+        SpriteGameObject eventBackDrop = new SpriteGameObject("eventBackDrop", 0, "eventLogBackDrop", 0);
+        eventBackDrop.Position = Vector2.Zero;
+        SpriteGameObject resourceBackDrop = new SpriteGameObject("resourceBackDrop", 0, "resourceBackDrop", 0);
+        resourceBackDrop.Position = Vector2.Zero;
         HUD hud = GameWorld.GameStateManager.GetGameState("hud") as HUD;
+        hud.hud.Add(resourceBackDrop);
+        hud.hud.Add(eventBackDrop);
         hud.hud.Add(mainResource);
         hud.hud.Add(secondaryResource);
         hud.hud.Add(eventLog);

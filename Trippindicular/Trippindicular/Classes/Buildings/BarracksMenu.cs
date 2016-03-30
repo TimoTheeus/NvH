@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 class BarracksMenu : Menu
 {
     protected Button button1, button2, button3, button4, button5;
+    protected CursorToolTip toolTip1, toolTip2, toolTip3, toolTip4, toolTip5;
     protected Tile tile;
-    protected Player player;
-    private string actionString;
+    protected Player player;    private string actionString;
     private bool actionSent;
 
     public BarracksMenu(Tile tile) : base(4, "barracksMenu")
@@ -23,6 +23,8 @@ class BarracksMenu : Menu
         this.actionString = null;
         button1 = new Button("checkBox", "", "", 0, "", 4);
         button1.Position = background.Position + new Vector2(-120, 0);
+        toolTip1 = new CursorToolTip();
+        toolTip1.Name = "Human Worker"; toolTip1.MainCost = "Wood Cost: 100"; toolTip1.SecCost = "Coal Cost: 100"; toolTip1.Hp = "100"; toolTip1.Damage = "-"; toolTip1.Range = "-"; toolTip1.Speed = "100";
         button2 = new Button("checkBox", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
         button3 = new Button("checkBox", "", "", 0, "", 4);
@@ -47,12 +49,25 @@ class BarracksMenu : Menu
                 return;
             }
         }
+
+
     }
 
     public override void HandleInput(InputHelper inputHelper)
     {
         base.HandleInput(inputHelper);
         Unit unit = null;
+
+        if (button1 != null && button1.Selected && !GameData.LevelObjects.Objects.Contains(toolTip1))
+        {
+            GameData.LevelObjects.Add(toolTip1);
+        }
+
+        if (button1 != null && !button1.Selected && GameData.LevelObjects.Objects.Contains(toolTip1))
+        {
+            GameData.LevelObjects.Remove(toolTip1);
+        }
+
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
             button1.Sprite.SheetIndex = 1;

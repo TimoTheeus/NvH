@@ -43,6 +43,9 @@ smallButton-GUI/SmallButton
 menuBackground-GUI/MenuBackground
 disabledButton-GUI/disabledButton
 nameBar-GUI/nameBar
+eventBackDrop-GUI/EventLogBackDrop
+resourceBackDrop-GUI/ResourceBackDrop
+toolTipBack-GUI/toolTipBackground
 #
 #Font:
 buttonFont-Fonts/ButtonFont

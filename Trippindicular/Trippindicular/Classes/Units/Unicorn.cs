@@ -21,6 +21,7 @@ class Unicorn : Unit
         health = maxHealth;
         slowTimer = new Timer(2f);
         stunTime = 0.5f;
+        name = "UNICORN";
     }
     public override void Update(GameTime gameTime)
     {
