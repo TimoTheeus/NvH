@@ -222,13 +222,13 @@ class BarracksMenu : Menu
     {
         button1 = new Button("checkBox", "", "", 0, "", 4);
         button1.Position = background.Position + new Vector2(-120, 0);
-        button2 = new Button("checkBox", "", "", 0, "", 4);
+        button2 = new Button("wolfButton", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
-        button3 = new Button("checkBox", "", "", 0, "", 4);
+        button3 = new Button("pelletButton", "", "", 0, "", 4);
         button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
-        button4 = new Button("checkBox", "", "", 0, "", 4);
+        button4 = new Button("treeButton", "", "", 0, "", 4);
         button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
-        button5 = new Button("checkBox", "", "", 0, "", 4);
+        button5 = new Button("unicornButton", "", "", 0, "", 4);
         button5.Position = button1.Position + new Vector2(button1.Width * 4, 0);
         addButton(button1);
         addButton(button2);
@@ -242,13 +242,13 @@ class BarracksMenu : Menu
     {
         button1 = new Button("checkBox", "", "", 0, "", 4);
         button1.Position = background.Position + new Vector2(-120, 0);
-        button2 = new Button("checkBox", "", "", 0, "", 4);
+        button2 = new Button("chainsawButton", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
-        button3 = new Button("checkBox", "", "", 0, "", 4);
+        button3 = new Button("hunterButton", "", "", 0, "", 4);
         button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
-        button4 = new Button("checkBox", "", "", 0, "", 4);
+        button4 = new Button("flamethrowerButton", "", "", 0, "", 4);
         button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
-        button5 = new Button("checkBox", "", "", 0, "", 4);
+        button5 = new Button("quadButton", "", "", 0, "", 4);
         button5.Position = button1.Position + new Vector2(button1.Width * 4, 0);
         addButton(button1);
         addButton(button2);

@@ -38,6 +38,23 @@ humanityHouse-Tilesets/HumanityHouse
 backButton-Buttons/BackButton
 humanityButton-Buttons/HumanityButton
 natureButton-Buttons/NatureButton
+unicornButton-Buttons/UnicornButton
+woodcutterButton-Buttons/WoodCutterButton
+militaryButton-Buttons/IconHumanityBuildingMilitary
+mineButton-Buttons/IconHumanityBuildingMining
+chainsawButton-Buttons/IconHumanityUnitChainsaw
+flamethrowerButton-Buttons/IconHumanityUnitFlamethrower
+hunterButton-Buttons/IconHumanityUnitHunter
+quadButton-Buttons/IconHumanityUnitQuad
+workerhButton-Buttons/IconHumanityUnitWorker
+sunlightButton-Buttons/IconNatureBuildingLightTree
+waterButton-Buttons/IconNatureBuildingWaterTree
+meteorButton-Buttons/IconNatureSpellMeteor
+snowButton-Buttons/IconNatureSpellSnow
+pelletButton-Buttons/IconNatureUnitPelletthing
+wolfButton-Buttons/IconNatureUnitWolf
+workernButton-Buttons/IconNatureUnitWorker
+treeButton-Buttons/IconNatureEnt
 #
 #GUI:
 button-GUI/Button
@@ -72,6 +89,12 @@ nMusic-SFX/NatureSoundTrack
 cursorDot-Cursors/CursorDot
 humanityCursor-Cursors/HumanityCursor
 natureCursor-Cursors/NatureCursor
+copperIcon-Cursors/IconHumanityResourceCopper
+woodIcon-Cursors/IconHumanityResourceWood
+lightIcon-Cursors/IconNatureResourceLight
+waterIcon-Cursors/IconNatureResourceWater
+iceSpell-Cursors/SpellIce
+meteorSpell-Cursors/SpellMeteor
 #
 #Units:
 unicorn-Tilesets/NatureUnicornUnit
@@ -82,6 +105,9 @@ quad-Units/HumanityUnitQuad
 woodcutter-Units/HumanityUnitWoodcutter
 treeUnit-Units/NatureUnitTree
 natureWorker-Units/NatureUnitWorker
+hunter-Units/HumanityUnitHunter
+humanityWorker-Units/HumanityUnitWorker
+pelletGun-Units/NatureUnitPelletGun
 
 
 

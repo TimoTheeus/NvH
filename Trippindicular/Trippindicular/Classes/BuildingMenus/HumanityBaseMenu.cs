@@ -25,9 +25,9 @@ class HumanityBaseMenu : Menu
         this.Add(background);
         button1 = new Button("checkBox", "", "", 0, "", 4);
         button1.Position = background.Position + new Vector2(-120, 0);
-        button2 = new Button("checkBox", "", "", 0, "", 4);
+        button2 = new Button("workerhButton", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
-        button3 = new Button("checkBox", "", "", 0, "", 4);
+        button3 = new Button("woodcutterButton", "", "", 0, "", 4);
         button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
         addButton(button1);
         addButton(button2);
