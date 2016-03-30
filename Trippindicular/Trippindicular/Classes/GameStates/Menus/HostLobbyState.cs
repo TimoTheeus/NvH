@@ -68,7 +68,7 @@ namespace Trippindicular.Classes
                     GameData.Host = true;
                     GameData.player = new Player(Player.Faction.humanity);
                     playingState.Initialize(GameData.Host);
-                    GameWorld.GameStateManager.SwitchTo("playing"); 
+                    GameWorld.GameStateManager.SwitchTo("hud"); 
                 }
             }
             else if (createAsNature.Pressed)
@@ -76,7 +76,7 @@ namespace Trippindicular.Classes
                 GameData.Host = true;
                 GameData.player = new Player(Player.Faction.nature);
                 playingState.Initialize(GameData.Host);
-                GameWorld.GameStateManager.SwitchTo("playing");
+                GameWorld.GameStateManager.SwitchTo("hud");
 
             }
             else if (exitGame.Pressed)

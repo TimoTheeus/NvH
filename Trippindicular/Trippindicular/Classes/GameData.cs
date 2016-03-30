@@ -20,9 +20,14 @@ static class GameData
     static public Player player;
     static public int unitIdIndex;
     static bool host;
-    static List<Point> forests;
+    static List<Forest> forests;
     public static bool Host { get { return host; } set { host = value; } }
 
+    static public int UnitIdIndex
+    {
+        get { return unitIdIndex; }
+        set { unitIdIndex = value; }
+    }
 
     static public Point Resolution
     {
@@ -42,7 +47,7 @@ static class GameData
         LevelObjects.Draw(gameTime, spriteBatch);
     }
 
-    static public void ClientInitialize(List<Point> trees, Player plyr)
+    static public void ClientInitialize(List<Forest> trees, Player plyr)
     {
         Tile tile = new Tile();
         GameData.Player = plyr;
@@ -53,20 +58,24 @@ static class GameData
                 if (i > (int)(LevelGrid.Columns * .25) && i < (int)(LevelGrid.Columns * .75))
                 {
                     bool ftile = false;
-                    foreach (Point p in trees)
+                    string id = "";
+                    foreach (Forest f in trees)
                     {
-                        if (p.X == i && p.Y == j)
+                        if (f.forestPoint.X == i && f.forestPoint.Y == j)
                         {
+                            id = f.ID;
                             ftile = true;
                             break;
                         }
                     }
                     if (ftile)
                     {
-                            Forest f = new Forest();
+                            Forest f = new Forest(new Point(i, j));
                             f.gridPosition = new Point(i, j);
+                            f.ID = id;
                             GameData.LevelGrid.Add(f, i, j);
-                            forests.Add(new Point(i, j));
+                            GameData.Buildings.Add(f);
+                            forests.Add(f);
                      } else {
                             Tile t = new Tile();
                             t.gridPosition = new Point(i, j);
@@ -118,8 +127,8 @@ static class GameData
         //naturePlayer = new Player(Player.Faction.nature);
         //GameData.LevelObjects.Add(naturePlayer);
         GameData.LevelObjects.Add(player);
-        ResourceController = new ResourceController(1, 10, 10);
-        GameData.LevelObjects.Add(ResourceController);
+        //ResourceController = new ResourceController(1, 10, 10);
+        //GameData.LevelObjects.Add(ResourceController);
         NatureWorker unit = new NatureWorker();
         unit.Position = new Vector2(500, 500);
         NatureWorker unit2 = new NatureWorker();
@@ -172,7 +181,7 @@ static class GameData
         Cursor = new Cursor();
         GameData.LevelObjects.Add(Cursor);
 
-        forests = new List<Point>();
+        forests = new List<Forest>();
 
     }
     static public void AfterInitialize()
@@ -193,9 +202,9 @@ static class GameData
     {
         string msg = "$init";
         msg += "$trees:";
-        foreach (Point p in forests)
+        foreach (Forest f in forests)
         {
-            msg += p.X.ToString() + "," + p.Y.ToString() + "|";
+            msg += f.ID + "," + f.forestPoint.X.ToString() + "," + f.forestPoint.Y.ToString()+"|";
         }
         string facString = "";
         if (GameData.Player.GetFaction == Player.Faction.nature)
@@ -213,6 +222,7 @@ static class GameData
     {
         Tile tile = new Tile();
         GameData.player.GetFaction = Player.Faction.nature;
+        int idIndex = 0;
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
             for (int j = 0; j < LevelGrid.Rows; j++)
@@ -221,10 +231,13 @@ static class GameData
                     switch (GameWorld.Random.Next(12))
                     {
                         case 0:
-                            Forest f = new Forest();
+                            Forest f = new Forest(new Point(i,j));
                             f.gridPosition = new Point(i, j);
+                            f.ID = f.ID + idIndex.ToString();
+                            idIndex++;
                             GameData.LevelGrid.Add(f, i, j);
-                            forests.Add(new Point(i, j));
+                            forests.Add(f);
+                            GameData.Buildings.Add(f);
                             break;
                         default:
                             Tile t = new Tile();
@@ -277,8 +290,8 @@ static class GameData
         //naturePlayer = new Player(Player.Faction.nature);
         //GameData.LevelObjects.Add(naturePlayer);
         GameData.LevelObjects.Add(player);
-        ResourceController = new ResourceController(1, 10, 10) ;
-        GameData.LevelObjects.Add(ResourceController);
+        //ResourceController = new ResourceController(1, 10, 10) ;
+        //GameData.LevelObjects.Add(ResourceController);
         NatureWorker unit = new NatureWorker();
         unit.Position = new Vector2(500, 500);
         NatureWorker unit2 = new NatureWorker();

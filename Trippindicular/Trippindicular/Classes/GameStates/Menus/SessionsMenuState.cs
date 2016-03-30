@@ -40,9 +40,9 @@ namespace Trippindicular.Classes
             this.Add(exitGame);
 
             //nameBar
-            nameBar = new SpriteGameObject("nameBar");
-            nameBar.Position= new Vector2(100, 540);
-            this.Add(nameBar);
+            //nameBar = new SpriteGameObject("nameBar");
+            //nameBar.Position= new Vector2(100, 540);
+            //this.Add(nameBar);
             //UseInput
             input = new UserInput();
             input.Position = new Vector2(150, 560);

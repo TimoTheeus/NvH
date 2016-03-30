@@ -46,6 +46,9 @@ class PlayingState : IGameLoopObject
             connected = true;
             GameData.Initialize();
             this.networkManager.SendMessage("$init");
+            ResourceController r;
+            r = new ResourceController(1, 10, 10);
+            GameData.LevelObjects.Add(r);
             this.initialized = false;
             ProcessNetworkMessages();
             //initialize when message received
@@ -124,8 +127,12 @@ class PlayingState : IGameLoopObject
                             }
                             else
                             {
+
                                 string initMsg = GameData.InitializeMessage();
                                 this.networkManager.SendMessage(initMsg);
+                                ResourceController r;
+                                r = new ResourceController(1, 10, 10);
+                                GameData.LevelObjects.Add(r);
                             }
                         } else {
                             UpdateGameData(msg);
@@ -141,7 +148,7 @@ class PlayingState : IGameLoopObject
     private void HandleInitMessage(string msg)
     {
         string[] pairs = msg.Split('$');
-        List<Point> trees = new List<Point>();
+        List<Forest> trees = new List<Forest>();
         Player player = null; ;
         for (int i = 2; i < pairs.Length; i++)
         {
@@ -165,9 +172,12 @@ class PlayingState : IGameLoopObject
                     {
                         if (!p.Equals(""))
                         {
-                            int x = int.Parse(p.Split(',')[0]);
-                            int y = int.Parse(p.Split(',')[1]);
-                            trees.Add(new Point(x, y));
+                            string id = p.Split(',')[0];
+                            int x = int.Parse(p.Split(',')[1]);
+                            int y = int.Parse(p.Split(',')[2]);
+                            Forest f = new Forest(new Point(x, y));
+                            f.ID = id;
+                            trees.Add(f);
                         }
                     }
                     break;
@@ -307,6 +317,58 @@ class PlayingState : IGameLoopObject
                         break;
                 }
             }
+        }
+        else if (sig.Equals("addu"))
+        {
+            Unit u;//$addu:10$type:HumanityWorker$posi:1080,420
+            u = null;
+            string id = pairs[1].Substring(5, pairs[1].Length - 5);
+            
+            for (int i = 2; i < pairs.Length; i++)
+            {
+                switch (pairs[i].Substring(0, 4))
+                {   
+                    case "type":
+                        switch (pairs[i].Substring(5,pairs[i].Length - 5))
+                        {
+                            case "HumanityWorker":
+                                u = new HumanityWorker();
+                                break;
+                            case "NatureWorker":
+                                u = new NatureWorker();
+                                break;
+                            case "Melee1":
+                                u = new Melee1(GameData.player.OppositeFaction, "selectedTile", id);
+                                break;
+                            case "Ranged":
+                                u = new Ranged(GameData.player.OppositeFaction, "selectedTile", id);
+                                break;
+                            case "Melee2":
+                                u = new Melee2(GameData.player.OppositeFaction, "selectedTile", id);
+                                break;
+                            case "FlameThrower":
+                                u = new FlameThrower();
+                                break;
+                            case "Unicorn":
+                                u = new Unicorn();
+                                break;
+                            case "WoodCutter":
+                                u = new WoodCutter();
+                                break;
+                            case "Unit":
+                                u = new Unit();
+                                break;
+                        }
+                        break;
+                    case "posi":
+                        string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
+                        u.Position= new Vector2(int.Parse(coords[0]), int.Parse(coords[1]));
+                        break;
+                }
+            }
+            u.ID = id;
+            GameData.Units.Add(u);
+            GameData.unitIdIndex++;
         }
         }
 

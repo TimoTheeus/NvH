@@ -17,6 +17,11 @@ class Player : GameObject
     protected Timer updateDiscoveredAreaTimerBuildings;
     protected EventLog eventLog;
 
+    public Faction OppositeFaction
+    {
+        get { if (this.faction == Player.Faction.nature) { return Player.Faction.humanity;} else {return Player.Faction.nature;}}
+
+    }
     public Faction GetFaction
     {
         get { return faction; }
@@ -102,7 +107,7 @@ class Player : GameObject
          {
              for (int i = 0; i < GameData.Buildings.Objects.Count; i++)
              {
-                 if (GameData.Buildings.Objects[i] != null && (GameData.Buildings.Objects[i] as Building).Faction == faction)
+                 if (GameData.Buildings.Objects[i] != null && !(GameData.Buildings.Objects[i] is Forest) && (GameData.Buildings.Objects[i] as Building).Faction == faction)
                  {
                      Building b = GameData.Buildings.Objects[i] as Building;
                      b.UpdateDiscoveredArea();

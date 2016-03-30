@@ -9,14 +9,18 @@ class BarracksMenu : Menu
     protected Button button1, button2, button3, button4, button5;
     protected Tile tile;
     protected Player player;
+    private string actionString;
+    private bool actionSent;
 
     public BarracksMenu(Tile tile) : base(4, "barracksMenu")
     {
         this.tile = tile;
+        actionSent = false;
         background = new SpriteGameObject("button", 0, "background", 4);
         background.Position = new Vector2(GameData.Cursor.CurrentTile.Position.X, GameData.Cursor.CurrentTile.Position.Y + (new Tile().Height * 3 / 2));
         background.Origin = background.Sprite.Center;
         this.Add(background);
+        this.actionString = null;
         button1 = new Button("checkBox", "", "", 0, "", 4);
         button1.Position = background.Position + new Vector2(-120, 0);
         button2 = new Button("checkBox", "", "", 0, "", 4);
@@ -48,7 +52,7 @@ class BarracksMenu : Menu
     public override void HandleInput(InputHelper inputHelper)
     {
         base.HandleInput(inputHelper);
-
+        Unit unit = null;
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
             button1.Sprite.SheetIndex = 1;
@@ -61,8 +65,7 @@ class BarracksMenu : Menu
         {
             button2.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
-            Unit unit;
+
             if (tile is NatureBarracks)
             {
                 unit = new NatureWorker();
@@ -76,14 +79,13 @@ class BarracksMenu : Menu
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.AddUnit(unit);
         }
         else if (button3 != null && button3.Pressed)
         {
             button3.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
-            Unit unit;
+
+
             if (tile is NatureBarracks)
             {
                 unit = new Melee1(Player.Faction.nature, "natureWolf", "unit");
@@ -97,14 +99,12 @@ class BarracksMenu : Menu
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.AddUnit(unit);
         }
         else if (button4 != null && button4.Pressed)
         {
             button4.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
-            Unit unit;
+
             if (tile is NatureBarracks)
             {
                 unit = new Unicorn("unicorn", "unicorn");
@@ -118,14 +118,12 @@ class BarracksMenu : Menu
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.AddUnit(unit);
         }
         else if (button5 != null && button5.Pressed)
         {
             button5.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
-            Unit unit;
+            
             if (tile is NatureBarracks)
             {
                 unit = new Ranged(Player.Faction.nature, "selectedTile", "unicorn");
@@ -139,7 +137,32 @@ class BarracksMenu : Menu
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
-            GameData.AddUnit(unit);
         }
+        if (unit != null)
+        {
+            GameData.AddUnit(unit);
+            this.actionString = "$addu:" + unit.ID  + "$type:"+ unit.GetType() + "$posi:" + unit.Position.X + "," + unit.Position.Y;//;
+            
+        }
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+        if (actionSent)
+        {
+            GameData.LevelObjects.Remove(this);
+        }
+    }
+
+    public override string getActionOutput()
+    {
+        string s = this.actionString;
+        if (s != null)
+        {
+            actionSent = true;
+            this.actionString = null;
+        }
+        return s;
     }
 }
