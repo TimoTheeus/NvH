@@ -26,16 +26,12 @@ class HumanityBaseMenu : Menu
         button1 = new Button("checkBox", "", "", 0, "", 4);
         button1.Position = background.Position + new Vector2(-120, 0);
         button2 = new Button("workerhButton", "", "", 0, "", 4);
-        button2.Position = button1.Position + new Vector2(button1.Width, 0);
+        button2.Position = button1.Position + new Vector2(button1.Width+30, 0);
         button3 = new Button("woodcutterButton", "", "", 0, "", 4);
-        button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
+        button3.Position = button2.Position + new Vector2(button1.Width+30, 0);
         addButton(button1);
         addButton(button2);
         addButton(button3);
-        button4 = new Button("checkBox", "", "", 0, "", 4);
-        button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
-        if ((tile as Building).level >= 2)
-            addButton(button4);
         for (int i = 0; i < GameData.LevelObjects.Objects.Count; i++)
         {
             if (GameData.LevelObjects.Objects[i] is Player)
@@ -87,10 +83,6 @@ class HumanityBaseMenu : Menu
             else {
                 Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
                 n.CreateNotification(); unit = null; }
-        }
-        else if (button4 != null && button4.Pressed)
-        {
-            //Temporary unit spell
         }
         if (unit != null)
         {

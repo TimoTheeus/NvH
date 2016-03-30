@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class MeteorStorm : Spell
 {
 
-    public MeteorStorm() : base("selectedTile", "meteorStorm")
+    public MeteorStorm() : base("meteorSpell", "meteorStorm")
     {
         name = "METEORSTORM";
         range = 200;

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class HumanityWorker : Unit
 {
 
-    public HumanityWorker() : base("selectedTile", "")
+    public HumanityWorker() : base("humanityWorker", "hworker")
     {
         this.Damage = 0;
         Range = 0;

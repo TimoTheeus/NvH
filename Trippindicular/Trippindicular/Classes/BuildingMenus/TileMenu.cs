@@ -28,18 +28,26 @@ class TileMenu : Menu
 
     protected void AddButtons()
     {
-  
-            button1 = new Button("checkBox", "", "", 0, "", 4);
+        if (GameData.player.GetFaction == Player.Faction.nature)
+        {
+            button1 = new Button("sunlightButton", "", "", 0, "", 4);
             button1.Position = background.Position + new Vector2(-100, 0);
-            button2 = new Button("checkBox", "", "", 0, "", 4);
+            button2 = new Button("natureBarrackButton", "", "", 0, "", 4);
             button2.Position = button1.Position + new Vector2(button1.Width, 0);
             addButton(button1);
             addButton(button2);
-        if (GameData.player.GetFaction == Player.Faction.nature)
-        {
-            button3 = new Button("checkBox", "", "", 0, "", 4);
-            button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
-            addButton(button3);
+                button3 = new Button("waterButton", "", "", 0, "", 4);
+                button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
+                addButton(button3);
+            
+        }
+        else {
+            button1 = new Button("mineButton", "", "", 0, "", 4);
+            button1.Position = background.Position + new Vector2(-100, 0);
+            button2 = new Button("militaryButton", "", "", 0, "", 4);
+            button2.Position = button1.Position + new Vector2(button1.Width, 0);
+            addButton(button1);
+            addButton(button2);
         }
 
         

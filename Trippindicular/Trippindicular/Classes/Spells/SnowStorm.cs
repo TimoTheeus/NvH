@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 class SnowStorm : Spell
 {
-    public SnowStorm() : base("selectedTile", "snowStorm")
+    public SnowStorm() : base("iceSpell", "snowStorm")
     {
         name = "SNOWSTORM";
         range = 300;

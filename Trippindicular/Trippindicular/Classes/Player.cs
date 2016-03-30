@@ -16,6 +16,7 @@ class Player : GameObject
     protected Timer updateDiscoveredAreaTimer;
     protected Timer updateDiscoveredAreaTimerBuildings;
     protected EventLog eventLog;
+    protected SpriteGameObject Water, Light, Coal, Wood;
 
     public Faction OppositeFaction
     {
@@ -86,6 +87,24 @@ class Player : GameObject
         hud.hud.Add(eventLog);
         updateDiscoveredAreaTimer = new Timer((1 / 6));
         updateDiscoveredAreaTimerBuildings = new Timer((1/61));
+        Light = new SpriteGameObject("lightIcon");
+        Water = new SpriteGameObject("waterIcon");
+        Coal = new SpriteGameObject("copperIcon");
+        Wood = new SpriteGameObject("woodIcon");
+        if (faction==Faction.nature)
+        {
+            Light.Position = new Vector2(1400, 0);
+            Water.Position = new Vector2(1100, 0);
+            hud.hud.Add(Light);
+            hud.hud.Add(Water);
+        }
+        else
+        {
+            Coal.Position = new Vector2(1400, 0);
+            Wood.Position = new Vector2(1100, 0);
+            hud.hud.Add(Coal);
+            hud.hud.Add(Wood);
+        }
     }
     public override void Update(GameTime gameTime)
     {

@@ -55,6 +55,7 @@ pelletButton-Buttons/IconNatureUnitPelletthing
 wolfButton-Buttons/IconNatureUnitWolf
 workernButton-Buttons/IconNatureUnitWorker
 treeButton-Buttons/IconNatureEnt
+natureBarrackButton-Buttons/IconNatureBuildingDefence
 #
 #GUI:
 button-GUI/Button
