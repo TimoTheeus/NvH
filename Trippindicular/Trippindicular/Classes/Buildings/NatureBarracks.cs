@@ -16,8 +16,12 @@ class NatureBarracks:Building
 
     public override void LeftButtonAction()
     {
-        GameData.LevelObjects.Add(new BarracksMenu(this));
-        GameData.Cursor.HasClickedTile = false;
+
+        if (GameData.player.GetFaction == Player.Faction.nature)
+        {
+            GameData.LevelObjects.Add(new BarracksMenu(this));
+            GameData.Cursor.HasClickedTile = false;
+        }
     }
 }
 

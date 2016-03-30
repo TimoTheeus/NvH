@@ -19,8 +19,11 @@ class HumanityBarrack : PolyTileBuilding
 
     public override void LeftButtonAction()
     {
-        GameData.LevelObjects.Add(new BarracksMenu(this));
-        GameData.Cursor.HasClickedTile = false;
+        if (GameData.player.GetFaction == Player.Faction.humanity)
+        {
+            GameData.LevelObjects.Add(new BarracksMenu(this));
+            GameData.Cursor.HasClickedTile = false;
+        }
     }
 }
 
