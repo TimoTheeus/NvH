@@ -12,6 +12,7 @@ class NatureBarracks:Building
         name = "NATURE BARRACKS";
         level = 1;
         maxLevel = 3;
+        this.resourceCosts = new Point(200, 50);
     }
 
     public override void LeftButtonAction()

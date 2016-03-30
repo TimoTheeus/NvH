@@ -92,17 +92,29 @@ static class GameData
                     t.gridPosition = new Point(i, j);
                     GameData.LevelGrid.Add(t, i, j);
                 }
-            }        
+            }
+        Mine mine = new Mine();
+        mine.gridPosition = new Point(4, 8);
+        GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[4, 8], mine, false);
         HumanityBase hBase = new HumanityBase();
         hBase.gridPosition = new Point(2, 11);
         hBase.Position = GameData.LevelGrid.Objects[2, 11].Position;
         GameData.LevelGrid.Objects[2, 11] = hBase;
         GameData.Buildings.Add(hBase);
+        GameData.Buildings.Add(mine);
+        mine.HasBeenBuiltAction();
+
+        SunlightTree sunlightTree = new SunlightTree();
         NatureBase nBase = new NatureBase();
         nBase.gridPosition = new Point(GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11);
+        sunlightTree.gridPosition = new Point(GameData.LevelGrid.Columns - 4, GameData.LevelGrid.Rows -8);
+        GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 4, GameData.LevelGrid.Rows - 8], sunlightTree, false);
         nBase.Position = GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11].Position;
         GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11] = nBase;
         GameData.Buildings.Add(nBase);
+        GameData.Buildings.Add(sunlightTree);
+        sunlightTree.HasBeenBuiltAction();
+
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
         if (GameData.Cursor != null)
@@ -138,7 +150,7 @@ static class GameData
             GameWorld.Camera.Pos = new Vector2(3380, 85);
 
         }
-
+        
         selectedTile = new SpriteGameObject("selectedTile", 0, "selectedTile", 1);
         selectedTile.Origin = selectedTile.Sprite.Center;
         selectedTile.Position = new Vector2(-3000, -3000);
@@ -202,7 +214,10 @@ static class GameData
         LevelObjects.Add(Units);
         Cursor = new Cursor();
         GameData.LevelObjects.Add(Cursor);
+        ResourceController r;
 
+        r = new ResourceController(3, 5, 0);
+        GameData.LevelObjects.Add(r);
         forests = new List<Forest>();
 
     }
@@ -276,17 +291,27 @@ static class GameData
                     t.gridPosition = new Point(i, j);
                     GameData.LevelGrid.Add(t, i, j);
                 }
-         }        
+         }
+        Mine mine = new Mine();
+        mine.gridPosition = new Point(4, 8);
+        GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[4, 8], mine, false);
         HumanityBase hBase = new HumanityBase();
         hBase.gridPosition = new Point(2, 11);
         hBase.Position = GameData.LevelGrid.Objects[2, 11].Position;
         GameData.LevelGrid.Objects[2, 11] = hBase;
         GameData.Buildings.Add(hBase);
+        GameData.Buildings.Add(mine);
+        mine.HasBeenBuiltAction();
+        SunlightTree sunlightTree = new SunlightTree();
         NatureBase nBase = new NatureBase();
         nBase.gridPosition = new Point(GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11);
+        sunlightTree.gridPosition = new Point(GameData.LevelGrid.Columns - 4, GameData.LevelGrid.Rows - 8);
+        GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 4, GameData.LevelGrid.Rows - 8], sunlightTree, false);
         nBase.Position = GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11].Position;
         GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11] = nBase;
         GameData.Buildings.Add(nBase);
+        GameData.Buildings.Add(sunlightTree);
+        sunlightTree.HasBeenBuiltAction();
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
         GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y, 

@@ -12,6 +12,7 @@ class Mine : Building
     {
         Faction = Player.Faction.humanity;
         name = "COALMINE";
+        this.resourceCosts = new Point(100, 50);
     }
 
     public override void HandleInput(InputHelper ih)
@@ -30,7 +31,7 @@ class Mine : Building
     public override void HasBeenBuiltAction()
     {
         base.HasBeenBuiltAction();
-        resController = new ResourceController(1, 0, 50);
+        resController = new ResourceController(3, 4, 0);
         GameData.LevelObjects.Add(resController);
     }
 }

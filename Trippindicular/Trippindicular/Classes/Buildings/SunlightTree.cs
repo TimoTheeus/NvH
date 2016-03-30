@@ -11,6 +11,7 @@ class SunlightTree:Building
     public SunlightTree() : base("sunlightTree", "natureLightTree")
     {
         Faction = Player.Faction.nature;
+        this.resourceCosts = new Point(60, 0);
     }
 
 
@@ -22,7 +23,7 @@ class SunlightTree:Building
     public override void HasBeenBuiltAction()
     {
         base.HasBeenBuiltAction();
-        resController = new ResourceController(1, 50, 0);
+        resController = new ResourceController(10, 10, 0); // 60/m
         GameData.LevelObjects.Add(resController);
     }
 }

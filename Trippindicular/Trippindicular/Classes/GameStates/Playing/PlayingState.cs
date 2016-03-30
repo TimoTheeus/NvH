@@ -48,7 +48,8 @@ class PlayingState : IGameLoopObject
             GameData.Initialize();
             this.networkManager.SendMessage("$init");
             ResourceController r;
-            r = new ResourceController(1, 10, 10);
+
+            r = new ResourceController(3, 5, 0);
             GameData.LevelObjects.Add(r);
             this.initialized = false;
             ProcessNetworkMessages();
@@ -132,7 +133,7 @@ class PlayingState : IGameLoopObject
                                 string initMsg = GameData.InitializeMessage();
                                 this.networkManager.SendMessage(initMsg);
                                 ResourceController r;
-                                r = new ResourceController(1, 10, 10);
+                                r = new ResourceController(3, 5, 0); // 100 p/m
                                 GameData.LevelObjects.Add(r);
                             }
                         } else {

@@ -16,16 +16,18 @@ class Melee2 : Unit
         this.speed = 150;
         if (this.faction == Player.Faction.nature)
         {
-            Damage = 25;
+            Damage = 30;
             this.unBuffedSpeed = speed;
             this.buffedSpeed = speed + 100;
-            maxHealth = 200;
+            maxHealth = 225;
             health = maxHealth;
+            this.resourceCosts = new Point(150, 150);
         }
         else {
-            Damage = 25;
-            maxHealth = 200;
+            Damage = 40;
+            maxHealth = 150;
             health = maxHealth;
+            this.resourceCosts = new Point(150, 100);
         }
     }
     public override void Attack()

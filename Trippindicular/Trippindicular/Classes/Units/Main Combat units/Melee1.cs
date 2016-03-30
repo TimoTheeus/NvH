@@ -12,16 +12,16 @@ class Melee1 : Unit
         this.faction = faction;
         if (this.faction == Player.Faction.nature)
         {
-            Damage = 30;
-            maxHealth = 200;
+            Damage = 25;
+            maxHealth = 175;
             health = maxHealth;
-            resourceCosts = new Point(30, 0);
+            resourceCosts = new Point(100, 25);
         }
         else {
-            Damage = 15;
-            maxHealth = 120;
+            Damage = 30;
+            maxHealth = 150;
             health = maxHealth;
-            resourceCosts = new Point(10, 0);
+            resourceCosts = new Point(100, 50);
         }
     }
 }

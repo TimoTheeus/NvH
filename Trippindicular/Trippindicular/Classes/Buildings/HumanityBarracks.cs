@@ -15,6 +15,7 @@ class HumanityBarrack : PolyTileBuilding
         Faction = Player.Faction.humanity;
         name = "HUMAN BARRACKS";
         maxLevel = 3;
+        this.resourceCosts = new Point(100, 100);
     }
 
     public override void LeftButtonAction()

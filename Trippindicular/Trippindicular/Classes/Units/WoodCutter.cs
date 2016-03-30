@@ -9,14 +9,14 @@ class WoodCutter : Unit
     {
         Faction = Player.Faction.humanity;
         name = "WOODCUTTER";
-        this.ResourceCosts = new Microsoft.Xna.Framework.Point(10, 10);
+        this.ResourceCosts = new Microsoft.Xna.Framework.Point(75, 0);
     }
 
     public override void Attack()
     {
         if (targetBuilding != null && GameData.player.GetFaction == Player.Faction.humanity)
         {
-            GameData.player.MainResource += 20;
+            GameData.player.SecondaryResource += 2;
         }
         base.Attack();
     }

@@ -18,8 +18,8 @@ class Unicorn : Unit
         if (this.faction == Player.Faction.nature)
         {
             this.Speed = 250f;
-            Damage = 25;
-            maxHealth = 200;
+            Damage = 40;
+            maxHealth = 300;
             health = maxHealth;
             slowTimer = new Timer(2f);
             stunTime = 0.5f;
@@ -27,8 +27,8 @@ class Unicorn : Unit
         else
         {
             this.Speed = 250f;
-            Damage = 25;
-            maxHealth = 200;
+            Damage = 50;
+            maxHealth = 240;
             health = maxHealth;
             slowTimer = new Timer(2f);
             stunTime = 0.5f;

@@ -11,6 +11,7 @@ class WaterTree : Building
     public WaterTree() : base("natureWaterTree", "natureWaterTree")
     {
         Faction = Player.Faction.nature;
+        this.resourceCosts = new Point(150, 0);
     }
 
 
@@ -22,7 +23,7 @@ class WaterTree : Building
     public override void HasBeenBuiltAction()
     {
         base.HasBeenBuiltAction();
-        resController = new ResourceController(1, 0, 50);
+        resController = new ResourceController(3, 0, 5); //100pm
         GameData.LevelObjects.Add(resController);
     }
 }
