@@ -257,6 +257,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\EventLogBackDrop.png">
+      <Name>EventLogBackDrop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="SFX\HumanitySoundTrack.mp3">
       <Name>HumanitySoundTrack</Name>
       <Importer>Mp3Importer</Importer>
@@ -306,6 +313,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\ResourceBackDrop.png">
+      <Name>ResourceBackDrop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Cursors\HumanityCursor.png">
       <Name>HumanityCursor</Name>
       <Importer>TextureImporter</Importer>
@@ -313,6 +325,13 @@
     </Compile>
     <Compile Include="Cursors\NatureCursor.png">
       <Name>NatureCursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\toolTipBackground.png">
+      <Name>toolTipBackground</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

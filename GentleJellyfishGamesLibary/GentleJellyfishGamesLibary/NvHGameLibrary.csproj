@@ -84,6 +84,7 @@
     <Compile Include="Classes\GameObjects\GameObjectGrid.cs" />
     <Compile Include="Classes\GameObjects\MenuButtons\CheckBox.cs" />
     <Compile Include="Classes\GameObjects\MenuButtons\DropBox.cs" />
+    <Compile Include="Classes\GameObjects\MenuButtons\ToolTip.cs" />
     <Compile Include="Classes\GameObjects\SpriteGameObject\Additions\Animation.cs" />
     <Compile Include="Classes\GameObjects\SpriteGameObject\Additions\Collision.cs" />
     <Compile Include="Classes\GameObjects\Controllers\Controller.cs" />
