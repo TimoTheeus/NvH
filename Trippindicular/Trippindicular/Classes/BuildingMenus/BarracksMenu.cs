@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 class BarracksMenu : Menu
 {
     protected Button button1, button2, button3, button4, button5;
+    protected CursorToolTip toolTip1, toolTip2, toolTip3, toolTip4, toolTip5;
     protected Tile tile;
-    protected Player player;
-    private string actionString;
+    protected Player player;    private string actionString;
     private bool actionSent;
 
     public BarracksMenu(Tile tile) : base(4, "barracksMenu")
@@ -21,6 +21,7 @@ class BarracksMenu : Menu
         background.Origin = background.Sprite.Center;
         this.Add(background);
         this.actionString = null;
+
         if (tile is NatureBarracks)
         {
             CreateNatureMenu();
@@ -38,13 +39,15 @@ class BarracksMenu : Menu
                 return;
             }
         }
+
+
     }
 
     public override void HandleInput(InputHelper inputHelper)
     {
         base.HandleInput(inputHelper);
         Unit unit = null;
-        //Upgrade building
+
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
             button1.Sprite.SheetIndex = 1;
