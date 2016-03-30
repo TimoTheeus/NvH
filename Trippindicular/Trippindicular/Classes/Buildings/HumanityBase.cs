@@ -12,12 +12,18 @@ class HumanityBase : PolyTileBuilding
         this.health = 1;
         Faction = Player.Faction.humanity;
         name = "HUMAN BASE";
+        maxLevel = 2;
     }
 
     public override void Destroy()
     {
         base.Destroy();
         GameWorld.GameStateManager.SwitchTo("finish");
+    }
+    public override void LeftButtonAction()
+    {
+        GameData.LevelObjects.Add(new HumanityBaseMenu(this));
+        GameData.Cursor.HasClickedTile = false;
     }
 }
 

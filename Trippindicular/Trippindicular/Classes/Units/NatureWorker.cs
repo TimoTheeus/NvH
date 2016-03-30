@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 class NatureWorker : Unit
 {
-    public NatureWorker() : base("slime", "natureWorker")
+    public NatureWorker() : base("natureWorker", "natureWorker")
     {
         this.Damage = 0;
         this.Range = 0;

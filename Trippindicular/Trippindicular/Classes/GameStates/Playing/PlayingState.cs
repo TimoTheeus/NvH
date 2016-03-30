@@ -390,7 +390,7 @@ class PlayingState : IGameLoopObject
                                 u = new FlameThrower();
                                 break;
                             case "Unicorn":
-                                u = new Unicorn();
+                                u = new Unicorn(GameData.player.OppositeFaction, "selectedTile", id);
                                 break;
                             case "WoodCutter":
                                 u = new WoodCutter();

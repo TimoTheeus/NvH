@@ -12,15 +12,27 @@ class Unicorn : Unit
     protected bool slowed;
     protected Timer slowTimer;
     protected float stunTime;
-    public Unicorn(string assetName="", string id="") : base(assetName, id)
+    public Unicorn(Player.Faction faction,string assetName="", string id="") : base(assetName, id)
     {
-        this.faction = Player.Faction.nature;
-        this.Speed = 250f;
-        Damage = 25;
-        maxHealth = 200;
-        health = maxHealth;
-        slowTimer = new Timer(2f);
-        stunTime = 0.5f;
+        this.faction = faction;
+        if (this.faction == Player.Faction.nature)
+        {
+            this.Speed = 250f;
+            Damage = 25;
+            maxHealth = 200;
+            health = maxHealth;
+            slowTimer = new Timer(2f);
+            stunTime = 0.5f;
+        }
+        else
+        {
+            this.Speed = 250f;
+            Damage = 25;
+            maxHealth = 200;
+            health = maxHealth;
+            slowTimer = new Timer(2f);
+            stunTime = 0.5f;
+        }
     }
     public override void Update(GameTime gameTime)
     {

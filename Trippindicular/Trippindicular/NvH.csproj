@@ -86,6 +86,7 @@
     <Compile Include="Classes\Buildings\Forest.cs" />
     <Compile Include="Classes\Buildings\HumanityBarracks.cs" />
     <Compile Include="Classes\Buildings\HumanityBase.cs" />
+    <Compile Include="Classes\Buildings\HumanityBaseMenu.cs" />
     <Compile Include="Classes\Buildings\Mine.cs" />
     <Compile Include="Classes\Buildings\NatureBarracks.cs" />
     <Compile Include="Classes\Buildings\NatureBase.cs" />

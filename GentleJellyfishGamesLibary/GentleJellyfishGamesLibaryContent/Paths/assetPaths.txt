@@ -74,6 +74,11 @@ natureCursor-Cursors/NatureCursor
 unicorn-Tilesets/NatureUnicornUnit
 natureWolf-Tilesets/NatureWolfUnit
 flamethrower-Tilesets/HumanityFlamethrowerUnit
+chainsaw-Units/HumanityUnitChainsaw
+quad-Units/HumanityUnitQuad
+woodcutter-Units/HumanityUnitWoodcutter
+treeUnit-Units/NatureUnitTree
+natureWorker-Units/NatureUnitWorker
 
 
 
