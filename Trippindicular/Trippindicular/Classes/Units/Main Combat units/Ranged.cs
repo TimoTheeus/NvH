@@ -16,13 +16,13 @@ class Ranged : Unit
             Damage = 25;
             maxHealth = 150;
             health = maxHealth;
-            Range = 300;
+            Range = 200;
         }
         else {
             Damage = 25;
             maxHealth = 150;
             health = maxHealth;
-            Range = 300;
+            Range = 200;
         }
     }
 }
