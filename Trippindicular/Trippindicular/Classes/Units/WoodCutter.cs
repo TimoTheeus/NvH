@@ -5,7 +5,7 @@ using System.Text;
 
 class WoodCutter : Unit
 {
-    public WoodCutter() : base("selectedTile", "WoodCutter")
+    public WoodCutter() : base("woodcutter", "WoodCutter")
     {
         Faction = Player.Faction.humanity;
         name = "WOODCUTTER";
