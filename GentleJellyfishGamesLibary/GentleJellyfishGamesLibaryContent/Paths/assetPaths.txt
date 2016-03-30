@@ -62,6 +62,8 @@ description-Fonts/AchievementDescription
 #Sounds:
 #
 #Music:
+hMusic-SFX/HumanitySoundTrack
+nMusic-SFX/NatureSoundTrack
 #
 #Cursors:
 cursorDot-Cursors/CursorDot

@@ -131,6 +131,9 @@ public class InputHelper
             case Keys.Space:
                 inputString += " ";
                 break;
+            case Keys.OemPeriod:
+                inputString += ".";
+                break;
             default:
                 break;
         }

@@ -78,7 +78,7 @@ class Cursor : SpriteGameObject
             }
         }
 
-        bool mouseEnabled = false;
+        bool mouseEnabled = true;
 
         if (inputHelper.IsKeyDown(Keys.K)) { MeteorStorm s = new MeteorStorm(); s.Position = this.Position + GameWorld.Camera.Pos; GameData.LevelObjects.Add(s); }
 

@@ -1,5 +1,5 @@
-height:640
-width:860
+height:720
+width:1280
 fullscreen:false
 soundvolume:1
 musicvolume:1
