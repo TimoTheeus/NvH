@@ -163,30 +163,7 @@ static class GameData
         GameData.LevelObjects.Add(player);
         //ResourceController = new ResourceController(1, 10, 10);
         //GameData.LevelObjects.Add(ResourceController);
-        NatureWorker unit = new NatureWorker();
-        unit.Position = new Vector2(500, 500);
-        NatureWorker unit2 = new NatureWorker();
-        unit2.Position = new Vector2(700, 500);
-        Melee1 unit3 = new Melee1(Player.Faction.nature, "selectedTile", "natMelee");
-        unit3.Position = new Vector2(900, 500);
-        HumanityWorker unit4 = new HumanityWorker();
-        unit4.Position = new Vector2(1100, 500);
-        FlameThrower unit5 = new FlameThrower();
-        unit5.Position = new Vector2(500, 700);
-        FlameThrower unit6 = new FlameThrower();
-        unit6.Position = new Vector2(700, 700);
-        WoodCutter unit7 = new WoodCutter();
-        unit7.Position = new Vector2(900, 700);
-        WoodCutter unit8 = new WoodCutter();
-        unit8.Position = new Vector2(1100, 700);
-        GameData.AddUnit(unit8);
-        GameData.AddUnit(unit7);
-        GameData.AddUnit(unit6);
-        GameData.AddUnit(unit5);
-        GameData.AddUnit(unit4);
-        GameData.AddUnit(unit3);
-        GameData.AddUnit(unit2);
-        GameData.AddUnit(unit);
+
         foreach (Unit u in GameData.Units.Objects)
         {
             if (u.Faction == Player.Faction.humanity)

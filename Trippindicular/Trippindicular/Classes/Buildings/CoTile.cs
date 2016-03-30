@@ -26,4 +26,8 @@ class CoTile : Building
     {
         mainTile.DealDamage(amount, attacker);
     }
+
+    public override void LeftButtonAction()
+    {
+    }
 }
