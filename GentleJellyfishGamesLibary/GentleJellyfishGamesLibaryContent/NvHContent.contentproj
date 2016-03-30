@@ -132,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Buildings\" />
-    <Folder Include="SFX\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\Scroll.png">
@@ -149,7 +148,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CursorDot.png">
+    <Compile Include="Cursors\CursorDot.png">
       <Name>CursorDot</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -265,8 +264,67 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SFX\HumanitySoundTrack.mp3">
+      <Name>HumanitySoundTrack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\NatureSoundTrack.mp3">
+      <Name>NatureSoundTrack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilesets\Environment1.png">
+      <Name>Environment1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Environment2.png">
+      <Name>Environment2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Environment3.png">
+      <Name>Environment3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Environment4.png">
+      <Name>Environment4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Environment5.png">
+      <Name>Environment5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Environment6.png">
+      <Name>Environment6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Environment7.png">
+      <Name>Environment7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="GUI\ResourceBackDrop.png">
       <Name>ResourceBackDrop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Cursors\HumanityCursor.png">
+      <Name>HumanityCursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Cursors\NatureCursor.png">
+      <Name>NatureCursor</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -274,6 +332,33 @@
   <ItemGroup>
     <Compile Include="GUI\toolTipBackground.png">
       <Name>toolTipBackground</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Units\HumanityUnitChainsaw.png">
+      <Name>HumanityUnitChainsaw</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HumanityUnitQuad.png">
+      <Name>HumanityUnitQuad</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HumanityUnitWoodcutter.png">
+      <Name>HumanityUnitWoodcutter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\NatureUnitTree.png">
+      <Name>NatureUnitTree</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\NatureUnitWorker.png">
+      <Name>NatureUnitWorker</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

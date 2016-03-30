@@ -13,7 +13,7 @@ class FactionMenuState : GameObjectList
 
     public FactionMenuState()
     {
-
+        this.Add(new MenuCursor());
         background = new SpriteGameObject("menuBackground");
         this.Add(background);
 

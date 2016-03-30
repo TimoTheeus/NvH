@@ -20,7 +20,7 @@ class SettingsMenuOverlay : GameObjectList
     public SettingsMenuOverlay(IGameLoopObject state)
     {
         titleMenuState = state;
-
+        this.Add(new Cursor());
         //Create button list
         settings = new GameObjectList(0, "buttons");
 

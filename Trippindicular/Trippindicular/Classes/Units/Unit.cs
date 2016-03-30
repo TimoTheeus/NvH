@@ -267,6 +267,7 @@ class Unit : SpriteGameObject
             }
         }
 
+
     }
     public virtual void Attack()
     {
@@ -333,7 +334,7 @@ class Unit : SpriteGameObject
         GameData.Cursor.ClickedUnit = null;
         GameData.Units.Remove(this);
     }
-    public void UpdateDiscoveredArea()
+    public virtual void UpdateDiscoveredArea()
     {
         if(faction == GameData.player.GetFaction)
             foreach(Tile t in GameData.LevelGrid.Objects)
@@ -444,6 +445,12 @@ class Unit : SpriteGameObject
     {
         
         return actionString;
+    }
+
+    internal void SetTargetUnit(string targetID)
+    {
+        this.targetUnit = (Unit) GameData.Units.Find(targetID);
+        MoveToUnit();
     }
 }
 

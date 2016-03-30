@@ -21,25 +21,15 @@ class BarracksMenu : Menu
         background.Origin = background.Sprite.Center;
         this.Add(background);
         this.actionString = null;
-        button1 = new Button("checkBox", "", "", 0, "", 4);
-        button1.Position = background.Position + new Vector2(-120, 0);
-        toolTip1 = new CursorToolTip();
-        toolTip1.Name = "Human Worker"; toolTip1.MainCost = "Wood Cost: 100"; toolTip1.SecCost = "Coal Cost: 100"; toolTip1.Hp = "100"; toolTip1.Damage = "-"; toolTip1.Range = "-"; toolTip1.Speed = "100";
-        button2 = new Button("checkBox", "", "", 0, "", 4);
-        button2.Position = button1.Position + new Vector2(button1.Width, 0);
-        button3 = new Button("checkBox", "", "", 0, "", 4);
-        button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
-        button4 = new Button("checkBox", "", "", 0, "", 4);
-        button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
-        button5 = new Button("checkBox", "", "", 0, "", 4);
-        button5.Position = button1.Position + new Vector2(button1.Width * 4, 0);
-        addButton(button1);
-        addButton(button2);
-        addButton(button3);
-        if((tile as Building).level >= 2)
-            addButton(button4);
-        if((tile as Building).level >= 3)
-            addButton(button5);
+
+        if (tile is NatureBarracks)
+        {
+            CreateNatureMenu();
+        }
+        else
+        {
+            CreateHumanityMenu();
+        }
 
         for (int i = 0; i < GameData.LevelObjects.Objects.Count; i++)
         {
@@ -58,16 +48,6 @@ class BarracksMenu : Menu
         base.HandleInput(inputHelper);
         Unit unit = null;
 
-        if (button1 != null && button1.Selected && !GameData.LevelObjects.Objects.Contains(toolTip1))
-        {
-            GameData.LevelObjects.Add(toolTip1);
-        }
-
-        if (button1 != null && !button1.Selected && GameData.LevelObjects.Objects.Contains(toolTip1))
-        {
-            GameData.LevelObjects.Remove(toolTip1);
-        }
-
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
             button1.Sprite.SheetIndex = 1;
@@ -75,7 +55,7 @@ class BarracksMenu : Menu
             GameData.Cursor.HasClickedTile = false;
             GameData.LevelObjects.Remove(this);
         }
-
+        //Create melee1 unit
         if (button2 != null && button2.Pressed)
         {
             button2.Sprite.SheetIndex = 1;
@@ -83,18 +63,20 @@ class BarracksMenu : Menu
 
             if (tile is NatureBarracks)
             {
-                unit = new NatureWorker();
+                unit = new Melee1(Player.Faction.nature,"natureWolf","natureWolf");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             else
             {
-                unit = new HumanityWorker();
+                unit = new Melee1(Player.Faction.humanity,"chainsaw","chainsaw");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
+            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + 
+                new Tile().Sprite.Height / 2);
         }
+        //Create ranged unit
         else if (button3 != null && button3.Pressed)
         {
             button3.Sprite.SheetIndex = 1;
@@ -103,18 +85,19 @@ class BarracksMenu : Menu
 
             if (tile is NatureBarracks)
             {
-                unit = new Melee1(Player.Faction.nature, "natureWolf", "unit");
+                unit = new Ranged(Player.Faction.nature, "natureWolf", "rangedNature");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             else
             {
-                unit = new Melee1(Player.Faction.humanity, "flamethrower","flamethrowerUnit");
+                unit = new Ranged(Player.Faction.humanity, "flamethrower","rangedHumanity");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
         }
+        //Create melee2 unit
         else if (button4 != null && button4.Pressed)
         {
             button4.Sprite.SheetIndex = 1;
@@ -122,18 +105,19 @@ class BarracksMenu : Menu
 
             if (tile is NatureBarracks)
             {
-                unit = new Unicorn("unicorn", "unicorn");
+                unit = new Melee2(Player.Faction.nature,"treeUnit", "melee2Nature");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             else
             {
-                unit = new Unicorn("selectedTile", "unit");
+                unit = new Melee2(Player.Faction.humanity,"flamethrower", "melee2Human");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
         }
+        //Create fast_melee unit (renamed to Unicorn)
         else if (button5 != null && button5.Pressed)
         {
             button5.Sprite.SheetIndex = 1;
@@ -141,13 +125,13 @@ class BarracksMenu : Menu
             
             if (tile is NatureBarracks)
             {
-                unit = new Ranged(Player.Faction.nature, "selectedTile", "unicorn");
+                unit = new Unicorn(Player.Faction.nature, "unicorn", "unicorn");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
             else
             {
-                unit = new Ranged(Player.Faction.humanity, "selectedTile", "unit");
+                unit = new Unicorn(Player.Faction.humanity, "quad", "fastmeleeHuman");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }
@@ -179,5 +163,45 @@ class BarracksMenu : Menu
             this.actionString = null;
         }
         return s;
+    }
+    protected void CreateNatureMenu()
+    {
+        button1 = new Button("checkBox", "", "", 0, "", 4);
+        button1.Position = background.Position + new Vector2(-120, 0);
+        button2 = new Button("checkBox", "", "", 0, "", 4);
+        button2.Position = button1.Position + new Vector2(button1.Width, 0);
+        button3 = new Button("checkBox", "", "", 0, "", 4);
+        button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
+        button4 = new Button("checkBox", "", "", 0, "", 4);
+        button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
+        button5 = new Button("checkBox", "", "", 0, "", 4);
+        button5.Position = button1.Position + new Vector2(button1.Width * 4, 0);
+        addButton(button1);
+        addButton(button2);
+        addButton(button3);
+        if ((tile as Building).level >= 2)
+            addButton(button4);
+        if ((tile as Building).level >= 3)
+            addButton(button5);
+    }
+    protected void CreateHumanityMenu()
+    {
+        button1 = new Button("checkBox", "", "", 0, "", 4);
+        button1.Position = background.Position + new Vector2(-120, 0);
+        button2 = new Button("checkBox", "", "", 0, "", 4);
+        button2.Position = button1.Position + new Vector2(button1.Width, 0);
+        button3 = new Button("checkBox", "", "", 0, "", 4);
+        button3.Position = button1.Position + new Vector2(button1.Width * 2, 0);
+        button4 = new Button("checkBox", "", "", 0, "", 4);
+        button4.Position = button1.Position + new Vector2(button1.Width * 3, 0);
+        button5 = new Button("checkBox", "", "", 0, "", 4);
+        button5.Position = button1.Position + new Vector2(button1.Width * 4, 0);
+        addButton(button1);
+        addButton(button2);
+        addButton(button3);
+        if ((tile as Building).level >= 2)
+            addButton(button4);
+        if ((tile as Building).level >= 3)
+            addButton(button5);
     }
 }

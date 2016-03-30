@@ -25,7 +25,7 @@ namespace Trippindicular.Classes
         {
             //Initialize playingState
             playingState = GameWorld.GameStateManager.GetGameState("playing") as PlayingState;
-
+            this.Add(new MenuCursor());
             //Background
             background = new SpriteGameObject("menuBackground");
             this.Add(background);
@@ -67,6 +67,7 @@ namespace Trippindicular.Classes
                 {
                     GameData.Host = true;
                     GameData.player = new Player(Player.Faction.humanity);
+
                     playingState.Initialize(GameData.Host, null);
                     GameWorld.GameStateManager.SwitchTo("hud"); 
                 }

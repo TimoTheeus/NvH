@@ -12,6 +12,14 @@
 #Example: tree-objects/tree
 #
 #Tilesets:
+forest-Tilesets/NatureLightCollection
+environment1-Tilesets/Environment1
+environment2-Tilesets/Environment2
+environment3-Tilesets/Environment3
+environment4-Tilesets/Environment4
+environment5-Tilesets/Environment5
+environment6-Tilesets/Environment6
+environment7-Tilesets/Environment7
 hexagonTile-Tilesets/HexagonTile
 selectedTile-Tilesets/SelectedTile
 humanityBarracks-Tilesets/HumanityMilitary
@@ -57,14 +65,23 @@ description-Fonts/AchievementDescription
 #Sounds:
 #
 #Music:
+hMusic-SFX/HumanitySoundTrack
+nMusic-SFX/NatureSoundTrack
 #
-#RandomStuff:
-cursorDot-CursorDot
+#Cursors:
+cursorDot-Cursors/CursorDot
+humanityCursor-Cursors/HumanityCursor
+natureCursor-Cursors/NatureCursor
 #
 #Units:
 unicorn-Tilesets/NatureUnicornUnit
 natureWolf-Tilesets/NatureWolfUnit
 flamethrower-Tilesets/HumanityFlamethrowerUnit
+chainsaw-Units/HumanityUnitChainsaw
+quad-Units/HumanityUnitQuad
+woodcutter-Units/HumanityUnitWoodcutter
+treeUnit-Units/NatureUnitTree
+natureWorker-Units/NatureUnitWorker
 
 
 

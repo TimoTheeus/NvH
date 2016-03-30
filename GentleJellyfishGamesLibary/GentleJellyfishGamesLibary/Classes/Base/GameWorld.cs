@@ -34,7 +34,7 @@ public class GameWorld : Game
     }
     public static AssetLoader AssetLoader { get { return assetLoader; } }
     public static Camera Camera { get { return cam; } }
-    
+
     public static GameStateManager GameStateManager
     {
         get

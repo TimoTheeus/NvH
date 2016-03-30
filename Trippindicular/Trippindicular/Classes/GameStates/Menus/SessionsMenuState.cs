@@ -18,7 +18,7 @@ namespace Trippindicular.Classes
         {
             //Initialize playingState
             playingState = GameWorld.GameStateManager.GetGameState("playing") as PlayingState;
-
+            this.Add(new MenuCursor());
             //Background
             background = new SpriteGameObject("menuBackground");
             this.Add(background);

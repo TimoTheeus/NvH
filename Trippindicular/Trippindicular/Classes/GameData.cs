@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Audio;
 
 //Class used for all static data used in the game.
 static class GameData
@@ -19,6 +20,7 @@ static class GameData
     static public ResourceController ResourceController;
     static public Player player;
     static public int unitIdIndex;
+    static public SoundEffect music;
     static bool host;
     static List<Forest> forests;
     public static bool Host { get { return host; } set { host = value; } }
@@ -76,7 +78,8 @@ static class GameData
                             GameData.Buildings.Add(f);
                             forests.Add(f);
                      } else {
-                            Tile t = new Tile();
+                            int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                            Tile t = new Tile("environment" + type);
                             t.gridPosition = new Point(i, j);
                             GameData.LevelGrid.Add(t, i, j);
                      }
@@ -84,7 +87,8 @@ static class GameData
  
                 else
                 {
-                    Tile t = new Tile();
+                    int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                    Tile t = new Tile("environment" + type);
                     t.gridPosition = new Point(i, j);
                     GameData.LevelGrid.Add(t, i, j);
                 }
@@ -101,15 +105,34 @@ static class GameData
         GameData.Buildings.Add(nBase);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
+        if (GameData.Cursor != null)
+        {
+            GameData.LevelObjects.Remove(GameData.Cursor);
+            
+        }
+        if (GameData.player.GetFaction == Player.Faction.humanity)
+        {
+            GameData.Cursor = new Cursor("humanityCursor");
+            GameWorld.AssetLoader.PlayMusic("hMusic");
+        }
+        else {
+            GameData.Cursor = new Cursor("natureCursor");
+            GameWorld.AssetLoader.PlayMusic("nMusic");
+        }
+        GameData.LevelObjects.Add(GameData.Cursor);
+
         GameWorld.Camera.Bounds = new Rectangle(0 - (int)tile.Sprite.Center.X - (int)(0.5 * GameWorld.Screen.X), -(int)tile.Sprite.Center.Y -
             (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
+        GameWorld.Camera.Bounds = new Rectangle(0 - (int)tile.Sprite.Center.X , -(int)tile.Sprite.Center.Y,
+            GameData.LevelGrid.GetWidth(), (GameData.LevelGrid.GetHeight()));
         if (plyr.GetFaction == Player.Faction.humanity)
         {
-            GameWorld.Camera.Pos = new Vector2(0, 0);
+            //GameWorld.Camera.Pos = new Vector2(0, 0);
+            GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
         }
         else
         {
-            //GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+            GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
             int y = GameData.LevelGrid.GetHeight();
             int x = GameData.LevelGrid.GetWidth();
             GameWorld.Camera.Pos = new Vector2(3380, 85);
@@ -220,7 +243,8 @@ static class GameData
     public static void HostInitialize()
     {
         Tile tile = new Tile();
-        GameData.player.GetFaction = Player.Faction.nature;
+        //GameData.player.GetFaction = Player.Faction.nature;
+
         int idIndex = 0;
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
@@ -239,14 +263,16 @@ static class GameData
                             GameData.Buildings.Add(f);
                             break;
                         default:
-                            Tile t = new Tile();
+                            int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                            Tile t = new Tile("environment" + type);
                             t.gridPosition = new Point(i, j);
                             GameData.LevelGrid.Add(t, i, j);
                             break;
                     }
                 else
                 {
-                    Tile t = new Tile();
+                    int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                    Tile t = new Tile("environment" + type);
                     t.gridPosition = new Point(i, j);
                     GameData.LevelGrid.Add(t, i, j);
                 }
@@ -263,8 +289,8 @@ static class GameData
         GameData.Buildings.Add(nBase);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
-        GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X - (int)(0.5*GameWorld.Screen.X), -(int)tile.Sprite.Center.Y - 
-            (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
+        GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y, 
+            GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
         GameWorld.Camera.Pos= new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
         if (player.GetFaction == Player.Faction.humanity)
         {
@@ -283,6 +309,24 @@ static class GameData
         selectedTile.Origin = selectedTile.Sprite.Center;
         selectedTile.Position = new Vector2(-3000, -3000);
         GameData.LevelObjects.Add(selectedTile);
+
+        if (GameData.Cursor != null)
+        {
+            GameData.LevelObjects.Remove(GameData.Cursor);
+        }
+        if (GameData.player.GetFaction == Player.Faction.humanity)
+        {
+            GameData.Cursor = new Cursor("humanityCursor");
+            GameWorld.AssetLoader.PlayMusic("hMusic");
+        }
+        else {
+            GameData.Cursor = new Cursor("natureCursor");
+            GameWorld.AssetLoader.PlayPlaylist(new string[] { "nMusic", "nMusic" });
+        }
+
+        
+
+        GameData.LevelObjects.Add(GameData.Cursor);
 
         
 

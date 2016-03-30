@@ -28,7 +28,7 @@ class MainGame : GameWorld
     {
         Log.Initialize();
         Content.RootDirectory = "Content";
-        this.IsMouseVisible = true;
+        this.IsMouseVisible = false;
         
 
         Log.Write(LogType.INFO, "Build Directory: " + Testing.AssemblyDirectory);
