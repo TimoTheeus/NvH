@@ -15,7 +15,7 @@ namespace Trippindicular.Classes
         /// </summary>
         private bool isDisposed;
 
-        public void Connect()
+        public void Connect(string ipstring)
         {
             var config = new NetPeerConfiguration("Asteroid")
             {
@@ -32,7 +32,7 @@ namespace Trippindicular.Classes
             this.netClient = new NetClient(config);
             this.netClient.Start();
 
-            this.netClient.Connect(new IPEndPoint(NetUtility.Resolve("127.0.0.1"), Convert.ToInt32("14242")));
+            this.netClient.Connect(new IPEndPoint(NetUtility.Resolve(ipstring), Convert.ToInt32("14242")));
         }
 
  /// <summary>

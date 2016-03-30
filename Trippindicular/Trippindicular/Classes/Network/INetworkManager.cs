@@ -6,7 +6,7 @@ using Lidgren.Network;
 
 public interface INetworkManager : IDisposable
     {
-        void Connect();
+        void Connect(string ipstring);
         void Disconnect();
 
         NetIncomingMessage ReadMessage();

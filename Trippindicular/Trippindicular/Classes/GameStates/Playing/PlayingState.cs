@@ -26,12 +26,12 @@ class PlayingState : IGameLoopObject
     {
   
     }
-    public void Initialize(bool host)
+    public void Initialize(bool host, string ip)
     {
         if (host)
         {
             this.networkManager = new ServerNetworkManager();
-            this.networkManager.Connect();
+            this.networkManager.Connect("");
             connected = true;
             GameData.Initialize();
             GameData.HostInitialize();
@@ -42,7 +42,8 @@ class PlayingState : IGameLoopObject
         else
         {
             this.networkManager = new ClientNetworkManager();
-            this.networkManager.Connect();
+            if (ip == null) { ip = "127.0.0.1"; }
+            this.networkManager.Connect(ip);
             connected = true;
             GameData.Initialize();
             this.networkManager.SendMessage("$init");

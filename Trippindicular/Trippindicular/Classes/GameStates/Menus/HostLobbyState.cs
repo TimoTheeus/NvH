@@ -67,7 +67,7 @@ namespace Trippindicular.Classes
                 {
                     GameData.Host = true;
                     GameData.player = new Player(Player.Faction.humanity);
-                    playingState.Initialize(GameData.Host);
+                    playingState.Initialize(GameData.Host, null);
                     GameWorld.GameStateManager.SwitchTo("hud"); 
                 }
             }
@@ -75,7 +75,7 @@ namespace Trippindicular.Classes
             {
                 GameData.Host = true;
                 GameData.player = new Player(Player.Faction.nature);
-                playingState.Initialize(GameData.Host);
+                playingState.Initialize(GameData.Host, null);
                 GameWorld.GameStateManager.SwitchTo("hud");
 
             }

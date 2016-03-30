@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
-
+using System;
 //Class used to draw a string that the user typed himself.
 public class UserInput : TextGameObject
 {
@@ -23,6 +23,11 @@ public class UserInput : TextGameObject
             ih.GetKeysPressedText();
             if (ih.InputString.Length <= maxSize)
             {
+                if (ih.KeyPressed(Keys.OemPeriod))
+                {
+                    ih.InputString += ".";
+                }
+                Console.WriteLine(text);
                 text = ih.InputString;
             }
             else

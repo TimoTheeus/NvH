@@ -71,7 +71,12 @@ namespace Trippindicular.Classes
             if (joinGame.Pressed&&input!= null)
             {
                 //Do something with input.Text
-                playingState.Initialize(GameData.Host);
+                string ip = null;
+                if (input.Text.Length > 6)
+                {
+                    ip = input.Text;
+                }
+                playingState.Initialize(GameData.Host, ip);
                 GameWorld.GameStateManager.SwitchTo("hud");
             }
             else if (options.Pressed)

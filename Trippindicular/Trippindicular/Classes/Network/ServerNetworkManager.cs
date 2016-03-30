@@ -11,7 +11,7 @@ namespace Trippindicular.Classes
     {
         NetServer netServer;
         private bool isDisposed;
-        public void Connect()
+        public void Connect(string ipstring)
         {
             var config = new NetPeerConfiguration("Asteroid")
             {
