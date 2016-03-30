@@ -88,7 +88,7 @@ class BarracksMenu : Menu
 
             if (tile is NatureBarracks)
             {
-                unit = new Melee1(Player.Faction.nature, "natureWolf", "unit");
+                unit = new Melee2(Player.Faction.nature, "natureWolf", "unit");
                 player.MainResource -= unit.ResourceCosts.X;
                 player.SecondaryResource -= unit.ResourceCosts.Y;
             }

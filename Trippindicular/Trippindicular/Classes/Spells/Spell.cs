@@ -12,14 +12,14 @@ class Spell : SpriteGameObject
 
     public Spell(string assetName = "", string id = "") : base(assetName, 0, id, 10)
     {
-
+        
     }
 
     public override void Update(GameTime gameTime)
     {
         timer.Update(gameTime);
         Console.WriteLine(this.position.ToString());
-        Console.WriteLine(GameData.Cursor.Position + GameWorld.Camera.Pos);
+        Console.WriteLine();
 
         for (int i = 0; i < GameData.Units.Objects.Count; i++)
             if (((Unit)GameData.Units.Objects[i]).Faction != Player.Faction.nature)
@@ -53,5 +53,7 @@ class Spell : SpriteGameObject
     {
 
     }
+
+
 }
 

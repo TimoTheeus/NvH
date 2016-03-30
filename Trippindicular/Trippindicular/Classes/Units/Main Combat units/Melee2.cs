@@ -7,12 +7,18 @@ using System.Text;
 //strong vs fast melee
 class Melee2 : Unit
 {
+    private int speedBuffAmnt;
+    private float unBuffedSpeed;
+    private float buffedSpeed;
     public Melee2(Player.Faction faction, string assetName = "", string id = "") : base(assetName, id)
     {
         this.faction = faction;
+        this.speed = 150;
         if (this.faction == Player.Faction.nature)
         {
             Damage = 25;
+            this.unBuffedSpeed = speed;
+            this.buffedSpeed = speed + 100;
             maxHealth = 200;
             health = maxHealth;
         }
@@ -51,5 +57,37 @@ class Melee2 : Unit
 
         attackTimer.Reset();
     }
-}
+
+    public override void UpdateDiscoveredArea()
+    {
+        bool speedBuff = false;
+        if (faction == GameData.player.GetFaction){
+            foreach (Tile t in GameData.LevelGrid.Objects)
+            {
+                Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
+                double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
+                if (absDistance < 300)
+                {
+                    t.Discovered = true;
+                    if (t is Forest)
+                    {
+                        speedBuff = true;
+                    }
+                    t.IsDark = false;
+                    }
+                }
+        }
+        if (speedBuff)
+        {
+            this.speed = buffedSpeed;
+        }
+        else
+        {
+            this.speed = unBuffedSpeed;
+        }
+
+
+         
+        }
+    }
 

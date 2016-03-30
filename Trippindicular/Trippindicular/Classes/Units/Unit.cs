@@ -334,7 +334,7 @@ class Unit : SpriteGameObject
         GameData.Cursor.ClickedUnit = null;
         GameData.Units.Remove(this);
     }
-    public void UpdateDiscoveredArea()
+    public virtual void UpdateDiscoveredArea()
     {
         if(faction == GameData.player.GetFaction)
             foreach(Tile t in GameData.LevelGrid.Objects)
