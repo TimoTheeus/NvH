@@ -96,6 +96,7 @@ class Unit : SpriteGameObject
         attackTimer = new Timer(this.AttackSpeed);
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         checkIfInDiscoveredAreaTimer = new Timer((1 / 6));
+        RemoveMenu();
     }
 
     public override void HandleInput(InputHelper ih)
@@ -172,9 +173,18 @@ class Unit : SpriteGameObject
     {
         if (InDiscoveredArea)
         {
-            healthBar.Draw(gameTime, spriteBatch);
+            if (selected||faction==GameData.player.OppositeFaction)
+            {
+                healthBar.Draw(gameTime, spriteBatch);
+            }
             base.Draw(gameTime, spriteBatch);
         }
+    }
+    protected void RemoveMenu()
+    {
+        Menu menu = GameData.LevelObjects.Find("barracksMenu") as Menu;
+        if (menu != null)
+            GameData.LevelObjects.Remove(menu);
     }
 
     protected void MoveToTile()
@@ -405,7 +415,7 @@ class Unit : SpriteGameObject
                     Unit unit = GameData.Units.Objects[i] as Unit;
                     if (unit.BoundingBox.Contains(mousePoint) && unit.faction != this.faction)
                     {
-                        actionString += "$targ:" + unit.ID + "$move:" + "0,0";
+                        actionString += "$move:" + "0,0" + "$targ:" + unit.ID ;
                         targetPosition = Vector2.Zero;
                         targetUnit = unit;
                         break;

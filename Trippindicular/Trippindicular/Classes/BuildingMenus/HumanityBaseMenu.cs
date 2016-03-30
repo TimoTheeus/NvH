@@ -14,7 +14,7 @@ class HumanityBaseMenu : Menu
     protected Player player;
 
     public HumanityBaseMenu(Tile tile)
-        : base(10, "humanityBaseMenu")
+        : base(10, "barracksMenu")
     {
         actionString = null;
         actionSent = false;

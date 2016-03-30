@@ -220,24 +220,29 @@ class PlayingState : IGameLoopObject
                             string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
                             Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
                             u.TargetPosition = new Vector2(float.Parse(coords[0]), float.Parse(coords[1]));
-                            //u.TargetUnit = null;
+                            u.TargetUnit = null;
                         }
                         catch (NullReferenceException e)
                         {
-
                             string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
                             Unit u = ((Unit)(GameData.LevelObjects.Find(id)));
+                            if (u != null) {
                             u.TargetPosition = new Vector2(float.Parse(coords[0]), float.Parse(coords[1]));
-                            u.TargetUnit = null;
+                            //u.TargetUnit = null;
+                                }
                             Console.WriteLine("null");
                         }
                         break;
        
                     case "targ":
-                        string targID = pairs[i].Substring(5, pairs[i].Length - 5);
-                        Unit theUnit = ((Unit)(GameData.LevelObjects.Find(id)));
-                        Unit targetU = (Unit) GameData.LevelObjects.Find(targID);
-                        theUnit.SetTargetUnit(targID);
+                        try
+                        {
+                            string targID = pairs[i].Substring(5, pairs[i].Length - 5);
+                            Unit theUnit = ((Unit)(GameData.LevelObjects.Find(id)));
+                            Unit targetU = (Unit)GameData.LevelObjects.Find(targID);
+                            theUnit.SetTargetUnit(targID);
+                        }
+                        catch (NullReferenceException e) { }
                         break;
                     case "tgbd":
                         string bdtgID = pairs[i].Substring(5, pairs[i].Length - 5);
@@ -276,6 +281,7 @@ class PlayingState : IGameLoopObject
         else if (sig.Equals("bdng"))
         {
             Building b= null;
+            bool polytile = false;
             string id = pairs[1].Substring(5, pairs[1].Length - 5);
             for (int i = 2; i < pairs.Length; i++)
             {
@@ -290,6 +296,21 @@ class PlayingState : IGameLoopObject
                                 break;
                             case "HumanityBarrack":
                                 b = new HumanityBarrack();
+                                polytile = true;
+                                break;
+                            case "SunlightTree":
+                                b = new SunlightTree();
+                                break;
+                            case "NatureBase":
+                                b = new NatureBase();
+                                polytile = true;
+                                break;
+                            case "HumanityBase":
+                                b = new HumanityBase();
+                                polytile = true;
+                                break;
+                            case "Mine":
+                                b = new Mine();
                                 break;
                         }
                         break;
@@ -298,7 +319,12 @@ class PlayingState : IGameLoopObject
                         b.gridPosition = new Point(int.Parse(coords[0]), int.Parse(coords[1]));
                         break;
                     case "fnsh":
+
                         GameData.LevelGrid.replaceTile((Tile)GameData.LevelGrid.Objects[b.gridPosition.X, b.gridPosition.Y], b, false);
+                        if (polytile)
+                        {
+                            ((PolyTileBuilding)b).AddQuadCoTiles();
+                        }
                         GameData.Buildings.Add(b);
                         break;
                     case "damg":
@@ -369,6 +395,7 @@ class PlayingState : IGameLoopObject
                 switch (pairs[i].Substring(0, 4))
                 {   
                     case "type":
+                        
                         switch (pairs[i].Substring(5,pairs[i].Length - 5))
                         {
                             case "HumanityWorker":
@@ -378,19 +405,40 @@ class PlayingState : IGameLoopObject
                                 u = new NatureWorker();
                                 break;
                             case "Melee1":
-                                u = new Melee1(GameData.player.OppositeFaction, "selectedTile", id);
+                                string asset = "";
+                                asset = "natureWolf";
+                                if (GameData.player.OppositeFaction == Player.Faction.humanity)
+                                {
+                                    asset = "chainsaw";
+                                }
+                                u = new Melee1(GameData.player.OppositeFaction, asset, id);
                                 break;
                             case "Ranged":
-                                u = new Ranged(GameData.player.OppositeFaction, "selectedTile", id);
+                                asset = "natureWolf";
+                                if (GameData.player.OppositeFaction == Player.Faction.humanity)
+                                {
+                                    asset = "flamethrower";
+                                }
+                                u = new Ranged(GameData.player.OppositeFaction, asset, id);
                                 break;
                             case "Melee2":
-                                u = new Melee2(GameData.player.OppositeFaction, "selectedTile", id);
+                                asset = "treeUnit";
+                                if (GameData.player.OppositeFaction == Player.Faction.humanity)
+                                {
+                                    asset = "flamethrower";
+                                }
+                                u = new Melee2(GameData.player.OppositeFaction, asset, id);
                                 break;
                             case "FlameThrower":
                                 u = new FlameThrower();
                                 break;
                             case "Unicorn":
-                                u = new Unicorn(GameData.player.OppositeFaction, "selectedTile", id);
+                                asset = "unicorn";
+                                if (GameData.player.OppositeFaction == Player.Faction.humanity)
+                                {
+                                    asset = "quad";
+                                }
+                                u = new Unicorn(GameData.player.OppositeFaction, asset, id);
                                 break;
                             case "WoodCutter":
                                 u = new WoodCutter();

@@ -15,13 +15,18 @@ class Building : Tile
     public int level;
     public int maxLevel;
     public int buildCost, levelUpCost2, levelUpCost3;
+    protected Point resourceCosts;
 
     public Player.Faction Faction
     {
         get { return faction; }
         set { faction = value; }
     }
-
+    public Point ResourceCosts
+    {
+        get { return resourceCosts; }
+        set { resourceCosts = value; }
+    }
     public float Health
     {
         get { return health; }
@@ -40,6 +45,7 @@ class Building : Tile
         maxHealth = 1;
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         level = 1;
+        resourceCosts = new Point(100,100);
     }
 
     protected void RemoveMenu()

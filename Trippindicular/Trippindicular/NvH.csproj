@@ -80,18 +80,19 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Buildings\BarracksMenu.cs" />
+    <Compile Include="Classes\BuildingMenus\BarracksMenu.cs" />
     <Compile Include="Classes\Buildings\Building.cs" />
     <Compile Include="Classes\Buildings\CoTile.cs" />
     <Compile Include="Classes\Buildings\Forest.cs" />
     <Compile Include="Classes\Buildings\HumanityBarracks.cs" />
     <Compile Include="Classes\Buildings\HumanityBase.cs" />
-    <Compile Include="Classes\Buildings\HumanityBaseMenu.cs" />
+    <Compile Include="Classes\BuildingMenus\HumanityBaseMenu.cs" />
     <Compile Include="Classes\Buildings\Mine.cs" />
     <Compile Include="Classes\Buildings\NatureBarracks.cs" />
     <Compile Include="Classes\Buildings\NatureBase.cs" />
-    <Compile Include="Classes\Buildings\NatureBaseMenu.cs" />
+    <Compile Include="Classes\BuildingMenus\NatureBaseMenu.cs" />
     <Compile Include="Classes\Buildings\PolyTileBuilding.cs" />
+    <Compile Include="Classes\Buildings\WaterTree.cs" />
     <Compile Include="Classes\Cursor.cs" />
     <Compile Include="Classes\DropDown.cs" />
     <Compile Include="Classes\EventLog.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Classes\Spells\MeteorStorm.cs" />
     <Compile Include="Classes\Spells\SnowStorm.cs" />
     <Compile Include="Classes\Spells\Spell.cs" />
-    <Compile Include="Classes\TileMenu.cs" />
+    <Compile Include="Classes\BuildingMenus\TileMenu.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Buildings\SunlightTree.cs" />
     <Compile Include="Classes\Tile.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Classes\Units\WoodCutter.cs" />
     <Compile Include="Classes\CursorToolTip.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="Classes\BuildingMenus\Menu.cs" />
     <Compile Include="Classes\MenuCursor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\MainGame.cs" />
