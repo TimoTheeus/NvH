@@ -14,6 +14,7 @@ class Cursor : SpriteGameObject
     protected Tile tileForOrigin;
     protected Spell spell;
     protected const int borderWidth = 100;
+    private string actionString;
 
     public bool HasClickedTile
     {
@@ -72,6 +73,7 @@ class Cursor : SpriteGameObject
             {
                 spell.Position = GameWorld.Camera._pos + GameData.Cursor.Position;
                 GameData.LevelObjects.Add(spell);
+                this.actionString = "$spel:" + spell.ID + "$type:" + spell.GetType() +"$posi:" + spell.Position.X + "," + spell.Position.Y;
                 Spell = null;
             }
         }
@@ -113,6 +115,16 @@ class Cursor : SpriteGameObject
             }
         }
         return false;
+    }
+
+    public override string getActionOutput()
+    {
+        string s = this.actionString;
+        if (s != null)
+        {
+            this.actionString = null;
+        }
+        return s;
     }
 }
 

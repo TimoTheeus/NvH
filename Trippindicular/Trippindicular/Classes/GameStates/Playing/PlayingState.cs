@@ -319,6 +319,38 @@ class PlayingState : IGameLoopObject
                 }
             }
         }
+        else if (sig.Equals("spel"))
+        {
+            Spell spell = null;
+            string id = pairs[1].Substring(5, pairs[1].Length - 5);
+            for (int i = 2; i < pairs.Length; i++)
+            {
+                switch (pairs[i].Substring(0, 4))
+                {
+                    case "type":
+                        switch (pairs[i].Substring(5, pairs[i].Length - 5))
+                        {
+                            case "MeteorStorm":
+                                spell = new MeteorStorm();
+                                break;
+                            case "SnowStorm":
+                                spell = new SnowStorm();
+                                break;
+                            case "Spell":
+                                spell = new Spell();
+                                break;
+                        }
+                        break;
+                    case "posi":
+                        string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');
+                        spell.Position = new Vector2(float.Parse(coords[0]), float.Parse(coords[1]));
+                        break;
+                }
+            }
+            spell.ID = id;
+            GameData.LevelObjects.Add(spell);
+            
+        }
         else if (sig.Equals("addu"))
         {
             Unit u;//$addu:10$type:HumanityWorker$posi:1080,420

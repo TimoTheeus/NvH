@@ -42,7 +42,7 @@ class Unicorn : Unit
                 if (GameData.Units.Objects[i] != null&& GameData.Units.Objects[i]!=this)
                 {
                     Unit u = GameData.Units.Objects[i] as Unit;
-                    if (this.CollidesWith(u) && this.Speed > 210&&!u.Frozen)
+                    if ((this.CollidesWith(u) && this.Speed > 210&&!u.Frozen) && (u.Faction != Player.Faction.nature))
                     {
                         if (u is Melee2)
                         {

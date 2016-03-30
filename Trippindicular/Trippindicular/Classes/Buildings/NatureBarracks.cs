@@ -10,6 +10,8 @@ class NatureBarracks:Building
     {
         Faction = Player.Faction.nature;
         name = "NATURE BARRACKS";
+        level = 1;
+        maxLevel = 3;
     }
 
     public override void LeftButtonAction()

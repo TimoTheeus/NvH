@@ -18,6 +18,8 @@ class Spell : SpriteGameObject
     public override void Update(GameTime gameTime)
     {
         timer.Update(gameTime);
+        Console.WriteLine(this.position.ToString());
+        Console.WriteLine(GameData.Cursor.Position + GameWorld.Camera.Pos);
 
         for (int i = 0; i < GameData.Units.Objects.Count; i++)
             if (((Unit)GameData.Units.Objects[i]).Faction != Player.Faction.nature)

@@ -38,7 +38,6 @@ static class GameData
     static public void Update(GameTime gameTime)
     {
         LevelObjects.Update(gameTime);
-        Console.WriteLine(GameWorld.Camera.Pos.ToString());
     }
 
     //This is where the objects in the game (LevelObjects) are drawn.
