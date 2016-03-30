@@ -101,15 +101,16 @@ static class GameData
         GameData.Buildings.Add(nBase);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
-        GameWorld.Camera.Bounds = new Rectangle(0 - (int)tile.Sprite.Center.X - (int)(0.5 * GameWorld.Screen.X), -(int)tile.Sprite.Center.Y -
-            (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
+        GameWorld.Camera.Bounds = new Rectangle(0 - (int)tile.Sprite.Center.X , -(int)tile.Sprite.Center.Y,
+            GameData.LevelGrid.GetWidth(), (GameData.LevelGrid.GetHeight()));
         if (plyr.GetFaction == Player.Faction.humanity)
         {
-            GameWorld.Camera.Pos = new Vector2(0, 0);
+            //GameWorld.Camera.Pos = new Vector2(0, 0);
+            GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
         }
         else
         {
-            //GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
+            GameWorld.Camera.Pos = new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
             int y = GameData.LevelGrid.GetHeight();
             int x = GameData.LevelGrid.GetWidth();
             GameWorld.Camera.Pos = new Vector2(3380, 85);
@@ -263,8 +264,8 @@ static class GameData
         GameData.Buildings.Add(nBase);
         GameData.LevelObjects.Add(GameData.LevelGrid);
 
-        GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X - (int)(0.5*GameWorld.Screen.X), -(int)tile.Sprite.Center.Y - 
-            (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
+        GameWorld.Camera.Bounds = new Rectangle(0-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y, 
+            GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
         GameWorld.Camera.Pos= new Vector2(-(int)tile.Sprite.Center.X, -(int)tile.Sprite.Center.Y);
         if (player.GetFaction == Player.Faction.humanity)
         {

@@ -23,10 +23,7 @@ public class UserInput : TextGameObject
             ih.GetKeysPressedText();
             if (ih.InputString.Length <= maxSize)
             {
-                if (ih.KeyPressed(Keys.OemPeriod))
-                {
-                    ih.InputString += ".";
-                }
+                
                 Console.WriteLine(text);
                 text = ih.InputString;
             }
