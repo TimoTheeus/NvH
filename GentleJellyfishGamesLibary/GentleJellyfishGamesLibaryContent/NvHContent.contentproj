@@ -132,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Buildings\" />
-    <Folder Include="SFX\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI\Scroll.png">
@@ -255,6 +254,18 @@
       <Name>CoolSlimeUnit</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\HumanitySoundTrack.mp3">
+      <Name>HumanitySoundTrack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\NatureSoundTrack.mp3">
+      <Name>NatureSoundTrack</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
