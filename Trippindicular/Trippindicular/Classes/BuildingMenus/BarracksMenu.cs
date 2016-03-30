@@ -47,10 +47,18 @@ class BarracksMenu : Menu
         //Upgrade building
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
         {
-            button1.Sprite.SheetIndex = 1;
-            (tile as Building).level += 1;
-            GameData.Cursor.HasClickedTile = false;
-            GameData.LevelObjects.Remove(this);
+            if (GameData.player.MainResource - 200 >= 0 && GameData.player.SecondaryResource - 150 >= 0)
+            {
+                button1.Sprite.SheetIndex = 1;
+                (tile as Building).level += 1;
+                GameData.Cursor.HasClickedTile = false;
+                GameData.LevelObjects.Remove(this);
+            }
+            else
+            {
+                Notification n = new Notification("Not enough resources, it costs:",  " 200 and 150", "", 3);
+                n.CreateNotification();
+            }
         }
         //Create melee1 unit
         if (button2 != null && button2.Pressed)
@@ -61,17 +69,29 @@ class BarracksMenu : Menu
             if (tile is NatureBarracks)
             {
                 unit = new Melee1(Player.Faction.nature,"natureWolf","natureWolf");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Sunlight and " + unit.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification();
+                    unit = null;
+                }
             }
             else
             {
                 unit = new Melee1(Player.Faction.humanity,"chainsaw","chainsaw");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + 
-                new Tile().Sprite.Height / 2);
         }
         //Create ranged unit
         else if (button3 != null && button3.Pressed)
@@ -83,16 +103,27 @@ class BarracksMenu : Menu
             if (tile is NatureBarracks)
             {
                 unit = new Ranged(Player.Faction.nature, "natureWolf", "rangedNature");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Sunlight and " + unit.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
             else
             {
                 unit = new Ranged(Player.Faction.humanity, "flamethrower","rangedHumanity");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
         }
         //Create melee2 unit
         else if (button4 != null && button4.Pressed)
@@ -103,39 +134,62 @@ class BarracksMenu : Menu
             if (tile is NatureBarracks)
             {
                 unit = new Melee2(Player.Faction.nature,"treeUnit", "melee2Nature");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Sunlight and " + unit.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
             else
             {
                 unit = new Melee2(Player.Faction.humanity,"flamethrower", "melee2Human");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
         }
         //Create fast_melee unit (renamed to Unicorn)
         else if (button5 != null && button5.Pressed)
         {
             button5.Sprite.SheetIndex = 1;
             GameData.Cursor.HasClickedTile = false;
-            
+
             if (tile is NatureBarracks)
             {
                 unit = new Unicorn(Player.Faction.nature, "unicorn", "unicorn");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Sunlight and " + unit.ResourceCosts.Y.ToString() + " Water", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
             else
             {
                 unit = new Unicorn(Player.Faction.humanity, "quad", "fastmeleeHuman");
-                player.MainResource -= unit.ResourceCosts.X;
-                player.SecondaryResource -= unit.ResourceCosts.Y;
+                if (player.MainResource - unit.ResourceCosts.X >= 0 && player.SecondaryResource - unit.ResourceCosts.Y >= 0)
+                {
+                    player.MainResource -= unit.ResourceCosts.X;
+                    player.SecondaryResource -= unit.ResourceCosts.Y;
+                }
+                else {
+                    Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
+                    n.CreateNotification(); unit = null; }
             }
-            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
         }
         if (unit != null)
         {
+            unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y + new Tile().Sprite.Height / 2);
             GameData.AddUnit(unit);
             this.actionString = "$addu:" + unit.ID  + "$type:"+ unit.GetType() + "$posi:" + unit.Position.X + "," + unit.Position.Y;//;
             

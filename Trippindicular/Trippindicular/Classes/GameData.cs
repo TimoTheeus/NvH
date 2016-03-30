@@ -321,7 +321,7 @@ static class GameData
         }
         else {
             GameData.Cursor = new Cursor("natureCursor");
-            GameWorld.AssetLoader.PlayPlaylist(new string[] { "nMusic", "nMusic" });
+            GameWorld.AssetLoader.PlayMusic("nMusic");
         }
 
         

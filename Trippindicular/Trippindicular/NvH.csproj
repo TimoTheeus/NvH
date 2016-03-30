@@ -111,6 +111,7 @@
     <Compile Include="Classes\Network\GameNetworkMessage.cs" />
     <Compile Include="Classes\Network\INetworkManager.cs" />
     <Compile Include="Classes\Network\ServerNetworkManager.cs" />
+    <Compile Include="Classes\Notification.cs" />
     <Compile Include="Classes\Spells\MeteorStorm.cs" />
     <Compile Include="Classes\Spells\SnowStorm.cs" />
     <Compile Include="Classes\Spells\Spell.cs" />
