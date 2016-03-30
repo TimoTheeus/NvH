@@ -18,7 +18,7 @@ class TitleMenuState : GameObjectList
     {
         GameData.Host = true;
 
-
+        this.Add(new MenuCursor());
         //Background
         background = new SpriteGameObject("menuBackground");
         this.Add(background);

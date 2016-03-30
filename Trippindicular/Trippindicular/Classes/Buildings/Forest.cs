@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 class Forest : Building
 {
     public Point forestPoint;
-    public Forest(Point p) : base("forest", "selectedTile")
+    public Forest(Point p) : base("forest", "forest")
     {
         forestPoint = p;
         maxHealth = 500;

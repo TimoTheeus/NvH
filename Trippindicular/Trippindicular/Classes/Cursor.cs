@@ -39,7 +39,7 @@ class Cursor : SpriteGameObject
         get { return currentTile; }
         set { currentTile = value; }
     }
-    public Cursor() : base("cursorDot", 0, "cursor", 10)
+    public Cursor(string assetName = "cursorDot") : base(assetName, 0, "cursor", 10)
     {
         hasClickedTile = false;
         tileForOrigin = new Tile();

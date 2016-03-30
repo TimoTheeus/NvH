@@ -76,7 +76,8 @@ static class GameData
                             GameData.Buildings.Add(f);
                             forests.Add(f);
                      } else {
-                            Tile t = new Tile();
+                            int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                            Tile t = new Tile("environment" + type);
                             t.gridPosition = new Point(i, j);
                             GameData.LevelGrid.Add(t, i, j);
                      }
@@ -84,7 +85,8 @@ static class GameData
  
                 else
                 {
-                    Tile t = new Tile();
+                    int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                    Tile t = new Tile("environment" + type);
                     t.gridPosition = new Point(i, j);
                     GameData.LevelGrid.Add(t, i, j);
                 }
@@ -100,6 +102,19 @@ static class GameData
         GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11] = nBase;
         GameData.Buildings.Add(nBase);
         GameData.LevelObjects.Add(GameData.LevelGrid);
+
+        if (GameData.Cursor != null)
+        {
+            GameData.LevelObjects.Remove(GameData.Cursor);
+        }
+        if (GameData.player.GetFaction == Player.Faction.humanity)
+        {
+            GameData.Cursor = new Cursor("humanityCursor");
+        }
+        else {
+            GameData.Cursor = new Cursor("humanityCursor");
+        }
+        GameData.LevelObjects.Add(GameData.Cursor);
 
         GameWorld.Camera.Bounds = new Rectangle(0 - (int)tile.Sprite.Center.X - (int)(0.5 * GameWorld.Screen.X), -(int)tile.Sprite.Center.Y -
             (int)(0.5 * GameWorld.Screen.Y), GameData.LevelGrid.GetWidth(), GameData.LevelGrid.GetHeight());
@@ -220,7 +235,8 @@ static class GameData
     public static void HostInitialize()
     {
         Tile tile = new Tile();
-        GameData.player.GetFaction = Player.Faction.nature;
+        //GameData.player.GetFaction = Player.Faction.nature;
+
         int idIndex = 0;
         GameData.LevelGrid = new HexaGrid(30, 40, tile.Width, tile.Height, true, "levelGrid");
         for (int i = 0; i < LevelGrid.Columns; i++)
@@ -239,14 +255,16 @@ static class GameData
                             GameData.Buildings.Add(f);
                             break;
                         default:
-                            Tile t = new Tile();
+                            int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                            Tile t = new Tile("environment" + type);
                             t.gridPosition = new Point(i, j);
                             GameData.LevelGrid.Add(t, i, j);
                             break;
                     }
                 else
                 {
-                    Tile t = new Tile();
+                    int type = 1 + (int)(GameWorld.Random.NextDouble() * 7);
+                    Tile t = new Tile("environment" + type);
                     t.gridPosition = new Point(i, j);
                     GameData.LevelGrid.Add(t, i, j);
                 }
@@ -284,7 +302,23 @@ static class GameData
         selectedTile.Position = new Vector2(-3000, -3000);
         GameData.LevelObjects.Add(selectedTile);
 
+        if (GameData.Cursor != null)
+        {
+            GameData.LevelObjects.Remove(GameData.Cursor);
+        }
+        if (GameData.player.GetFaction == Player.Faction.humanity)
+        {
+            GameData.Cursor = new Cursor("humanityCursor");
+        }
+        else {
+            GameData.Cursor = new Cursor("humanityCursor");
+        }
+
         
+
+        GameData.LevelObjects.Add(GameData.Cursor);
+
+
 
         //naturePlayer = new Player(Player.Faction.nature);
         //GameData.LevelObjects.Add(naturePlayer);
