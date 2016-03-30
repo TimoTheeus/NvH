@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.GamerServices;
 //Main menu, access to all sub-menus
 class TitleMenuState : GameObjectList
 {
-    protected Button hostGame,joinGame, options, exitGame, sessions;
+    protected Button hostGame, joinGame, options, exitGame, sessions, singlePlayer;
     protected SpriteGameObject background;
     protected PlayingState playingState;
     PacketReader packetReader = new PacketReader();
@@ -32,6 +32,10 @@ class TitleMenuState : GameObjectList
                 joinGame = new Button("button", "buttonFont", "font", 0, "Join game", 0);
                 joinGame.Position = new Vector2(700, 150);
                 this.Add(joinGame);
+
+                singlePlayer =  new Button("button", "buttonFont", "font", 0, "Single player", 0);
+                singlePlayer.Position = new Vector2(700, 280);
+                this.Add(singlePlayer);
 
 
 
@@ -66,13 +70,21 @@ class TitleMenuState : GameObjectList
         //Buttons
         if (hostGame.Pressed)
         {
-
+            GameData.SinglePlayer = true;
+            GameData.Host = true;
             GameWorld.GameStateManager.SwitchTo("hostLobby");
         }
         else if (joinGame.Pressed)
         {
+            GameData.SinglePlayer = true;
             GameData.Host = false;
             GameWorld.GameStateManager.SwitchTo("sessionsMenu");
+        }
+        else if (singlePlayer.Pressed)
+        {
+            GameData.Host = false;
+            GameData.SinglePlayer = true;
+            GameWorld.GameStateManager.SwitchTo("hostLobby");
         }
         else if (options.Pressed)
         {

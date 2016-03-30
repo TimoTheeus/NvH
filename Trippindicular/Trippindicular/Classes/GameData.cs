@@ -214,10 +214,14 @@ static class GameData
         LevelObjects.Add(Units);
         Cursor = new Cursor();
         GameData.LevelObjects.Add(Cursor);
-        ResourceController r;
+        if (GameData.SinglePlayer)
+        {
+            ResourceController r;
 
-        r = new ResourceController(3, 5, 0);
-        GameData.LevelObjects.Add(r);
+            r = new ResourceController(3, 5, 0);
+
+            GameData.LevelObjects.Add(r);
+        }
         forests = new List<Forest>();
 
     }
@@ -388,5 +392,7 @@ static class GameData
     }
 
     public static Player Player { get { return player; } set { player = value; } }
+
+    public static bool SinglePlayer { get; set; }
 }
 
