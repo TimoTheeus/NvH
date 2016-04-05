@@ -41,8 +41,8 @@ class Building : Tile
     public Building(string id = "", string assetName=""):base(assetName,id)
     {
         RemoveMenu();
-        health = 1;
-        maxHealth = 1;
+        health = 500;
+        maxHealth = 500;
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         level = 1;
         resourceCosts = new Point(100,100);
