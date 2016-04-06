@@ -10,6 +10,7 @@ class HumanityBase : PolyTileBuilding
     public HumanityBase() : base("humanityBase", "humanityBase")
     {
         this.health = 600;
+        MaxHealth = health;
         Faction = Player.Faction.humanity;
         name = "HUMAN BASE";
         maxLevel = 2;
