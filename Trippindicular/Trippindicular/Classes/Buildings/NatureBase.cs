@@ -9,8 +9,7 @@ class NatureBase : PolyTileBuilding
 {
     public NatureBase() : base("natureBase", "natureBase")
     {
-        this.health = 1500;
-        this.maxHealth = 1500;
+        this.health = 600;
         Faction = Player.Faction.nature;
         name = "NATURE BASE";
         level = 1;
