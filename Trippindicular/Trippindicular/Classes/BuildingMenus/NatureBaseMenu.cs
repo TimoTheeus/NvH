@@ -9,8 +9,6 @@ class NatureBaseMenu : Menu
     protected Button button1, button2, button3,button4,button5;
     protected Tile tile;
     protected Spell spell;
-    private string actionString;
-    private bool actionSent;
     protected Player player;
 
     public NatureBaseMenu(Tile tile)
@@ -50,6 +48,7 @@ class NatureBaseMenu : Menu
 
     public override void HandleInput(InputHelper inputHelper)
     {
+
         base.HandleInput(inputHelper);
         Unit unit = null;
         if (button1 != null && button1.Pressed && (tile as Building).level < (tile as Building).maxLevel)
@@ -78,7 +77,6 @@ class NatureBaseMenu : Menu
                 unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
                     new Tile().Sprite.Height / 2);
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Sunlight and " + unit.ResourceCosts.Y.ToString() + " Water", "", 3);
@@ -91,7 +89,6 @@ class NatureBaseMenu : Menu
                 spell = new SnowStorm();
                 GameData.Cursor.Spell = spell;
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", " 500 Sunlight and 500 Water", "", 3);
@@ -105,7 +102,6 @@ class NatureBaseMenu : Menu
                 spell = new MeteorStorm();
                 GameData.Cursor.Spell = spell;
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", " 500 Sunlight and 500 Water", "", 3);

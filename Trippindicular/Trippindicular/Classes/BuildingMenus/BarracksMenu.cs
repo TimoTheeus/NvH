@@ -9,8 +9,7 @@ class BarracksMenu : Menu
     protected Button button1, button2, button3, button4, button5;
     protected CursorToolTip toolTip1, toolTip2, toolTip3, toolTip4, toolTip5;
     protected Tile tile;
-    protected Player player;    private string actionString;
-    private bool actionSent;
+    protected Player player;    
 
     public BarracksMenu(Tile tile) : base(4, "barracksMenu")
     {

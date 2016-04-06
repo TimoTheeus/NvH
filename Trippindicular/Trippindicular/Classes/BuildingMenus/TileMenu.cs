@@ -10,7 +10,6 @@ class TileMenu : Menu
     protected Button button1, button2, button3, button4;
     protected Tile tile;
     protected float sunlightTreeCooldown;
-    protected string actionString;
 
     public TileMenu(Tile tile, string id = "menu") : base(4, id)
     {

@@ -9,8 +9,6 @@ class HumanityBaseMenu : Menu
     protected Button button1, button2, button3, button4, button5;
     protected Tile tile;
     protected Spell spell;
-    private string actionString;
-    private bool actionSent;
     protected Player player;
 
     public HumanityBaseMenu(Tile tile)
@@ -62,7 +60,6 @@ class HumanityBaseMenu : Menu
                 unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
                     new Tile().Sprite.Height / 2);
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
@@ -78,7 +75,6 @@ class HumanityBaseMenu : Menu
                 unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
                     new Tile().Sprite.Height / 2);
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
@@ -90,15 +86,9 @@ class HumanityBaseMenu : Menu
             this.actionString = "$addu:" + unit.ID + "$type:" + unit.GetType() + "$posi:" + unit.Position.X + "," + unit.Position.Y;//;
         }
 
+
     }
-    public override void Update(GameTime gameTime)
-    {
-        base.Update(gameTime);
-        if (actionSent)
-        {
-            GameData.LevelObjects.Remove(this);
-        }
-    }
+
     public override string getActionOutput()
     {
         string s = this.actionString;

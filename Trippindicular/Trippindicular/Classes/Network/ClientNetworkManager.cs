@@ -32,7 +32,7 @@ namespace Trippindicular.Classes
             this.netClient = new NetClient(config);
             this.netClient.Start();
 
-            this.netClient.Connect(new IPEndPoint(NetUtility.Resolve(ipstring), Convert.ToInt32("14242")));
+            this.netClient.Connect(new IPEndPoint(NetUtility.Resolve("192.168.1.3"), Convert.ToInt32("14242")));
         }
 
  /// <summary>
