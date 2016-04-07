@@ -62,7 +62,7 @@ class HumanityBaseMenu : Menu
                 unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
                     new Tile().Sprite.Height / 2);
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
+                //GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);
@@ -78,7 +78,7 @@ class HumanityBaseMenu : Menu
                 unit.Position = new Vector2(tile.Position.X + new Tile().Sprite.Width / 2 - unit.Sprite.Width / 2, tile.Position.Y +
                     new Tile().Sprite.Height / 2);
                 GameData.Cursor.HasClickedTile = false;
-                GameData.LevelObjects.Remove(this);
+                //GameData.LevelObjects.Remove(this);
             }
             else {
                 Notification n = new Notification("Not enough resources, it costs:", unit.ResourceCosts.X.ToString() + " Coal and " + unit.ResourceCosts.Y.ToString() + " Wood", "", 3);

@@ -96,7 +96,7 @@ class Unit : SpriteGameObject
         attackTimer = new Timer(this.AttackSpeed);
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         checkIfInDiscoveredAreaTimer = new Timer((1 / 6));
-        RemoveMenu();
+        //RemoveMenu();
     }
 
     public override void HandleInput(InputHelper ih)
