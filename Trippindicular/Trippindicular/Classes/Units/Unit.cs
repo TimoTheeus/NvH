@@ -151,7 +151,7 @@ class Unit : SpriteGameObject
             Point p = new Point((int)this.Position.X, (int)this.Position.Y);
             if (GameData.LevelGrid.GetTile(p) != null)
             {
-                if (GameData.LevelGrid.GetTile(p).Discovered && !GameData.LevelGrid.GetTile(p).IsDark)
+                if (GameData.LevelGrid.GetTile(p).Discovered)
                     InDiscoveredArea = true;
                 else InDiscoveredArea = false;
             }
@@ -352,8 +352,9 @@ class Unit : SpriteGameObject
     }
     public virtual void UpdateDiscoveredArea()
     {
-        if(faction == GameData.player.GetFaction)
-            foreach(Tile t in GameData.LevelGrid.Objects)
+        if (faction == GameData.player.GetFaction)
+        {
+            foreach (Tile t in GameData.LevelGrid.Objects)
             {
                 Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
                 double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
@@ -363,8 +364,8 @@ class Unit : SpriteGameObject
                     t.IsDark = false;
                 }
 
-                
             }
+        }
     }
     protected virtual void ClickOnEmptyTileAction()
     {

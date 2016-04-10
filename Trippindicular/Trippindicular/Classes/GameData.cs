@@ -280,6 +280,7 @@ static class GameData
         hBase.gridPosition = new Point(2, 11);
         hBase.Position = GameData.LevelGrid.Objects[2, 11].Position;
         GameData.LevelGrid.Objects[2, 11] = hBase;
+        hBase.HasBeenBuiltAction();
         hBase.AddQuadCoTiles();
         GameData.Buildings.Add(hBase);
         GameData.Buildings.Add(mine);
@@ -292,6 +293,7 @@ static class GameData
         nBase.Position = GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11].Position;
         GameData.LevelGrid.Objects[GameData.LevelGrid.Columns - 2, GameData.LevelGrid.Rows - 11] = nBase;
         nBase.AddQuadCoTiles();
+        nBase.HasBeenBuiltAction();
         GameData.Buildings.Add(nBase);
         GameData.Buildings.Add(sunlightTree);
         sunlightTree.HasBeenBuiltAction();

@@ -17,7 +17,13 @@ class Tile : SpriteGameObject
     protected bool isBeingBuilt;
     protected bool isDark;
     private string actionString;
+    protected bool permaDiscovered;
 
+    public bool PermaDiscovered
+    {
+        get { return permaDiscovered; }
+        set { permaDiscovered = value; }
+    }
     public bool IsBeingBuilt
     {
         get { return isBeingBuilt; }
@@ -43,6 +49,7 @@ class Tile : SpriteGameObject
         text = new List<TextGameObject>();
         descriptive = new TextGameObject("smallFont", 4, "descriptive");
         isBeingBuilt = false;
+        permaDiscovered = false;
     }
 
     public override void HandleInput(InputHelper ih)
@@ -94,12 +101,11 @@ class Tile : SpriteGameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (discovered)
-        {
-            if (isDark)
+        if (discovered||permaDiscovered)
+        {            
+            if(IsDark&&!permaDiscovered)
                 Sprite.Color = Color.Gray;
-            else
-                Sprite.Color = Color.White;
+            else { Sprite.Color = Color.White; }
 
             base.Draw(gameTime, spriteBatch);
             for (int i = 0; i < text.Count; i++)

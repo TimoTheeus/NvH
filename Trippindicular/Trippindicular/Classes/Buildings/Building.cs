@@ -72,13 +72,39 @@ class Building : Tile
 
     public virtual void Destroy()
     {
+        if (GameData.player.GetFaction == faction)
+        {
+            foreach (Tile t in GameData.LevelGrid.Objects)
+            {
+                Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
+                double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
+                if (absDistance < 300)
+                {
+                    t.PermaDiscovered = false;
+                    t.IsDark = true;
+                }
+            }
+        }
         GameData.LevelGrid.replaceTile(this, new Tile(), false);
         GameData.Buildings.Remove(this);
+
     }
 
     public virtual void HasBeenBuiltAction()
     {
-  
+        if (GameData.player.GetFaction == faction)
+        {
+            foreach (Tile t in GameData.LevelGrid.Objects)
+            {
+                Vector2 distance = new Vector2(Math.Abs(this.GlobalPosition.X - t.Position.X), Math.Abs(this.GlobalPosition.Y - t.Position.Y));
+                double absDistance = Math.Sqrt(Math.Pow(distance.X, 2) + Math.Pow(distance.Y, 2));
+                if (absDistance < 300)
+                {
+                    t.PermaDiscovered = true;
+                    t.IsDark = false;
+                }
+            }
+        }
     }
     public void UpdateDiscoveredArea()
     {

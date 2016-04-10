@@ -14,7 +14,6 @@ class Player : GameObject
     protected TextGameObject mainResource;
     protected TextGameObject secondaryResource;
     protected Timer updateDiscoveredAreaTimer;
-    protected Timer updateDiscoveredAreaTimerBuildings;
     protected EventLog eventLog;
     protected SpriteGameObject Water, Light, Coal, Wood;
 
@@ -86,7 +85,6 @@ class Player : GameObject
         hud.hud.Add(secondaryResource);
         hud.hud.Add(eventLog);
         updateDiscoveredAreaTimer = new Timer((1 / 6));
-        updateDiscoveredAreaTimerBuildings = new Timer((1/3));
         Light = new SpriteGameObject("lightIcon");
         Water = new SpriteGameObject("waterIcon");
         Coal = new SpriteGameObject("copperIcon");
@@ -111,7 +109,6 @@ class Player : GameObject
         mainResource.Text = this.MainResource.ToString();
         secondaryResource.Text = this.SecondaryResource.ToString();
         updateDiscoveredAreaTimer.Update(gameTime);
-        updateDiscoveredAreaTimerBuildings.Update(gameTime);
         if (updateDiscoveredAreaTimer.Ended)
         {
             foreach (Tile t in GameData.LevelGrid.Objects)
@@ -128,20 +125,6 @@ class Player : GameObject
             updateDiscoveredAreaTimer.Reset();
 
         }
-        if (updateDiscoveredAreaTimerBuildings.Ended)
-         {
-             for (int i = 0; i < GameData.Buildings.Objects.Count; i++)
-             {
-                 if (GameData.Buildings.Objects[i] != null && !(GameData.Buildings.Objects[i] is Forest) && (GameData.Buildings.Objects[i] as Building).Faction == faction)
-                 {
-                     Building b = GameData.Buildings.Objects[i] as Building;
-                     b.UpdateDiscoveredArea();
-                 }
-             }
-            updateDiscoveredAreaTimerBuildings.Reset();
-
-    }
-        
     }
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
