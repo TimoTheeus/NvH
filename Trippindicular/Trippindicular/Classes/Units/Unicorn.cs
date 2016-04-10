@@ -23,6 +23,7 @@ class Unicorn : Unit
             health = maxHealth;
             slowTimer = new Timer(2f);
             stunTime = 0.5f;
+            this.resourceCosts = new Point(100, 50);
         }
         else
         {
@@ -32,6 +33,7 @@ class Unicorn : Unit
             health = maxHealth;
             slowTimer = new Timer(2f);
             stunTime = 0.5f;
+            this.resourceCosts = new Point(100, 50);
         }
     }
     public override void Update(GameTime gameTime)

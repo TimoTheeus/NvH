@@ -290,30 +290,33 @@ class PlayingState : IGameLoopObject
                 {
                     case "type":
                         string type = pairs[i].Substring(5, pairs[i].Length - 5);
-                        switch (type)
-                        {
-                            case "NatureBarracks":
-                                b = new NatureBarracks();
-                                break;
-                            case "HumanityBarrack":
-                                b = new HumanityBarrack();
-                                polytile = true;
-                                break;
-                            case "SunlightTree":
-                                b = new SunlightTree();
-                                break;
-                            case "NatureBase":
-                                b = new NatureBase();
-                                polytile = true;
-                                break;
-                            case "HumanityBase":
-                                b = new HumanityBase();
-                                polytile = true;
-                                break;
-                            case "Mine":
-                                b = new Mine();
-                                break;
-                        }
+                            switch (type)
+                            {
+                                case "NatureBarracks":
+                                    b = new NatureBarracks();
+                                    break;
+                                case "HumanityBarrack":
+                                    b = new HumanityBarrack();
+                                    polytile = true;
+                                    break;
+                                case "SunlightTree":
+                                    b = new SunlightTree();
+                                    break;
+                                case "NatureBase":
+                                    b = new NatureBase();
+                                    polytile = true;
+                                    break;
+                                case "HumanityBase":
+                                    b = new HumanityBase();
+                                    polytile = true;
+                                    break;
+                                case "Mine":
+                                    b = new Mine();
+                                    break;
+                                case "WaterTree":
+                                    b = new WaterTree();
+                                    break;
+                            }
                         break;
                     case "posi":
                         string[] coords = pairs[i].Substring(5, pairs[i].Length - 5).Split(',');

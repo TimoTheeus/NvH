@@ -21,7 +21,12 @@ class Unit : SpriteGameObject
     protected bool pacifist, frozen;
     protected const float meleeRange = 50;
     protected const float slowUnitSpeed = 150;
+    protected bool repositioning;
 
+    public bool IsRepositioning
+    {
+        get { return repositioning; }
+    }
     public Unit TargetUnit
     {
         get { return targetUnit; }
@@ -96,7 +101,8 @@ class Unit : SpriteGameObject
         attackTimer = new Timer(this.AttackSpeed);
         healthBar = new HealthBar(new Vector2(position.X, position.Y + sprite.Height / 2 + 10));
         checkIfInDiscoveredAreaTimer = new Timer((1 / 6));
-        RemoveMenu();
+        //RemoveMenu();
+        repositioning = false;
     }
 
     public override void HandleInput(InputHelper ih)
@@ -126,7 +132,7 @@ class Unit : SpriteGameObject
                 
             }
         }
-        if (GameData.Cursor.ClickedUnit == this)
+        if (this.selected)
         {
             if (ih.RightButtonPressed())
             {
@@ -380,14 +386,16 @@ class Unit : SpriteGameObject
             if (GameData.Units.Objects[i] != null&&GameData.Units.Objects[i]!=this)
             {
                 if ((GameData.Units.Objects[i].Position.X-this.Position.X>-5&& GameData.Units.Objects[i].Position.X - this.Position.X<5)&&
-                    (GameData.Units.Objects[i].Position.Y - this.Position.Y > -5 && GameData.Units.Objects[i].Position.Y - this.Position.Y < 5))
+                    (GameData.Units.Objects[i].Position.Y - this.Position.Y > -5 && GameData.Units.Objects[i].Position.Y - this.Position.Y < 5)&&!((Unit)GameData.Units.Objects[i]).IsRepositioning)
                 {
                     targetPosition = this.Position + new Vector2(20, 20);
+                    repositioning = true;
                     this.actionString = "$unit:"+this.ID+"$move:" + this.targetPosition.X + "," + this.targetPosition.Y;
                     return;
                 }
             }
         }
+        repositioning = false;
     }
     protected virtual void ArrivedAtBuildingAction()
     {

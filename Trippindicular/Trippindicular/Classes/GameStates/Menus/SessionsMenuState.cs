@@ -74,7 +74,7 @@ namespace Trippindicular.Classes
                 string ip = null;
                 if (input.Text.Length > 6)
                 {
-                    ip = input.Text;
+                    ip ="192.168.1.3";
                 }
                 playingState.Initialize(GameData.Host, ip);
                 GameWorld.GameStateManager.SwitchTo("hud");

@@ -86,7 +86,7 @@ class Player : GameObject
         hud.hud.Add(secondaryResource);
         hud.hud.Add(eventLog);
         updateDiscoveredAreaTimer = new Timer((1 / 6));
-        updateDiscoveredAreaTimerBuildings = new Timer((1/61));
+        updateDiscoveredAreaTimerBuildings = new Timer((1/3));
         Light = new SpriteGameObject("lightIcon");
         Water = new SpriteGameObject("waterIcon");
         Coal = new SpriteGameObject("copperIcon");

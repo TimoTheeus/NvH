@@ -9,7 +9,8 @@ class BarracksMenu : Menu
     protected Button button1, button2, button3, button4, button5;
     protected CursorToolTip toolTip1, toolTip2, toolTip3, toolTip4, toolTip5;
     protected Tile tile;
-    protected Player player;    
+    protected Player player;    private string actionString;
+    private bool actionSent;
 
     public BarracksMenu(Tile tile) : base(4, "barracksMenu")
     {
@@ -224,11 +225,11 @@ class BarracksMenu : Menu
         button2 = new Button("wolfButton", "", "", 0, "", 4);
         button2.Position = button1.Position + new Vector2(button1.Width, 0);
         button3 = new Button("pelletButton", "", "", 0, "", 4);
-        button3.Position = button2.Position + new Vector2(button1.Width * 2+10, 0);
+        button3.Position = button2.Position + new Vector2(button1.Width +10, 0);
         button4 = new Button("treeButton", "", "", 0, "", 4);
-        button4.Position = button3.Position + new Vector2(button1.Width * 3, 0);
+        button4.Position = button3.Position + new Vector2(button1.Width, 0);
         button5 = new Button("unicornButton", "", "", 0, "", 4);
-        button5.Position = button4.Position + new Vector2(button1.Width * 4, 0);
+        button5.Position = button4.Position + new Vector2(button1.Width , 0);
         addButton(button1);
         addButton(button2);
         addButton(button3);
